@@ -1,0 +1,22 @@
+# Python generation scripts (not needed for deploy)
+generate_*.py
+__pycache__/
+*.pyc
+
+# Source/temp files
+PROGRESS.md
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+
+# Unused logo/profile variants
+web-images/logo-1.jpg
+web-images/logo-2.jpg
+web-images/profile-*.jpg
+
+# Claude config
+.claude/

@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>First Contact — Your Audio Sessions | Liminal Space</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=Outfit:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #050510;
+      --bg2: #08081A;
+      --surface: #0D0D22;
+      --primary: #6B5CE7;
+      --primary-soft: rgba(107,92,231,0.12);
+      --gold: #D4A84C;
+      --gold-soft: rgba(212,168,76,0.10);
+      --gold-glow: rgba(212,168,76,0.30);
+      --text: #EAE8F4;
+      --text-mid: #A8A4BE;
+      --text-dim: #6B687E;
+      --rule: rgba(255,255,255,0.05);
+      --door10: #7B8FE8;
+      --door12: #A87DE8;
+      --door15: #D4A84C;
+      --display: 'Syne', sans-serif;
+      --serif: 'Newsreader', Georgia, serif;
+      --body: 'Outfit', sans-serif;
+      --mono: 'IBM Plex Mono', monospace;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --col: min(44rem, 100% - 3rem);
+    }
+
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+    body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    button{font-family:inherit;cursor:pointer;border:none;background:none}
+
+    /* grain */
+    body::after{
+      content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.025;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+      background-size:256px;
+    }
+
+    #stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+    .rv{opacity:0;transform:translateY(22px);transition:opacity .85s var(--ease),transform .85s var(--ease)}
+    .rv.show{opacity:1;transform:none}
+    .rv-d1{transition-delay:.08s}.rv-d2{transition-delay:.16s}
+    .rv-d3{transition-delay:.24s}.rv-d4{transition-delay:.32s}
+
+    .wide{width:var(--col);margin-inline:auto}
+    .z1{position:relative;z-index:2}
+
+    .nebula{position:absolute;border-radius:50%;pointer-events:none;z-index:0}
+
+    /* ═══ HEADER ═══ */
+    .header{
+      text-align:center;padding:1.5rem 0;
+      border-bottom:1px solid var(--rule);
+      position:relative;z-index:10;
+    }
+    .logo{font-family:var(--display);font-weight:700;font-size:1.05rem;letter-spacing:-0.03em}
+    .logo i{font-family:var(--serif);font-weight:300;font-style:italic;color:var(--gold);margin-left:.12em}
+
+    /* ═══ HERO ═══ */
+    .hero{
+      position:relative;overflow:hidden;
+      padding:clamp(5rem,12vw,9rem) 0 clamp(4rem,8vw,6rem);
+      text-align:center;
+    }
+    .hero-bg{position:absolute;inset:0;z-index:0}
+    .hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.25}
+    .hero-bg::after{
+      content:'';position:absolute;inset:0;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 35%,rgba(5,5,16,.05) 0%,rgba(5,5,16,.6) 50%,var(--bg) 75%),
+        linear-gradient(to bottom,transparent 60%,var(--bg) 100%);
+    }
+
+    .hero-badge{
+      display:inline-block;
+      font-family:var(--mono);font-size:.55rem;font-weight:600;
+      letter-spacing:.2em;text-transform:uppercase;
+      color:var(--gold);padding:.45rem 1.2rem;
+      border:1px solid rgba(212,168,76,.2);
+      border-radius:100px;margin-bottom:1.5rem;
+      background:rgba(212,168,76,.04);
+      box-shadow:0 0 30px rgba(212,168,76,.06);
+    }
+    .hero h1{
+      font-family:var(--display);
+      font-size:clamp(2rem,5.5vw,3.2rem);
+      font-weight:800;line-height:1.05;
+      letter-spacing:-0.035em;margin-bottom:.85rem;
+    }
+    .hero h1 em{
+      font-family:var(--serif);font-weight:300;font-style:italic;
+      color:var(--gold);text-shadow:0 0 60px var(--gold-glow);
+    }
+    .hero-sub{
+      font-family:var(--serif);font-size:1.1rem;
+      color:var(--text-mid);max-width:38ch;margin:0 auto;
+      line-height:1.75;
+    }
+
+    /* ═══ HEADPHONE NOTICE ═══ */
+    .notice{
+      display:flex;align-items:flex-start;gap:.75rem;
+      border:1px solid rgba(212,168,76,.08);border-radius:12px;
+      padding:1.15rem 1.25rem;margin:0 0 2.5rem;
+      background:rgba(212,168,76,.02);
+    }
+    .notice svg{width:18px;height:18px;color:var(--gold);flex-shrink:0;margin-top:.1rem}
+    .notice p{font-size:.88rem;color:var(--text-mid)}
+    .notice strong{color:var(--text);font-weight:500}
+
+    /* ═══ SECTION BG IMAGE ═══ */
+    .section-bg{
+      position:relative;overflow:hidden;
+    }
+    .section-bg-img{
+      position:absolute;inset:0;z-index:0;
+    }
+    .section-bg-img img{width:100%;height:100%;object-fit:cover}
+    .section-bg-img::after{
+      content:'';position:absolute;inset:0;
+      background:
+        linear-gradient(to bottom,var(--bg) 0%,rgba(5,5,16,.7) 25%,rgba(5,5,16,.7) 75%,var(--bg) 100%);
+    }
+
+    /* ═══ TRACKS SECTION ═══ */
+    .tracks-section{
+      padding:clamp(3rem,6vw,5rem) 0;
+      position:relative;
+    }
+    .tracks-label{
+      font-family:var(--mono);font-size:.55rem;font-weight:600;
+      letter-spacing:.22em;text-transform:uppercase;
+      color:var(--text-dim);text-align:center;margin-bottom:.6rem;
+    }
+    .tracks-title{
+      font-family:var(--display);font-size:clamp(1.4rem,3.5vw,2rem);
+      font-weight:800;letter-spacing:-0.02em;
+      text-align:center;margin-bottom:.5rem;
+    }
+    .tracks-title em{font-family:var(--serif);font-weight:300;font-style:italic;color:var(--gold)}
+    .tracks-subtitle{
+      font-family:var(--serif);font-size:.95rem;
+      color:var(--text-mid);text-align:center;max-width:32ch;margin:0 auto 2.5rem;
+    }
+
+    .tracks{display:flex;flex-direction:column;gap:1.25rem}
+
+    .track{
+      border:1px solid var(--rule);border-radius:14px;
+      padding:clamp(1.25rem,3vw,1.75rem);
+      background:var(--surface);
+      position:relative;overflow:hidden;
+      transition:border-color .4s,box-shadow .4s;
+    }
+    .track:hover{
+      border-color:rgba(255,255,255,.08);
+      box-shadow:0 8px 40px rgba(0,0,0,.3);
+    }
+    .track::before{
+      content:'';position:absolute;top:0;left:0;right:0;height:2px;
+      background:linear-gradient(90deg,transparent,var(--track-color,var(--primary)),transparent);
+      opacity:.6;
+    }
+    .track::after{
+      content:'';position:absolute;top:0;right:0;width:180px;height:180px;
+      background:radial-gradient(circle,var(--track-color) 0%,transparent 70%);
+      opacity:.03;border-radius:50%;transform:translate(30%,-30%);
+      pointer-events:none;
+    }
+    .track--10{--track-color:var(--door10)}
+    .track--12{--track-color:var(--door12)}
+    .track--15{--track-color:var(--door15)}
+
+    .track-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:.4rem;gap:1rem}
+    .track-badge{
+      font-family:var(--mono);font-size:.52rem;font-weight:600;
+      letter-spacing:.14em;text-transform:uppercase;
+      color:var(--track-color,var(--text-dim));
+    }
+    .track-dur{font-family:var(--mono);font-size:.7rem;color:var(--text-dim)}
+
+    .track h3{font-family:var(--display);font-size:1.15rem;font-weight:700;margin-bottom:.35rem}
+    .track-desc{font-size:.88rem;color:var(--text-mid);line-height:1.65;margin-bottom:1.25rem}
+
+    .track audio{width:100%;height:48px;border-radius:8px;outline:none}
+    audio::-webkit-media-controls-panel{background:var(--bg2)}
+    audio::-webkit-media-controls-current-time-display,
+    audio::-webkit-media-controls-time-remaining-display{color:var(--text-dim);font-size:.75rem}
+
+    .track-dl{
+      display:inline-flex;align-items:center;gap:.4rem;
+      margin-top:1rem;
+      font-family:var(--mono);font-size:.65rem;font-weight:500;
+      letter-spacing:.06em;text-transform:uppercase;
+      color:var(--text-dim);transition:color .2s;
+    }
+    .track-dl:hover{color:var(--text)}
+    .track-dl svg{width:14px;height:14px}
+
+    /* ═══ VISION BREAK ═══ */
+    .vision-break{
+      position:relative;overflow:hidden;
+      padding:clamp(4rem,10vw,7rem) 0;
+      text-align:center;
+    }
+    .vision-break-bg{
+      position:absolute;inset:0;z-index:0;
+    }
+    .vision-break-bg img{
+      width:100%;height:100%;object-fit:cover;opacity:.15;
+    }
+    .vision-break-bg::after{
+      content:'';position:absolute;inset:0;
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 50%,rgba(5,5,16,.3) 0%,var(--bg) 70%);
+    }
+    .vision-break blockquote{
+      font-family:var(--serif);font-size:clamp(1.1rem,2.8vw,1.5rem);
+      font-weight:300;font-style:italic;
+      color:var(--text);max-width:30ch;margin:0 auto;
+      line-height:1.6;position:relative;z-index:2;
+    }
+    .vision-break blockquote span{color:var(--gold)}
+    .vision-break .vb-line{
+      width:48px;height:1px;margin:1.25rem auto 0;
+      background:linear-gradient(90deg,transparent,var(--gold),transparent);
+      position:relative;z-index:2;
+    }
+
+    /* ═══ PDF DOWNLOAD ═══ */
+    .pdf-section{
+      padding:clamp(2rem,5vw,3.5rem) 0;
+    }
+    .pdf-card{
+      display:flex;align-items:center;gap:1.25rem;
+      border:1px solid rgba(107,92,231,.12);border-radius:14px;
+      padding:1.35rem 1.5rem;
+      background:var(--surface);
+      transition:border-color .3s,box-shadow .3s;
+    }
+    .pdf-card:hover{
+      border-color:rgba(107,92,231,.25);text-decoration:none;
+      box-shadow:0 8px 40px rgba(0,0,0,.2);
+    }
+    .pdf-icon{
+      width:52px;height:52px;border-radius:12px;
+      background:rgba(107,92,231,.08);border:1px solid rgba(107,92,231,.12);
+      display:flex;align-items:center;justify-content:center;flex-shrink:0;
+    }
+    .pdf-icon svg{width:24px;height:24px;color:var(--primary)}
+    .pdf-info h3{font-family:var(--display);font-size:.95rem;font-weight:700}
+    .pdf-info p{font-size:.78rem;color:var(--text-dim);margin-top:.15rem}
+
+    @media(max-width:480px){
+      .pdf-card{flex-direction:column;text-align:center}
+    }
+
+    /* ═══ GUIDE SECTION ═══ */
+    .guide-section{
+      position:relative;overflow:hidden;
+      padding:clamp(3rem,7vw,5rem) 0 clamp(3rem,6vw,4rem);
+    }
+    .guide-section .section-bg-img img{opacity:.1}
+
+    .guide-header{margin-bottom:1.75rem;text-align:center}
+    .guide-header .tracks-label{margin-bottom:.5rem}
+    .guide-header h2{
+      font-family:var(--display);font-size:clamp(1.4rem,3.5vw,2rem);font-weight:800;
+      letter-spacing:-0.02em;margin-bottom:.4rem;
+    }
+    .guide-header h2 em{font-family:var(--serif);font-weight:300;font-style:italic;color:var(--gold)}
+    .guide-header p{font-size:.9rem;color:var(--text-mid);font-family:var(--serif)}
+
+    .g-block{border-bottom:1px solid var(--rule)}
+    .g-block:first-child{border-top:1px solid var(--rule)}
+
+    .g-btn{
+      width:100%;display:flex;align-items:center;justify-content:space-between;
+      padding:1.25rem 0;text-align:left;gap:1rem;
+      font-family:var(--display);font-size:.92rem;font-weight:600;
+      color:var(--text);transition:color .3s;
+    }
+    .g-btn:hover{color:var(--gold)}
+    .g-btn .ic{width:18px;height:18px;flex-shrink:0;position:relative}
+    .g-btn .ic::before,.g-btn .ic::after{
+      content:'';position:absolute;background:var(--text-dim);
+      transition:transform .35s var(--ease),background .3s;
+    }
+    .g-btn .ic::before{width:12px;height:1px;top:50%;left:50%;transform:translate(-50%,-50%)}
+    .g-btn .ic::after{width:1px;height:12px;top:50%;left:50%;transform:translate(-50%,-50%)}
+    .g-block.open .g-btn .ic::after{transform:translate(-50%,-50%) rotate(90deg)}
+    .g-block.open .g-btn .ic::before,
+    .g-block.open .g-btn .ic::after{background:var(--gold)}
+
+    .g-body{max-height:0;overflow:hidden;transition:max-height .5s var(--ease)}
+    .g-block.open .g-body{max-height:2000px}
+    .g-inner{padding:0 0 1.5rem}
+    .g-inner p{font-family:var(--serif);font-size:.9rem;color:var(--text-mid);line-height:1.85;margin-bottom:.75rem}
+    .g-inner h4{
+      font-family:var(--display);font-weight:600;font-size:.88rem;
+      color:var(--text);margin:1.25rem 0 .5rem;
+    }
+    .g-inner h4:first-child{margin-top:0}
+    .g-inner ul{list-style:none;padding:0}
+    .g-inner li{
+      padding-left:1.2rem;position:relative;
+      font-family:var(--serif);font-size:.88rem;color:var(--text-mid);
+      line-height:1.8;margin-bottom:.35rem;
+    }
+    .g-inner li::before{
+      content:'';position:absolute;left:0;top:.65em;
+      width:5px;height:5px;border-radius:50%;
+      background:var(--gold);opacity:.35;
+    }
+    .g-inner li strong{color:var(--text);font-weight:500}
+
+    /* ═══ FOOTER ═══ */
+    .footer{
+      text-align:center;padding:2.5rem 0;
+      border-top:1px solid var(--rule);margin-top:1rem;
+    }
+    .footer p{font-size:.65rem;color:var(--text-dim);opacity:.5}
+
+  </style>
+</head>
+<body>
+
+  <canvas id="stars"></canvas>
+
+  <!-- HEADER -->
+  <div class="header">
+    <a href="#" class="logo">Liminal<i>Space</i></a>
+  </div>
+
+  <!-- ═══════════════════ -->
+  <!--       HERO          -->
+  <!-- ═══════════════════ -->
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true">
+      <img src="web-images/v7-threshold.jpg" alt="" loading="eager">
+    </div>
+
+    <div class="wide z1">
+      <div class="hero-badge rv">First Contact</div>
+      <h1 class="rv rv-d1">Welcome to <em>the threshold</em></h1>
+      <p class="hero-sub rv rv-d2">Your three guided sessions and complete guide are below. Put on headphones, find a quiet space, and begin.</p>
+    </div>
+  </section>
+
+  <!-- HEADPHONE NOTICE -->
+  <div class="wide z1">
+    <div class="notice rv">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+      <p><strong>Stereo headphones required.</strong> The binaural effect depends on separate frequencies reaching each ear. Over-ear wired headphones are ideal. Speakers will not work.</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ -->
+  <!--      TRACKS         -->
+  <!-- ═══════════════════ -->
+  <section class="tracks-section section-bg">
+    <div class="section-bg-img" aria-hidden="true">
+      <img src="web-images/v7-waves.jpg" alt="" style="opacity:.08">
+    </div>
+
+    <div class="wide z1">
+      <p class="tracks-label rv">Your Sessions</p>
+      <h2 class="tracks-title rv rv-d1">Three Doors, <em>three depths</em></h2>
+      <p class="tracks-subtitle rv rv-d2">Each door takes you deeper into the liminal space between waking and sleeping.</p>
+
+      <div class="tracks">
+        <!-- Door 10 -->
+        <div class="track track--10 rv">
+          <div class="track-top">
+            <span class="track-badge">Door 10 · 10 Hz Alpha</span>
+            <span class="track-dur">20:00</span>
+          </div>
+          <h3>Mind Awake, Body Asleep</h3>
+          <p class="track-desc">The foundation. Door 10 guides your brainwaves into a 10 Hz alpha state where your body falls asleep while your mind remains alert and aware. Everything that follows begins here.</p>
+          <audio controls preload="metadata">
+            <source src="audio/door-10-guided.mp3" type="audio/mpeg">
+          </audio>
+          <a href="audio/door-10-guided.mp3" download class="track-dl">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download MP3
+          </a>
+        </div>
+
+        <!-- Door 12 -->
+        <div class="track track--12 rv rv-d1">
+          <div class="track-top">
+            <span class="track-badge">Door 12 · 7 Hz Theta</span>
+            <span class="track-dur">20:00</span>
+          </div>
+          <h3>Expanded Awareness</h3>
+          <p class="track-desc">You have crossed the threshold of Door 10. Now you go deeper. The 7 Hz theta frequency expands your perception beyond the boundaries of your physical body. You may feel larger than you are. You may sense things you cannot see.</p>
+          <audio controls preload="metadata">
+            <source src="audio/door-12-guided.mp3" type="audio/mpeg">
+          </audio>
+          <a href="audio/door-12-guided.mp3" download class="track-dl">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download MP3
+          </a>
+        </div>
+
+        <!-- Door 15 -->
+        <div class="track track--15 rv rv-d2">
+          <div class="track-top">
+            <span class="track-badge">Door 15 · 4 Hz Theta/Delta</span>
+            <span class="track-dur">20:00</span>
+          </div>
+          <h3>The No-Time State</h3>
+          <p class="track-desc">The deepest door. Door 15 targets the 4 Hz threshold where time dissolves and the boundaries of self become negotiable. This is where the most profound experiences emerge. Approach with patience and openness.</p>
+          <audio controls preload="metadata">
+            <source src="audio/door-15-guided.mp3" type="audio/mpeg">
+          </audio>
+          <a href="audio/door-15-guided.mp3" download class="track-dl">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download MP3
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ -->
+  <!--    VISION BREAK     -->
+  <!-- ═══════════════════ -->
+  <section class="vision-break">
+    <div class="vision-break-bg" aria-hidden="true">
+      <img src="web-images/v7-waves.jpg" alt="">
+    </div>
+    <div class="wide z1">
+      <blockquote class="rv">
+        "I am more than my physical body. I am more than what I can see and touch and hear. I am ready to enter the <span>Liminal Space.</span>"
+      </blockquote>
+      <div class="vb-line rv rv-d1"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ -->
+  <!--    PDF DOWNLOAD     -->
+  <!-- ═══════════════════ -->
+  <section class="pdf-section">
+    <div class="wide z1">
+      <a href="product/First-Contact-Guide.pdf" download class="pdf-card rv">
+        <div class="pdf-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <div class="pdf-info">
+          <h3>Download the Complete Guide</h3>
+          <p>First Contact: Your Gateway to Out-of-Body Experience · 14 pages · PDF</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ -->
+  <!--       GUIDE         -->
+  <!-- ═══════════════════ -->
+  <section class="guide-section section-bg">
+    <div class="section-bg-img" aria-hidden="true">
+      <img src="web-images/v7-deep.jpg" alt="" style="opacity:.08">
+    </div>
+
+    <div class="wide z1">
+      <div class="guide-header rv">
+        <p class="tracks-label">Reference</p>
+        <h2>The <em>Guide</em></h2>
+        <p>Everything from the PDF, accessible right here. Tap any section to expand.</p>
+      </div>
+
+      <div class="g-block open">
+        <button class="g-btn">The Liminal Protocol<span class="ic"></span></button>
+        <div class="g-body">
+          <div class="g-inner">
+            <h4>1. Prepare Your Environment</h4>
+            <ul>
+              <li>Quiet, dark room. 30 minutes uninterrupted.</li>
+              <li>Phone on airplane mode.</li>
+              <li>Stereo headphones (not speakers).</li>
+              <li>Lie on your back. Light blanket. Remove glasses/watch.</li>
+            </ul>
+            <h4>2. The Preparation Ritual</h4>
+            <ul>
+              <li><strong>Conversion Box:</strong> Visualize a large, strong container. Place every thought, worry, plan, and fear inside. Close the lid. Everything will be there when you return.</li>
+              <li><strong>Resonant Tuning:</strong> Three deep breaths. On each exhale, hum a long, low tone. You are tuning yourself like an instrument.</li>
+              <li><strong>Affirmation:</strong> "I am more than my physical body. I am more than what I can see and touch and hear. I am ready to enter the Liminal Space."</li>
+            </ul>
+            <h4>3. During the Session</h4>
+            <ul>
+              <li>Press play on the Door 10 track. Close your eyes.</li>
+              <li>Do not try to force anything. Passive observation only.</li>
+              <li>Notice physical sensations: tingling, heaviness, warmth, vibration.</li>
+              <li>If you see colors or patterns, observe without grasping.</li>
+            </ul>
+            <h4>4. After the Session</h4>
+            <ul>
+              <li>Open eyes slowly. Don't move immediately.</li>
+              <li>Write down everything you experienced, no matter how small.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="g-block">
+        <button class="g-btn">Your 7-Day Protocol<span class="ic"></span></button>
+        <div class="g-body">
+          <div class="g-inner">
+            <ul>
+              <li><strong>Day 1–2:</strong> Door 10 — Getting comfortable with the state</li>
+              <li><strong>Day 3–4:</strong> Door 10 — Deepening. Notice the exact moment your body falls asleep while your mind stays awake.</li>
+              <li><strong>Day 5:</strong> Door 12 — Move to the deeper track. The theta frequency may feel unfamiliar.</li>
+              <li><strong>Day 6:</strong> Door 12 — Allow your awareness to expand. Don't direct it.</li>
+              <li><strong>Day 7:</strong> Door 15 — The deep end. Let go completely.</li>
+            </ul>
+            <p>Practice at the same time each day. Consistency trains your brain to enter these states faster.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="g-block">
+        <button class="g-btn">Common Experiences &amp; Troubleshooting<span class="ic"></span></button>
+        <div class="g-body">
+          <div class="g-inner">
+            <h4>What You Might Experience</h4>
+            <ul>
+              <li><strong>Deep relaxation</strong> — Nearly universal. This alone is valuable.</li>
+              <li><strong>Hypnagogic imagery</strong> — Flashes of light, geometric patterns, brief dreamlike scenes.</li>
+              <li><strong>Vibrations</strong> — Buzzing or humming throughout the body. This is significant.</li>
+              <li><strong>Floating or sinking</strong> — Body feels lighter, heavier, or gently rocking.</li>
+              <li><strong>Time distortion</strong> — 20 minutes feels like 5, or like an hour.</li>
+              <li><strong>Sleep</strong> — Completely normal. Gets better with practice.</li>
+            </ul>
+            <h4>If You Keep Falling Asleep</h4>
+            <p>Try sitting at a slight incline. Practice when alert, not tired. Morning sessions work well.</p>
+            <h4>If You Feel Vibrations But Get Scared</h4>
+            <p>This is the vibrational stage — you're on the right path. Remain calm. Let the vibrations intensify without resistance.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="g-block">
+        <button class="g-btn">The Science Behind This<span class="ic"></span></button>
+        <div class="g-body">
+          <div class="g-inner">
+            <p>When two slightly different frequencies play in each ear, your brain perceives a third frequency — the difference between them. This is a binaural beat. It causes your neural oscillations to synchronize with that frequency, guiding your brainwaves into specific states.</p>
+            <h4>The Doors</h4>
+            <ul>
+              <li><strong>Door 10 (10 Hz alpha)</strong> — Mind awake, body asleep. The foundation.</li>
+              <li><strong>Door 12 (7 Hz theta)</strong> — Expanded awareness beyond the physical body.</li>
+              <li><strong>Door 15 (4 Hz theta/delta)</strong> — The no-time state. Where the most profound experiences occur.</li>
+            </ul>
+            <p>These techniques originate from the Monroe Institute (est. 1971), were studied by the CIA in their Gateway Analysis (1983, now declassified), and used operationally by the U.S. military in Project Stargate for over 20 years.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="g-block">
+        <button class="g-btn">Session Journal Prompts<span class="ic"></span></button>
+        <div class="g-body">
+          <div class="g-inner">
+            <p>After each session, spend 5 minutes with these prompts:</p>
+            <ul>
+              <li>What physical sensations did I notice?</li>
+              <li>Did I see any imagery? Describe colours, shapes, scenes.</li>
+              <li>Did I notice a shift in body awareness?</li>
+              <li>How did time feel?</li>
+              <li>Did I fall asleep? At what point?</li>
+              <li>What was my emotional state?</li>
+              <li>Did anything surprise me?</li>
+              <li>On a scale of 1–10, how deep was the relaxation?</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer" style="position:relative;z-index:2">
+    <div class="wide">
+      <p>&copy; 2026 Liminal Space. For personal use only. Do not redistribute.</p>
+    </div>
+  </footer>
+
+  <script>
+    // ═══ STARS (30fps, reduced count) ═══
+    (function(){
+      const c=document.getElementById('stars'),x=c.getContext('2d');
+      let w,h,stars,last=0;
+      function resize(){w=c.width=innerWidth;h=c.height=document.documentElement.scrollHeight}
+      function init(){
+        stars=[];const n=Math.min(40,Math.floor(w*h/40000));
+        for(let i=0;i<n;i++){
+          stars.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.1+.2,
+            base:Math.random()*.3+.1,phase:Math.random()*Math.PI*2,
+            speed:Math.random()*.002+.001,gold:Math.random()>.65});
+        }
+      }
+      let t=0;
+      function draw(ts){
+        requestAnimationFrame(draw);
+        if(ts-last<33)return;last=ts;
+        x.clearRect(0,0,w,h);t++;
+        stars.forEach(s=>{
+          const tw=s.base+Math.sin(t*s.speed+s.phase)*s.base*.5;
+          x.beginPath();x.arc(s.x,s.y,s.r,0,Math.PI*2);
+          x.fillStyle=s.gold?`rgba(212,168,76,${tw})`:`rgba(200,195,230,${tw*.5})`;
+          x.fill();
+        });
+      }
+      resize();init();requestAnimationFrame(draw);
+      addEventListener('resize',()=>{resize();init()});
+    })();
+
+    // ═══ REVEALS ═══
+    const obs=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');obs.unobserve(e.target)}});
+    },{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+    document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+
+    // ═══ ACCORDION ═══
+    document.querySelectorAll('.g-btn').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        const block=btn.parentElement;
+        block.classList.toggle('open');
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Free Audio Session | Liminal Space</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=Outfit:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Meta Pixel -->
+  <!-- fbq('track', 'ViewContent', { content_name: 'Free Audio Page' }); -->
+  <!-- GA4 placeholder -->
+  <!-- gtag('event', 'page_view', { page_title: 'Free Audio Delivery' }); -->
+
+  <style>
+    :root {
+      --bg: #050510;
+      --bg2: #08081A;
+      --surface: #0D0D22;
+      --primary: #6B5CE7;
+      --primary-soft: rgba(107,92,231,0.12);
+      --gold: #D4A84C;
+      --gold-soft: rgba(212,168,76,0.10);
+      --gold-glow: rgba(212,168,76,0.30);
+      --green: #3ECF8E;
+      --green-soft: rgba(62,207,142,0.10);
+      --text: #EAE8F4;
+      --text-mid: #A8A4BE;
+      --text-dim: #6B687E;
+      --rule: rgba(255,255,255,0.05);
+      --display: 'Syne', sans-serif;
+      --serif: 'Newsreader', Georgia, serif;
+      --body: 'Outfit', sans-serif;
+      --mono: 'IBM Plex Mono', monospace;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --col: min(44rem, 100% - 3rem);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body {
+      font-family: var(--body); background: var(--bg); color: var(--text);
+      line-height: 1.7; overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+    /* grain */
+    body::after {
+      content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+      background-size: 256px;
+    }
+
+    #stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+    .rv { opacity: 0; transform: translateY(22px); transition: opacity 0.85s var(--ease), transform 0.85s var(--ease); }
+    .rv.show { opacity: 1; transform: none; }
+    .rv-d1 { transition-delay: .08s } .rv-d2 { transition-delay: .16s }
+    .rv-d3 { transition-delay: .24s } .rv-d4 { transition-delay: .32s }
+
+    .wide { width: var(--col); margin-inline: auto; }
+    .z1 { position: relative; z-index: 2; }
+
+    .nebula {
+      position: absolute; border-radius: 50%;
+      pointer-events: none; z-index: 0;
+    }
+
+    /* ═══ HEADER ═══ */
+    .header {
+      text-align: center; padding: 1.5rem 0;
+      border-bottom: 1px solid var(--rule);
+      position: relative; z-index: 10;
+    }
+    .logo {
+      font-family: var(--display); font-weight: 700; font-size: 1.05rem;
+      letter-spacing: -0.03em;
+    }
+    .logo i { font-family: var(--serif); font-weight: 300; font-style: italic; color: var(--gold); margin-left: .12em; }
+
+    /* ═══ HERO ═══ */
+    .hero {
+      position: relative; overflow: hidden;
+      padding: clamp(4rem, 10vw, 7rem) 0 clamp(3rem, 7vw, 5rem);
+      text-align: center;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+    }
+    .hero-bg img {
+      width: 100%; height: 100%; object-fit: cover; opacity: 0.2;
+    }
+    .hero-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 70% at 50% 40%, rgba(5,5,16,0.2) 0%, var(--bg) 70%);
+    }
+
+    .hero-check {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--green-soft);
+      border: 2px solid var(--green);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.5rem;
+      animation: glow-green 3s ease-in-out infinite;
+    }
+    @keyframes glow-green {
+      0%,100% { box-shadow: 0 0 0 0 rgba(62,207,142,0.2); }
+      50% { box-shadow: 0 0 24px 6px rgba(62,207,142,0.12); }
+    }
+    .hero-check svg { width: 24px; height: 24px; color: var(--green); }
+
+    .hero h1 {
+      font-family: var(--display);
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 800; line-height: 1.05;
+      letter-spacing: -0.035em; margin-bottom: .75rem;
+    }
+    .hero h1 em {
+      font-family: var(--serif); font-weight: 300; font-style: italic;
+      color: var(--gold); text-shadow: 0 0 60px var(--gold-glow);
+    }
+    .hero > .wide > p {
+      font-family: var(--serif); font-size: 1.05rem;
+      color: var(--text-mid); max-width: 34ch; margin: 0 auto;
+    }
+
+    /* ═══ AUDIO PLAYER CARD ═══ */
+    .player-section { padding: 2.5rem 0; }
+
+    .player-card {
+      border: 1px solid rgba(62,207,142,0.15);
+      border-radius: 16px;
+      padding: clamp(1.5rem, 4vw, 2.25rem);
+      background: var(--surface);
+      position: relative; overflow: hidden;
+    }
+    .player-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--green), transparent);
+    }
+
+    .player-badge {
+      font-family: var(--mono); font-size: .55rem; font-weight: 600;
+      letter-spacing: .15em; text-transform: uppercase;
+      color: var(--green); margin-bottom: .75rem;
+    }
+    .player-card h2 {
+      font-family: var(--display); font-size: 1.3rem; font-weight: 700;
+      margin-bottom: .25rem;
+    }
+    .player-sub {
+      font-size: .88rem; color: var(--text-mid); margin-bottom: 1.25rem;
+    }
+
+    .player-card audio {
+      width: 100%; height: 48px; border-radius: 8px; outline: none;
+    }
+    audio::-webkit-media-controls-panel { background: var(--bg2); }
+    audio::-webkit-media-controls-current-time-display,
+    audio::-webkit-media-controls-time-remaining-display { color: var(--text-dim); font-size: .75rem; }
+
+    .player-actions {
+      display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+      margin-top: 1.25rem;
+    }
+    .dl-btn {
+      display: inline-flex; align-items: center; gap: .4rem;
+      font-family: var(--mono); font-size: .7rem; font-weight: 500;
+      letter-spacing: .06em; text-transform: uppercase;
+      color: var(--green); padding: .55rem 1.1rem;
+      border: 1px solid rgba(62,207,142,0.2);
+      border-radius: 6px; transition: all .3s;
+    }
+    .dl-btn:hover { background: var(--green-soft); }
+    .dl-btn svg { width: 14px; height: 14px; }
+
+    .hp-note {
+      display: flex; align-items: center; gap: .4rem;
+      font-size: .75rem; color: var(--text-dim);
+    }
+    .hp-note svg { width: 15px; height: 15px; color: var(--gold); flex-shrink: 0; }
+
+    /* ═══ QUICK START ═══ */
+    .quickstart {
+      border: 1px solid var(--rule);
+      border-radius: 14px;
+      padding: clamp(1.5rem, 4vw, 2rem);
+      margin-top: 2rem;
+      background: rgba(212,168,76,0.02);
+      border-color: rgba(212,168,76,0.08);
+    }
+    .quickstart h3 {
+      font-family: var(--display); font-size: 1.05rem; font-weight: 700;
+      color: var(--gold); margin-bottom: 1.25rem;
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .quickstart h3 svg { width: 18px; height: 18px; }
+
+    .qs-steps { display: flex; flex-direction: column; gap: .85rem; }
+    .qs-step {
+      display: grid; grid-template-columns: auto 1fr;
+      gap: 0 .85rem; align-items: baseline;
+    }
+    .qs-num {
+      font-family: var(--mono); font-size: .58rem; font-weight: 600;
+      color: var(--gold); opacity: .6;
+    }
+    .qs-step p { font-size: .9rem; color: var(--text-mid); }
+    .qs-step strong { color: var(--text); font-weight: 500; }
+
+    /* ═══ DIVIDER ═══ */
+    .divider {
+      text-align: center;
+      padding: clamp(3rem, 7vw, 5rem) 0 clamp(2rem, 4vw, 3rem);
+      position: relative;
+    }
+    .divider-line {
+      width: 48px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0 auto 1rem;
+    }
+    .divider-text {
+      font-family: var(--mono); font-size: .55rem; font-weight: 600;
+      letter-spacing: .22em; text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    /* ═══ UPSELL ═══ */
+    .upsell {
+      padding-bottom: clamp(4rem, 8vw, 6rem);
+      position: relative; overflow: hidden;
+    }
+    .upsell-header {
+      text-align: center;
+      margin-bottom: clamp(2rem, 5vw, 3rem);
+    }
+    .upsell-eyebrow {
+      font-family: var(--mono); font-size: .58rem; font-weight: 600;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: .75rem; opacity: .7;
+    }
+    .upsell-header h2 {
+      font-family: var(--display);
+      font-size: clamp(1.6rem, 4.5vw, 2.5rem);
+      font-weight: 800; line-height: 1.05;
+      letter-spacing: -0.035em; margin-bottom: 1rem;
+    }
+    .upsell-header h2 em {
+      font-family: var(--serif); font-weight: 300; font-style: italic;
+      color: var(--gold);
+    }
+    .upsell-header > p {
+      font-family: var(--serif); font-size: 1rem;
+      color: var(--text-mid); max-width: 38ch; margin: 0 auto;
+      line-height: 1.75;
+    }
+
+    /* product visual */
+    .product-img {
+      border-radius: 14px; overflow: hidden;
+      border: 1px solid rgba(212,168,76,0.1);
+      margin-bottom: 2.5rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px rgba(212,168,76,0.06);
+      position: relative;
+    }
+    .product-img img { width: 100%; }
+    .product-img::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, var(--bg) 0%, transparent 35%);
+    }
+
+    /* Door preview cards */
+    .doors-preview {
+      display: flex; flex-direction: column; gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .dp-card {
+      display: grid; grid-template-columns: auto 1fr;
+      gap: 0 1.25rem; align-items: start;
+      padding: 1.25rem 1.5rem;
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      background: rgba(13,13,34,0.5);
+      transition: border-color .3s;
+    }
+    .dp-card:hover { border-color: rgba(212,168,76,0.12); }
+
+    .dp-num {
+      font-family: var(--display); font-weight: 800; font-size: 1.8rem;
+      line-height: 1;
+    }
+    .dp-card:nth-child(1) .dp-num { color: #7B8FE8; }
+    .dp-card:nth-child(2) .dp-num { color: #A87DE8; }
+    .dp-card:nth-child(3) .dp-num { color: var(--gold); }
+
+    .dp-info h4 {
+      font-family: var(--display); font-size: .95rem; font-weight: 700;
+      margin-bottom: .15rem;
+    }
+    .dp-freq {
+      font-family: var(--mono); font-size: .55rem; font-weight: 600;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--text-dim); margin-bottom: .35rem;
+    }
+    .dp-info p { font-size: .85rem; color: var(--text-mid); line-height: 1.65; }
+
+    /* what's included list */
+    .included {
+      margin-bottom: 2.5rem;
+    }
+    .included h3 {
+      font-family: var(--display); font-size: 1.05rem; font-weight: 700;
+      margin-bottom: 1.25rem;
+    }
+    .inc-list { list-style: none; }
+    .inc-item {
+      display: flex; align-items: baseline; gap: .75rem;
+      padding: .65rem 0;
+      border-bottom: 1px solid var(--rule);
+      font-size: .9rem; color: var(--text-mid);
+    }
+    .inc-item:first-child { border-top: 1px solid var(--rule); }
+    .inc-check {
+      color: var(--green); flex-shrink: 0;
+      font-family: var(--mono); font-size: .7rem; font-weight: 600;
+    }
+    .inc-item strong { color: var(--text); font-weight: 500; }
+
+    /* comparison */
+    .comparison { margin-bottom: 2.5rem; }
+    .comp-table {
+      width: 100%; border-collapse: collapse;
+    }
+    .comp-table th, .comp-table td {
+      padding: .75rem .5rem;
+      text-align: left;
+      border-bottom: 1px solid var(--rule);
+      font-size: .85rem;
+    }
+    .comp-table th {
+      font-family: var(--mono); font-weight: 600; font-size: .58rem;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    .comp-table th:nth-child(2), .comp-table th:nth-child(3),
+    .comp-table td:nth-child(2), .comp-table td:nth-child(3) {
+      text-align: center;
+    }
+    .comp-table td:first-child { color: var(--text); font-weight: 500; }
+    .comp-table td { color: var(--text-mid); }
+    .comp-yes { color: var(--green); font-family: var(--mono); font-weight: 600; font-size: .8rem; }
+    .comp-no { color: var(--text-dim); font-family: var(--mono); font-size: .8rem; }
+    .comp-highlight {
+      background: rgba(212,168,76,0.04);
+    }
+    .comp-table th.comp-highlight {
+      color: var(--gold);
+    }
+
+    /* CTA box */
+    .cta-box {
+      text-align: center;
+      padding: 2.5rem;
+      border: 1px solid rgba(212,168,76,0.12);
+      border-radius: 16px;
+      background: rgba(13,13,34,0.6);
+      box-shadow: 0 0 50px rgba(212,168,76,0.04);
+    }
+    .cta-price {
+      font-family: var(--display); font-size: 2.4rem; font-weight: 800;
+      color: var(--gold); margin-bottom: .25rem;
+      text-shadow: 0 0 40px var(--gold-glow);
+    }
+    .cta-price-note {
+      font-size: .78rem; color: var(--text-dim); margin-bottom: 1.5rem;
+    }
+    .btn-gold {
+      display: inline-block;
+      font-family: var(--display); font-weight: 700; font-size: .95rem;
+      padding: 1rem 2.5rem; border-radius: 8px;
+      background: var(--gold); color: var(--bg);
+      box-shadow: 0 0 30px rgba(212,168,76,0.2), 0 4px 16px rgba(0,0,0,0.3);
+      transition: all .3s; cursor: pointer; border: none;
+      text-decoration: none;
+    }
+    .btn-gold:hover {
+      background: #E0B65A; transform: translateY(-2px);
+      box-shadow: 0 0 50px rgba(212,168,76,0.3), 0 8px 24px rgba(0,0,0,0.4);
+    }
+    .cta-guarantee {
+      font-size: .7rem; color: var(--text-dim); margin-top: 1rem;
+      display: flex; align-items: center; justify-content: center; gap: .35rem;
+    }
+    .cta-guarantee svg { width: 12px; height: 12px; opacity: .6; }
+
+    /* ═══ FOOTER ═══ */
+    .footer {
+      text-align: center; padding: 2.5rem 0;
+      border-top: 1px solid var(--rule);
+      margin-top: 2rem;
+    }
+    .footer p { font-size: .65rem; color: var(--text-dim); opacity: .5; }
+  </style>
+</head>
+<body>
+
+  <canvas id="stars"></canvas>
+
+  <!-- HEADER -->
+  <div class="header">
+    <a href="index.html" class="logo">Liminal<i>Space</i></a>
+  </div>
+
+  <!-- ═══════════════════════════ -->
+  <!--          HERO               -->
+  <!-- ═══════════════════════════ -->
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true">
+      <img src="web-images/v7-astral.jpg" alt="" loading="eager">
+    </div>
+    <div class="wide z1">
+      <div class="hero-check rv">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h1 class="rv rv-d1">Your session is <em>ready</em></h1>
+      <p class="rv rv-d2">Put on headphones. Find a dark, quiet room. Lie down and press play.</p>
+      <p class="rv rv-d3" style="margin-top:1.5rem;font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim)">Want the full system? 3 Doors + PDF Guide</p>
+      <a href="#upsell" class="rv rv-d4" style="display:inline-block;margin-top:.65rem;font-family:var(--display);font-weight:700;font-size:.82rem;padding:.6rem 1.75rem;border-radius:8px;background:var(--gold);color:var(--bg);box-shadow:0 0 24px rgba(212,168,76,.15);transition:all .3s;text-decoration:none">Get First Contact — $37</a>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ -->
+  <!--       AUDIO PLAYER          -->
+  <!-- ═══════════════════════════ -->
+  <section class="player-section">
+    <div class="wide">
+      <div class="player-card rv">
+        <div class="player-badge">Door 10 · 10 Hz Alpha · Free Session</div>
+        <h2>Mind Awake, Body Asleep</h2>
+        <p class="player-sub">20 minutes of guided binaural audio — the same frequency the CIA studied in the Gateway Program.</p>
+        <audio controls preload="metadata">
+          <source src="audio/door-10-guided.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+        <div class="player-actions">
+          <a href="audio/door-10-guided.mp3" download class="dl-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download MP3
+          </a>
+          <span class="hp-note">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+            Stereo headphones required
+          </span>
+        </div>
+      </div>
+
+      <!-- Quick Start -->
+      <div class="quickstart rv rv-d1">
+        <h3>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          Quick Start
+        </h3>
+        <div class="qs-steps">
+          <div class="qs-step"><span class="qs-num">01</span><p><strong>Headphones on.</strong> Wired over-ear work best. Bluetooth can reduce the binaural effect.</p></div>
+          <div class="qs-step"><span class="qs-num">02</span><p><strong>Dark, quiet room.</strong> Eliminate distractions. Phone on airplane mode.</p></div>
+          <div class="qs-step"><span class="qs-num">03</span><p><strong>Lie down.</strong> On your back, light blanket, eyes closed.</p></div>
+          <div class="qs-step"><span class="qs-num">04</span><p><strong>Press play.</strong> The voice will guide you through the Liminal Protocol and into the Door 10 state.</p></div>
+          <div class="qs-step"><span class="qs-num">05</span><p><strong>Observe.</strong> Don't try to force anything. Simply notice what happens. Tingling, warmth, imagery — let it come.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ -->
+  <!--         DIVIDER             -->
+  <!-- ═══════════════════════════ -->
+  <div class="divider rv">
+    <div class="divider-line"></div>
+    <span class="divider-text">Ready to go deeper?</span>
+  </div>
+
+  <!-- ═══════════════════════════ -->
+  <!--          UPSELL             -->
+  <!-- ═══════════════════════════ -->
+  <section class="upsell" id="upsell">
+
+    <div class="wide z1">
+      <div class="upsell-header">
+        <p class="upsell-eyebrow rv">First Contact · Complete System</p>
+        <h2 class="rv rv-d1">You just opened Door 10.<br>There are <em>two more doors.</em></h2>
+        <p class="rv rv-d2">Door 10 is the foundation. But the real experiences — expanded awareness, time dissolution, out-of-body states — happen deeper. First Contact gives you the complete system.</p>
+      </div>
+
+      <!-- Product image -->
+      <div class="product-img rv rv-d1">
+        <img src="web-images/v7-hero.jpg" alt="The doorway to deeper consciousness states" loading="lazy">
+      </div>
+
+      <!-- Door previews -->
+      <div class="doors-preview">
+        <div class="dp-card rv rv-d1">
+          <div class="dp-num">10</div>
+          <div class="dp-info">
+            <h4>Mind Awake, Body Asleep</h4>
+            <div class="dp-freq">10 Hz · Alpha</div>
+            <p>The foundation state. Your body dissolves into relaxation while your mind stays impossibly clear. You have this one.</p>
+          </div>
+        </div>
+        <div class="dp-card rv rv-d2">
+          <div class="dp-num">12</div>
+          <div class="dp-info">
+            <h4>Expanded Awareness</h4>
+            <div class="dp-freq">7 Hz · Theta</div>
+            <p>Your perception extends beyond your body. You sense rooms you're not in. The state the military used for remote viewing.</p>
+          </div>
+        </div>
+        <div class="dp-card rv rv-d3">
+          <div class="dp-num">15</div>
+          <div class="dp-info">
+            <h4>The No-Time State</h4>
+            <div class="dp-freq">4 Hz · Delta Threshold</div>
+            <p>Time dissolves. The boundaries of self become optional. Where the most profound experiences in the Monroe Institute's history occurred.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- What's included -->
+      <div class="included rv">
+        <h3>Everything in First Contact</h3>
+        <ul class="inc-list">
+          <li class="inc-item"><span class="inc-check">✓</span><span><strong>3 Guided Audio Sessions</strong> — Door 10, Door 12, Door 15 (20 min each)</span></li>
+          <li class="inc-item"><span class="inc-check">✓</span><span><strong>The Liminal Protocol</strong> — Complete preparation ritual built into each session</span></li>
+          <li class="inc-item"><span class="inc-check">✓</span><span><strong>14-Page PDF Guide</strong> — The science, the technique, common experiences</span></li>
+          <li class="inc-item"><span class="inc-check">✓</span><span><strong>7-Day Progression Plan</strong> — Structured path from foundation to the deepest state</span></li>
+          <li class="inc-item"><span class="inc-check">✓</span><span><strong>Session Journal Prompts</strong> — Track your experiences and deepen your practice</span></li>
+          <li class="inc-item"><span class="inc-check">✓</span><span><strong>Lifetime Access</strong> — Download everything. Keep forever. No subscription.</span></li>
+        </ul>
+      </div>
+
+      <!-- Comparison -->
+      <div class="comparison rv">
+        <table class="comp-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Free</th>
+              <th class="comp-highlight">First Contact</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Door 10 — Mind Awake</td>
+              <td><span class="comp-yes">✓</span></td>
+              <td class="comp-highlight"><span class="comp-yes">✓</span></td>
+            </tr>
+            <tr>
+              <td>Door 12 — Expanded Awareness</td>
+              <td><span class="comp-no">—</span></td>
+              <td class="comp-highlight"><span class="comp-yes">✓</span></td>
+            </tr>
+            <tr>
+              <td>Door 15 — No-Time State</td>
+              <td><span class="comp-no">—</span></td>
+              <td class="comp-highlight"><span class="comp-yes">✓</span></td>
+            </tr>
+            <tr>
+              <td>The Liminal Protocol</td>
+              <td><span class="comp-yes">✓</span></td>
+              <td class="comp-highlight"><span class="comp-yes">✓</span></td>
+            </tr>
+            <tr>
+              <td>14-Page Guide (PDF)</td>
+              <td><span class="comp-no">—</span></td>
+              <td class="comp-highlight"><span class="comp-yes">✓</span></td>
+            </tr>
+            <tr>
+              <td>7-Day Progression Plan</td>
+              <td><span class="comp-no">—</span></td>
+              <td class="comp-highlight"><span class="comp-yes">✓</span></td>
+            </tr>
+            <tr>
+              <td>Journal Prompts</td>
+              <td><span class="comp-no">—</span></td>
+              <td class="comp-highlight"><span class="comp-yes">✓</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- CTA -->
+      <div class="cta-box rv">
+        <div class="cta-price">$37</div>
+        <p class="cta-price-note">One-time payment · Instant access · Keep forever</p>
+        <a href="#" class="btn-gold">Get First Contact</a>
+        <p class="cta-guarantee">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Secure checkout · Instant digital delivery
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="wide">
+      <p>&copy; 2026 Liminal Space. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // ═══ STARS (30fps, reduced) ═══
+    (function(){
+      const c=document.getElementById('stars'),x=c.getContext('2d');
+      let w,h,stars,last=0;
+      function resize(){w=c.width=innerWidth;h=c.height=document.documentElement.scrollHeight}
+      function init(){
+        stars=[];const n=Math.min(40,Math.floor(w*h/40000));
+        for(let i=0;i<n;i++){
+          stars.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.1+.2,
+            base:Math.random()*.3+.1,phase:Math.random()*Math.PI*2,
+            speed:Math.random()*.002+.001,gold:Math.random()>.65});
+        }
+      }
+      let t=0;
+      function draw(ts){
+        requestAnimationFrame(draw);
+        if(ts-last<33)return;last=ts;
+        x.clearRect(0,0,w,h);t++;
+        stars.forEach(s=>{
+          const tw=s.base+Math.sin(t*s.speed+s.phase)*s.base*.5;
+          x.beginPath();x.arc(s.x,s.y,s.r,0,Math.PI*2);
+          x.fillStyle=s.gold?`rgba(212,168,76,${tw})`:`rgba(200,195,230,${tw*.5})`;
+          x.fill();
+        });
+      }
+      resize();init();requestAnimationFrame(draw);
+      addEventListener('resize',()=>{resize();init()});
+    })();
+
+    // ═══ REVEALS ═══
+    const obs=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');obs.unobserve(e.target);}});
+    },{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+    document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+  </script>
+</body>
+</html>
