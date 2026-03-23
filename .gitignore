@@ -20,3 +20,5 @@ web-images/profile-*.jpg
 
 # Claude config
 .claude/
+.vercel
+audio/
