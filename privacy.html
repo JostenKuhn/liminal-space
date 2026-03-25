@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Liminal Space</title>
+  <meta name="description" content="Privacy Policy for Liminal Space. How we collect, use, and protect your information.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=Outfit:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #050510;
+      --bg2: #0A0A1E;
+      --surface: #0F0F28;
+      --primary: #6B5CE7;
+      --gold: #D4A84C;
+      --gold-hover: #E0B65A;
+      --gold-glow: rgba(212,168,76,0.35);
+      --text: #F0EEF8;
+      --text-mid: #B8B4CE;
+      --text-dim: #7E7A94;
+      --rule: rgba(255,255,255,0.06);
+      --display: 'Syne', sans-serif;
+      --serif: 'Newsreader', Georgia, serif;
+      --body: 'Outfit', sans-serif;
+      --mono: 'IBM Plex Mono', monospace;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --col: min(68rem, 100% - 2.5rem);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body {
+      font-family: var(--body); background: var(--bg); color: var(--text);
+      line-height: 1.7; overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+    /* Subtle grain */
+    body::after {
+      content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none;
+      opacity: 0.02;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+      background-size: 128px;
+    }
+
+    .wide { width: var(--col); margin-inline: auto; }
+
+    /* ═══ NAV ═══ */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+      padding: 1.2rem 0; transition: all .4s;
+    }
+    .nav.scrolled {
+      background: rgba(5,5,16,0.92); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      padding: 0.7rem 0; border-bottom: 1px solid var(--rule);
+    }
+    .nav-inner {
+      width: var(--col); margin-inline: auto;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-mark {
+      font-family: var(--display); font-weight: 700; font-size: 1.1rem;
+      letter-spacing: -0.03em;
+    }
+    .nav-mark i {
+      font-family: var(--serif); font-weight: 300; font-style: italic;
+      color: var(--gold); margin-left: .12em;
+    }
+    .nav-cta {
+      font-family: var(--display); font-weight: 600; font-size: 0.78rem;
+      color: var(--bg); background: var(--gold);
+      padding: 0.55rem 1.5rem; border-radius: 100px;
+      transition: all .3s;
+      box-shadow: 0 2px 16px rgba(212,168,76,0.2);
+    }
+    .nav-cta:hover { background: var(--gold-hover); transform: translateY(-1px); }
+
+    /* ═══ LEGAL CONTENT ═══ */
+    .legal {
+      padding: 10rem 0 6rem;
+      max-width: 52rem;
+      margin-inline: auto;
+      width: var(--col);
+    }
+    .legal-eyebrow {
+      font-family: var(--mono); font-size: .6rem; font-weight: 600;
+      letter-spacing: .22em; text-transform: uppercase;
+      color: var(--text-dim); margin-bottom: 1.5rem;
+    }
+    .legal h1 {
+      font-family: var(--display);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800; line-height: 1.05;
+      letter-spacing: -0.035em; margin-bottom: 1rem;
+    }
+    .legal h1 em {
+      font-family: var(--serif); font-weight: 300; font-style: italic;
+      color: var(--gold);
+    }
+    .legal .updated {
+      font-family: var(--mono); font-size: .65rem;
+      letter-spacing: .08em; text-transform: uppercase;
+      color: var(--text-dim); margin-bottom: 3.5rem;
+    }
+    .legal h2 {
+      font-family: var(--display);
+      font-size: 1.15rem; font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 3rem 0 1rem;
+      color: var(--text);
+    }
+    .legal h2:first-of-type { margin-top: 0; }
+    .legal p {
+      font-family: var(--body);
+      font-size: 0.95rem; color: var(--text-mid);
+      line-height: 1.85; font-weight: 300;
+      margin-bottom: 1rem;
+    }
+    .legal ul {
+      list-style: none; padding: 0; margin-bottom: 1rem;
+    }
+    .legal ul li {
+      font-family: var(--body);
+      font-size: 0.95rem; color: var(--text-mid);
+      line-height: 1.85; font-weight: 300;
+      padding-left: 1.5rem; position: relative;
+      margin-bottom: 0.4rem;
+    }
+    .legal ul li::before {
+      content: '';
+      position: absolute; left: 0; top: 0.75rem;
+      width: 4px; height: 4px; border-radius: 50%;
+      background: var(--gold); opacity: 0.5;
+    }
+    .legal a {
+      color: var(--gold); transition: color .2s;
+    }
+    .legal a:hover { color: var(--gold-hover); }
+    .legal-divider {
+      border: none; border-top: 1px solid var(--rule);
+      margin: 3rem 0;
+    }
+
+    /* ═══ FOOTER ═══ */
+    .footer { padding: 3rem 0; border-top: 1px solid var(--rule); }
+    .footer-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-mark { font-family: var(--display); font-size: .92rem; font-weight: 700; }
+    .footer-mark i { font-family: var(--serif); font-style: italic; color: var(--gold); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a {
+      font-family: var(--mono); font-size: .62rem;
+      letter-spacing: .06em; text-transform: uppercase;
+      color: var(--text-dim); transition: color .2s;
+    }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy {
+      width: 100%; text-align: center; font-size: .62rem;
+      color: var(--text-dim); margin-top: .75rem; opacity: .5;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" role="navigation" aria-label="Main">
+    <div class="nav-inner">
+      <a href="/" class="nav-mark">Liminal<i>Space</i></a>
+      <a href="/" class="nav-cta">Back to Home</a>
+    </div>
+  </nav>
+
+  <!-- LEGAL CONTENT -->
+  <main class="legal">
+    <p class="legal-eyebrow">Legal</p>
+    <h1>Privacy <em>Policy</em></h1>
+    <p class="updated">Last updated: 25 March 2026</p>
+
+    <h2>Overview</h2>
+    <p>Liminal Space ("we", "us", "our") operates the website enterliminalspace.com. This policy explains what information we collect, how we use it, and your rights regarding that information. We keep things simple because we believe your data should be respected, not exploited.</p>
+
+    <h2>Information We Collect</h2>
+    <p>We collect only what you voluntarily provide:</p>
+    <ul>
+      <li>First name and email address when you opt in to receive our free audio track or other content</li>
+    </ul>
+    <p>We do not require account creation. We do not collect passwords, payment card details, or sensitive personal data on this site.</p>
+
+    <h2>How We Use Your Information</h2>
+    <p>Your information is used strictly for:</p>
+    <ul>
+      <li>Delivering the free audio track and PDF guide you requested</li>
+      <li>Sending email communications about Liminal Space, including product updates, new releases, and educational content</li>
+    </ul>
+
+    <h2>Third-Party Services</h2>
+    <p>We use a small number of trusted third-party services to operate:</p>
+    <ul>
+      <li><strong>Beehiiv</strong> — email marketing platform that stores your name and email address and delivers our emails</li>
+      <li><strong>Stan Store</strong> — payment processor for product purchases. Stan Store handles all payment data directly; we never see or store your card details</li>
+      <li><strong>Google Analytics (GA4)</strong> — anonymous website analytics to understand how visitors use our site. No personally identifiable information is shared</li>
+      <li><strong>Meta Pixel</strong> — anonymous conversion tracking to measure ad performance. No personally identifiable information is shared</li>
+    </ul>
+
+    <h2>Cookies and Tracking</h2>
+    <p>This site may use cookies from Google Analytics and Meta Pixel for anonymous analytics and conversion tracking. These cookies do not identify you personally. We do not use cookies for advertising retargeting beyond basic conversion measurement.</p>
+
+    <h2>Data Sharing</h2>
+    <p>We do not sell, rent, or trade your personal information to anyone. Ever. Your data is shared only with the third-party services listed above, solely to deliver the services you requested.</p>
+
+    <h2>Your Rights</h2>
+    <p>You have the right to:</p>
+    <ul>
+      <li>Unsubscribe from our emails at any time using the link in every email we send</li>
+      <li>Request a copy of the personal data we hold about you</li>
+      <li>Request deletion of your personal data from our systems</li>
+    </ul>
+    <p>To exercise any of these rights, email us at <a href="mailto:hello@enterliminalspace.com">hello@enterliminalspace.com</a>.</p>
+
+    <h2>Data Retention</h2>
+    <p>We retain your email and name for as long as you remain subscribed to our list. If you unsubscribe, your data is removed from our active mailing list. You may request full deletion at any time.</p>
+
+    <h2>Children's Privacy</h2>
+    <p>Our site and products are not intended for anyone under the age of 18. We do not knowingly collect information from minors.</p>
+
+    <h2>Changes to This Policy</h2>
+    <p>We may update this policy from time to time. Changes will be posted on this page with an updated revision date. Continued use of the site after changes constitutes acceptance of the revised policy.</p>
+
+    <h2>Contact</h2>
+    <p>If you have any questions about this privacy policy, reach out to us at <a href="mailto:hello@enterliminalspace.com">hello@enterliminalspace.com</a>.</p>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="wide">
+      <div class="footer-inner">
+        <div class="footer-mark">Liminal<i>Space</i></div>
+        <div class="footer-links">
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+          <a href="mailto:hello@enterliminalspace.com">Contact</a>
+        </div>
+        <p class="footer-copy">&copy; 2026 Liminal Space. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // NAV SCROLL
+    const nav = document.querySelector('.nav');
+    let nt = false;
+    addEventListener('scroll', () => {
+      if (!nt) { requestAnimationFrame(() => { nav.classList.toggle('scrolled', scrollY > 60); nt = false; }); nt = true; }
+    });
+  </script>
+</body>
+</html>
