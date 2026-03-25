@@ -973,14 +973,34 @@
       });
     });
 
-    // ═══ FORMS ═══
+    // ═══ FORMS — Beehiiv subscribe via /api/subscribe ═══
     document.querySelectorAll('.optin-form').forEach(form => {
-      form.addEventListener('submit', e => {
+      form.addEventListener('submit', async e => {
         e.preventDefault();
+        const btn = form.querySelector('button[type="submit"]');
+        const origText = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = 'Sending…';
+
         const d = new FormData(form);
-        console.log('Opt-in:', { name: d.get('first_name'), email: d.get('email') });
-        // Redirect to free audio page after capture
-        window.location.href = 'free-audio.html';
+        try {
+          const res = await fetch('/api/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              email: d.get('email'),
+              first_name: d.get('first_name'),
+            }),
+          });
+          if (!res.ok) throw new Error('Subscribe failed');
+          window.location.href = 'free-audio.html';
+        } catch (err) {
+          console.error('Opt-in error:', err);
+          btn.disabled = false;
+          btn.textContent = origText;
+          // Fallback: still redirect so the experience isn't broken
+          window.location.href = 'free-audio.html';
+        }
       });
     });
   </script>
