@@ -125,6 +125,12 @@
       box-shadow: 0 2px 16px rgba(212,168,76,0.2);
     }
     .nav-cta:hover { background: var(--gold-hover); transform: translateY(-1px); }
+    .nav-cta-buy {
+      margin-left: .5rem; background: transparent; color: var(--gold);
+      border: 1px solid rgba(212,168,76,0.3); box-shadow: none;
+    }
+    .nav-cta-buy:hover { background: rgba(212,168,76,0.1); color: var(--gold); }
+    @media (max-width: 640px) { .nav-cta-buy { display: none; } }
 
     /* ═══════════════════════════ */
     /*         H E R O            */
@@ -671,7 +677,7 @@
     <div class="nav-inner">
       <a href="#" class="nav-mark">Liminal<i>Space</i></a>
       <a href="#final" class="nav-cta">Get Free Audio</a>
-      <a href="https://stan.store/liminalspace/p/first-contact--consciousness-exploration-kit" class="nav-cta" style="margin-left: .5rem; background: transparent; color: var(--gold); border: 1px solid rgba(212,168,76,0.3); box-shadow: none;">Get Full System — $37</a>
+      <a href="https://stan.store/liminalspace/p/first-contact--consciousness-exploration-kit" class="nav-cta nav-cta-buy">Get Full System — $37</a>
     </div>
   </nav>
 
