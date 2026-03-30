@@ -130,7 +130,11 @@
       border: 1px solid rgba(212,168,76,0.3); box-shadow: none;
     }
     .nav-cta-buy:hover { background: rgba(212,168,76,0.1); color: var(--gold); }
-    @media (max-width: 640px) { .nav-cta-buy { display: none; } }
+    @media (max-width: 640px) {
+      .nav-cta, .nav-cta-buy { font-size: .62rem; padding: .45rem .9rem; }
+      .nav-cta-buy { margin-left: .35rem; }
+      .nav-mark { font-size: .9rem; }
+    }
 
     /* ═══════════════════════════ */
     /*         H E R O            */
