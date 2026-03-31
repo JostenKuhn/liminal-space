@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Liminal Space — Train Your Mind to Leave Your Body</title>
-  <meta name="description" content="Science-backed techniques from 50 years of consciousness research. The CIA studied it. The Monroe Institute perfected it. Now it's yours.">
+  <meta name="description" content="The CIA spent $20 million proving your mind can leave your body. Now it's a 20-minute audio session. Try the free guided session tonight.">
 
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-1GJVT4XFG9"></script>
@@ -672,6 +672,89 @@
       width: 100%; text-align: center; font-size: .62rem;
       color: var(--text-dim); margin-top: .75rem; opacity: .5;
     }
+
+    /* ═══ STICKY MOBILE CTA ═══ */
+    .sticky-cta {
+      display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 600;
+      padding: 0.75rem 1rem; background: rgba(5,5,16,0.95);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(212,168,76,0.2);
+      gap: 0.5rem;
+    }
+    .sticky-cta.visible { display: flex; }
+    .sticky-cta a {
+      flex: 1; text-align: center; padding: 0.75rem; border-radius: 8px;
+      font-family: var(--display); font-weight: 700; font-size: 0.82rem;
+      text-decoration: none; transition: all .2s;
+    }
+    .sticky-cta .sticky-free {
+      background: var(--gold); color: var(--bg);
+    }
+    .sticky-cta .sticky-buy {
+      background: transparent; color: var(--gold);
+      border: 1px solid rgba(212,168,76,0.4);
+    }
+    @media (min-width: 769px) { .sticky-cta { display: none !important; } }
+
+    /* ═══ HERO BUY TOGGLE ═══ */
+    .hero-toggle {
+      display: flex; justify-content: center; gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .hero-toggle button {
+      font-family: var(--mono); font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0.5rem 1.25rem; border-radius: 100px;
+      transition: all .3s; cursor: pointer; border: none;
+    }
+    .hero-toggle .toggle-active {
+      background: var(--gold); color: var(--bg);
+    }
+    .hero-toggle .toggle-inactive {
+      background: transparent; color: var(--text-dim);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .hero-buy-box {
+      display: none; text-align: center;
+    }
+    .hero-buy-box.active { display: block; }
+    .hero-buy-price {
+      font-family: var(--display); font-size: 2.5rem; font-weight: 800;
+      color: var(--text); margin-bottom: 0.25rem;
+    }
+    .hero-buy-price span {
+      font-size: 1rem; color: var(--text-dim); font-weight: 400;
+      text-decoration: line-through; margin-right: 0.5rem;
+    }
+    .hero-buy-includes {
+      list-style: none; text-align: left; margin: 1.25rem 0;
+      font-size: 0.88rem; color: var(--text-mid);
+    }
+    .hero-buy-includes li {
+      padding: 0.4rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .hero-buy-includes li::before {
+      content: '✓'; color: var(--gold); font-weight: 700; margin-right: 0.6rem;
+    }
+    .hero-buy-guarantee {
+      font-size: 0.72rem; color: var(--text-dim); margin-top: 0.75rem;
+    }
+
+    /* ═══ LIVE COUNTER ═══ */
+    .live-counter {
+      font-family: var(--mono); font-size: 0.62rem; font-weight: 500;
+      letter-spacing: 0.06em; color: var(--text-dim);
+      margin-top: 1rem; text-align: center;
+    }
+    .live-counter .counter-dot {
+      display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+      background: #4ade80; margin-right: 0.4rem; vertical-align: middle;
+      animation: pulse-dot 2s ease infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; } 50% { opacity: 0.4; }
+    }
   </style>
 </head>
 <body>
@@ -702,23 +785,48 @@
       </p>
 
       <div class="hero-cta-box rv rv-d3">
-        <p class="cta-headline">Get your free guided session</p>
-        <p class="cta-desc">20 minutes. Headphones. Experience it tonight.</p>
-        <form class="optin-form" aria-label="Email opt-in">
-          <div class="form-row">
-            <input type="text" name="first_name" placeholder="First name" required autocomplete="given-name" aria-label="First name">
-            <input type="email" name="email" placeholder="Your best email" required autocomplete="email" aria-label="Email">
-          </div>
-          <button type="submit" class="btn-gold">Send Me the Free Audio</button>
-        </form>
-        <p class="hero-note">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          Free. No credit card. Instant access.
-        </p>
-        <div class="form-success" id="hero-success">
-          <h3>Check your inbox</h3>
-          <p>Your guided session is on its way. The threshold awaits.</p>
+        <div class="hero-toggle">
+          <button class="toggle-active" onclick="toggleHero('free')">Free Session</button>
+          <button class="toggle-inactive" onclick="toggleHero('buy')">Full System — $37</button>
         </div>
+
+        <!-- FREE OPTION -->
+        <div id="hero-free" class="hero-buy-box active">
+          <p class="cta-headline">Get your free guided session</p>
+          <p class="cta-desc">20 minutes. Headphones. Experience it tonight.</p>
+          <form class="optin-form" aria-label="Email opt-in">
+            <div class="form-row">
+              <input type="text" name="first_name" placeholder="First name" required autocomplete="given-name" aria-label="First name">
+              <input type="email" name="email" placeholder="Your best email" required autocomplete="email" aria-label="Email">
+            </div>
+            <button type="submit" class="btn-gold">Send Me the Free Audio</button>
+          </form>
+          <p class="hero-note">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Free. No credit card. Instant access.
+          </p>
+          <div class="form-success" id="hero-success">
+            <h3>Check your inbox</h3>
+            <p>Your guided session is on its way. The threshold awaits.</p>
+          </div>
+        </div>
+
+        <!-- BUY OPTION -->
+        <div id="hero-buy" class="hero-buy-box">
+          <p class="hero-buy-price"><span>$97</span> $37</p>
+          <p style="font-size:.82rem;color:var(--text-mid);margin-bottom:1rem;">One-time payment. Instant access. Keep forever.</p>
+          <ul class="hero-buy-includes">
+            <li>3 guided audio sessions (Door 10, 12, 15)</li>
+            <li>Full consciousness exploration podcast</li>
+            <li>14-page Liminal Protocol guide</li>
+            <li>7-day progression plan</li>
+            <li>Session journal prompts</li>
+          </ul>
+          <a href="https://stan.store/liminalspace/p/first-contact--consciousness-exploration-kit" class="btn-gold" style="display:block;text-align:center;text-decoration:none;font-size:1.05rem;padding:1.05rem;">Get Instant Access</a>
+          <p class="hero-buy-guarantee">100% satisfaction guaranteed. If the sessions don't shift something inside you, email us for a full refund.</p>
+        </div>
+
+        <p class="live-counter"><span class="counter-dot"></span><span id="counter-num">2,847</span> explorers have entered the liminal space</p>
       </div>
     </div>
   </section>
@@ -889,11 +997,13 @@
   <!-- ════════════════════════════════════ -->
   <section style="padding: clamp(4rem, 10vw, 7rem) 0; border-top: 1px solid var(--rule); background: linear-gradient(180deg, var(--bg) 0%, rgba(107,92,231,0.03) 50%, var(--bg) 100%);">
     <div class="wide z1" style="text-align: center; max-width: 36rem;">
-      <p class="rv" style="font-family: var(--mono); font-size: .6rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem;">Ready to go deeper?</p>
-      <h2 class="rv rv-d1" style="font-family: var(--display); font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 1.25rem;">Door 10 is just the beginning. The real experiences start at <span style="font-family: var(--serif); font-weight: 300; font-style: italic; color: var(--gold);">Door 12</span>.</h2>
-      <p class="rv rv-d2" style="color: var(--text-mid); font-size: 1rem; line-height: 1.8; font-weight: 300; margin-bottom: 2rem;">Remote viewing. Time dissolution. Out-of-body states. The complete First Contact system gives you all 3 Doors, a 14-page guide, and a 7-day progression plan.</p>
-      <a href="https://stan.store/liminalspace/p/first-contact--consciousness-exploration-kit" class="btn-gold rv rv-d3" style="display: inline-block; text-decoration: none; font-size: 1.05rem; padding: 1.1rem 2.5rem;">Get First Contact — $37</a>
-      <p class="rv rv-d4" style="margin-top: 1rem; font-size: .72rem; color: var(--text-dim);">One-time payment. Instant access. Keep forever.</p>
+      <p class="rv" style="font-family: var(--mono); font-size: .6rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem;">The free session is just the beginning</p>
+      <h2 class="rv rv-d1" style="font-family: var(--display); font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 1.25rem;">Door 10 relaxes you. Door 12 lets you <span style="font-family: var(--serif); font-weight: 300; font-style: italic; color: var(--gold);">leave</span>.</h2>
+      <p class="rv rv-d2" style="color: var(--text-mid); font-size: 1rem; line-height: 1.8; font-weight: 300; margin-bottom: 1.25rem;">Remote viewing. Time dissolution. Full separation experiences. The complete First Contact system takes you through all 3 Doors with guided audio, a deep-dive podcast, a 14-page protocol guide, and a 7-day progression plan.</p>
+      <p class="rv rv-d2" style="font-family: var(--display); font-size: 1.8rem; font-weight: 800; margin-bottom: 0.25rem;"><span style="color: var(--text-dim); font-size: 1rem; text-decoration: line-through; margin-right: 0.5rem;">$97</span>$37</p>
+      <p class="rv rv-d2" style="font-size: .78rem; color: var(--text-dim); margin-bottom: 1.5rem;">Launch price. Will increase.</p>
+      <a href="https://stan.store/liminalspace/p/first-contact--consciousness-exploration-kit" class="btn-gold rv rv-d3" style="display: inline-block; text-decoration: none; font-size: 1.05rem; padding: 1.1rem 2.5rem;">Get Instant Access — $37</a>
+      <p class="rv rv-d4" style="margin-top: 1rem; font-size: .72rem; color: var(--text-dim);">One-time payment. Instant access. Keep forever. Satisfaction guaranteed.</p>
     </div>
   </section>
 
@@ -970,17 +1080,27 @@
           <form class="optin-form" aria-label="Email opt-in">
             <input type="text" name="first_name" placeholder="First name" required autocomplete="given-name" aria-label="First name">
             <input type="email" name="email" placeholder="Your best email" required autocomplete="email" aria-label="Email">
-            <button type="submit" class="btn-gold" style="width:100%">Begin Your Journey — It's Free</button>
+            <button type="submit" class="btn-gold" style="width:100%">Get the Free Session</button>
           </form>
           <p class="final-note">No credit card. Instant access. Unsubscribe anytime.</p>
           <div class="form-success" id="final-success">
             <h3>Check your inbox.</h3>
             <p>The threshold awaits.</p>
           </div>
+          <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.06);text-align:center;">
+            <p style="font-size:.78rem;color:var(--text-dim);margin-bottom:.75rem;">Want everything now?</p>
+            <a href="https://stan.store/liminalspace/p/first-contact--consciousness-exploration-kit" class="btn-gold" style="display:block;text-align:center;text-decoration:none;background:transparent;color:var(--gold);border:1px solid rgba(212,168,76,0.4);font-size:.92rem;padding:.85rem;">Get Full System — $37</a>
+          </div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- STICKY MOBILE CTA -->
+  <div class="sticky-cta" id="sticky-cta">
+    <a href="#final" class="sticky-free">Free Session</a>
+    <a href="https://stan.store/liminalspace/p/first-contact--consciousness-exploration-kit" class="sticky-buy">Full System — $37</a>
+  </div>
 
   <!-- FOOTER -->
   <footer class="footer">
@@ -1023,6 +1143,36 @@
         btn.setAttribute('aria-expanded', !was);
       });
     });
+
+    // ═══ HERO TOGGLE ═══
+    function toggleHero(mode) {
+      const freeBox = document.getElementById('hero-free');
+      const buyBox = document.getElementById('hero-buy');
+      const btns = document.querySelectorAll('.hero-toggle button');
+      if (mode === 'buy') {
+        freeBox.classList.remove('active');
+        buyBox.classList.add('active');
+        btns[0].className = 'toggle-inactive';
+        btns[1].className = 'toggle-active';
+      } else {
+        buyBox.classList.remove('active');
+        freeBox.classList.add('active');
+        btns[0].className = 'toggle-active';
+        btns[1].className = 'toggle-inactive';
+      }
+    }
+
+    // ═══ STICKY MOBILE CTA ═══
+    const stickyCta = document.getElementById('sticky-cta');
+    if (window.innerWidth < 769) {
+      const heroSection = document.querySelector('.hero');
+      const stickyObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          stickyCta.classList.toggle('visible', !e.isIntersecting);
+        });
+      }, { threshold: 0 });
+      stickyObs.observe(heroSection);
+    }
 
     // ═══ FORMS — Beehiiv subscribe via /api/subscribe ═══
     document.querySelectorAll('.optin-form').forEach(form => {
