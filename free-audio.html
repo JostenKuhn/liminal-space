@@ -13,6 +13,7 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-1GJVT4XFG9');
+    gtag('event', 'generate_lead', {value: 1.00, currency: 'USD'});
   </script>
 
   <!-- Meta Pixel -->
@@ -692,6 +693,93 @@
       entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');obs.unobserve(e.target);}});
     },{threshold:.08,rootMargin:'0px 0px -30px 0px'});
     document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+
+    // ═══ COMPREHENSIVE TRACKING ═══
+
+    // Track video play
+    const video = document.querySelector('video');
+    if (video) {
+      video.addEventListener('play', () => {
+        gtag('event', 'video_start', {video_title: 'Is Reality a Simulation'});
+        fbq('trackCustom', 'VideoStart', {video: 'simulation_overview'});
+      });
+      video.addEventListener('ended', () => {
+        gtag('event', 'video_complete', {video_title: 'Is Reality a Simulation'});
+        fbq('trackCustom', 'VideoComplete', {video: 'simulation_overview'});
+      });
+      // Track 25/50/75% video progress
+      let videoFired = {};
+      video.addEventListener('timeupdate', () => {
+        if (!video.duration) return;
+        const pct = Math.round((video.currentTime / video.duration) * 100);
+        [25, 50, 75].forEach(m => {
+          if (pct >= m && !videoFired[m]) {
+            videoFired[m] = true;
+            gtag('event', 'video_progress', {video_title: 'Is Reality a Simulation', percent: m});
+            fbq('trackCustom', 'VideoProgress', {video: 'simulation_overview', percent: m});
+          }
+        });
+      });
+    }
+
+    // Track audio play
+    const audio = document.querySelector('audio');
+    if (audio) {
+      audio.addEventListener('play', () => {
+        gtag('event', 'audio_start', {audio_title: 'Door 10 Free Session'});
+        fbq('trackCustom', 'AudioStart', {session: 'door_10_free'});
+      });
+      audio.addEventListener('ended', () => {
+        gtag('event', 'audio_complete', {audio_title: 'Door 10 Free Session'});
+        fbq('trackCustom', 'AudioComplete', {session: 'door_10_free'});
+      });
+      // Track audio progress
+      let audioFired = {};
+      audio.addEventListener('timeupdate', () => {
+        if (!audio.duration) return;
+        const pct = Math.round((audio.currentTime / audio.duration) * 100);
+        [25, 50, 75].forEach(m => {
+          if (pct >= m && !audioFired[m]) {
+            audioFired[m] = true;
+            gtag('event', 'audio_progress', {audio_title: 'Door 10 Free Session', percent: m});
+            fbq('trackCustom', 'AudioProgress', {session: 'door_10_free', percent: m});
+          }
+        });
+      });
+    }
+
+    // Track scroll depth
+    let scrollFired = {};
+    addEventListener('scroll', () => {
+      const pct = Math.round((scrollY / (document.body.scrollHeight - innerHeight)) * 100);
+      [25, 50, 75, 100].forEach(m => {
+        if (pct >= m && !scrollFired[m]) {
+          scrollFired[m] = true;
+          gtag('event', 'scroll_depth', {page: 'free_audio', percent: m});
+          fbq('trackCustom', 'ScrollDepth', {page: 'free_audio', percent: m});
+        }
+      });
+    });
+
+    // Track Stan Store CTA clicks (InitiateCheckout)
+    document.querySelectorAll('a[href*="stan.store"]').forEach(link => {
+      link.addEventListener('click', () => {
+        gtag('event', 'begin_checkout', {value: 37.00, currency: 'USD', page: 'free_audio'});
+        fbq('track', 'InitiateCheckout', {value: 37.00, currency: 'USD', content_name: 'First Contact'});
+      });
+    });
+
+    // Track time on page (30s, 60s, 2min, 5min)
+    let timeFired = {};
+    [30, 60, 120, 300].forEach(sec => {
+      setTimeout(() => {
+        if (!timeFired[sec]) {
+          timeFired[sec] = true;
+          gtag('event', 'time_on_page', {page: 'free_audio', seconds: sec});
+          fbq('trackCustom', 'TimeOnPage', {page: 'free_audio', seconds: sec});
+        }
+      }, sec * 1000);
+    });
   </script>
 </body>
 </html>

@@ -921,6 +921,68 @@
       window.addEventListener('scroll',update,{passive:true});
       update();
     })();
+
+    // ═══ MEMBERS PAGE TRACKING ═══
+
+    // Track all audio plays (Door 10, 12, 15)
+    document.querySelectorAll('audio').forEach((audio, i) => {
+      const doors = ['Door 10', 'Door 12', 'Door 15'];
+      const name = doors[i] || 'Audio ' + (i+1);
+      audio.addEventListener('play', () => {
+        gtag('event', 'audio_start', {audio_title: name, page: 'members'});
+        fbq('trackCustom', 'AudioStart', {session: name});
+      });
+      audio.addEventListener('ended', () => {
+        gtag('event', 'audio_complete', {audio_title: name, page: 'members'});
+        fbq('trackCustom', 'AudioComplete', {session: name});
+      });
+    });
+
+    // Track video play
+    const vid = document.querySelector('video');
+    if (vid) {
+      vid.addEventListener('play', () => {
+        gtag('event', 'video_start', {video_title: 'Simulation Overview', page: 'members'});
+        fbq('trackCustom', 'VideoStart', {video: 'simulation_overview', page: 'members'});
+      });
+    }
+
+    // Track podcast play
+    const allAudio = document.querySelectorAll('audio');
+    if (allAudio.length > 3) {
+      const podcast = allAudio[3];
+      if (podcast) {
+        podcast.addEventListener('play', () => {
+          gtag('event', 'audio_start', {audio_title: 'Podcast', page: 'members'});
+          fbq('trackCustom', 'PodcastStart');
+        });
+      }
+    }
+
+    // Track download clicks
+    document.querySelectorAll('a[download], a[href*="releases/download"]').forEach(link => {
+      link.addEventListener('click', () => {
+        const file = link.getAttribute('download') || link.href.split('/').pop();
+        gtag('event', 'file_download', {file_name: file, page: 'members'});
+        fbq('trackCustom', 'FileDownload', {file: file});
+      });
+    });
+
+    // Track section engagement
+    document.querySelectorAll('.sticky-nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        const section = link.getAttribute('href').replace('#','');
+        gtag('event', 'nav_click', {section: section, page: 'members'});
+      });
+    });
+
+    // Track time on members page
+    [60, 300, 600, 1200].forEach(sec => {
+      setTimeout(() => {
+        gtag('event', 'time_on_page', {page: 'members', seconds: sec});
+        fbq('trackCustom', 'TimeOnPage', {page: 'members', seconds: sec});
+      }, sec * 1000);
+    });
   </script>
 </body>
 </html>
