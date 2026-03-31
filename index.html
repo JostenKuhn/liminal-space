@@ -1144,8 +1144,53 @@
       });
     });
 
+    // ═══ ENHANCED TRACKING ═══
+    // Track scroll depth milestones
+    let scrollFired = {};
+    addEventListener('scroll', () => {
+      const pct = Math.round((scrollY / (document.body.scrollHeight - innerHeight)) * 100);
+      [25, 50, 75, 100].forEach(m => {
+        if (pct >= m && !scrollFired[m]) {
+          scrollFired[m] = true;
+          gtag('event', 'scroll_depth', {percent: m});
+          fbq('trackCustom', 'ScrollDepth', {percent: m});
+        }
+      });
+    });
+
+    // Track section views
+    ['research', 'doors', 'mid-cta', 'inside', 'proof', 'faq', 'final'].forEach(id => {
+      const el = document.querySelector('.' + id) || document.getElementById(id);
+      if (!el) return;
+      const secObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            gtag('event', 'section_view', {section: id});
+            fbq('trackCustom', 'SectionView', {section: id});
+            secObs.unobserve(el);
+          }
+        });
+      }, {threshold: 0.3});
+      secObs.observe(el);
+    });
+
+    // Track buy CTA clicks
+    document.querySelectorAll('a[href*="stan.store"]').forEach(link => {
+      link.addEventListener('click', () => {
+        gtag('event', 'begin_checkout', {value: 37.00, currency: 'USD'});
+        fbq('track', 'InitiateCheckout', {value: 37.00, currency: 'USD'});
+      });
+    });
+
+    // Track hero toggle clicks
+    function trackToggle(mode) {
+      gtag('event', 'hero_toggle', {mode: mode});
+      fbq('trackCustom', 'HeroToggle', {mode: mode});
+    }
+
     // ═══ HERO TOGGLE ═══
     function toggleHero(mode) {
+      trackToggle(mode);
       const freeBox = document.getElementById('hero-free');
       const buyBox = document.getElementById('hero-buy');
       const btns = document.querySelectorAll('.hero-toggle button');
@@ -1194,6 +1239,10 @@
             }),
           });
           if (!res.ok) throw new Error('Subscribe failed');
+          // Track successful signup
+          gtag('event', 'generate_lead', {value: 1.00, currency: 'USD'});
+          fbq('track', 'Lead');
+          fbq('track', 'CompleteRegistration');
           window.location.href = 'free-audio.html';
         } catch (err) {
           console.error('Opt-in error:', err);
