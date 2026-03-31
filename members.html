@@ -13,6 +13,7 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-1GJVT4XFG9');
+    gtag('event', 'purchase', {value: 37.00, currency: 'USD', transaction_id: Date.now().toString()});
   </script>
 
   <!-- Meta Pixel -->
@@ -27,6 +28,7 @@
     'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '26479131108445246');
     fbq('track', 'PageView');
+    fbq('track', 'Purchase', {value: 37.00, currency: 'USD'});
   </script>
   <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=26479131108445246&ev=PageView&noscript=1"/></noscript>
 
