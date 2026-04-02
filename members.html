@@ -45,6 +45,18 @@
   </script>
   <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=26479131108445246&ev=PageView&noscript=1"/></noscript>
 
+  <!-- Reddit Pixel -->
+  <script>
+    !function(w,d){if(!w.rdt){var p=w.rdt=function(){p.sendEvent?p.sendEvent.apply(p,arguments):p.callQueue.push(arguments)};p.callQueue=[];var t=d.createElement("script");t.src="https://www.redditstatic.com/ads/pixel.js";t.async=!0;var s=d.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}}(window,document);
+    rdt('init','a2_iryyyn1edljt');
+    rdt('track','PageVisit');
+    // Only fire Purchase for real buyers (dedup with localStorage)
+    if (new URLSearchParams(window.location.search).get('purchased') === 'true' && !localStorage.getItem('ls_reddit_purchase_fired')) {
+      rdt('track','Purchase', {value: 37.00, currency: 'USD'});
+      localStorage.setItem('ls_reddit_purchase_fired', 'true');
+    }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=Outfit:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
