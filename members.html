@@ -17,14 +17,11 @@
     // Only fire purchase events for real buyers (redirected from Stan Store with ?purchased=true)
     const params = new URLSearchParams(window.location.search);
     const isPurchase = params.get('purchased') === 'true';
-    if (isPurchase) {
+    if (isPurchase && !localStorage.getItem('ls_purchase_fired')) {
       const txnId = 'ls_' + Date.now();
       gtag('event', 'purchase', {value: 37.00, currency: 'USD', transaction_id: txnId});
       gtag('event', 'conversion', {send_to: 'G-1GJVT4XFG9', value: 37.00, currency: 'USD'});
-      // Mark as purchased in localStorage so we don't double-fire on refresh
-      if (!localStorage.getItem('ls_purchased_' + txnId.slice(0,10))) {
-        localStorage.setItem('ls_purchased_' + txnId.slice(0,10), 'true');
-      }
+      localStorage.setItem('ls_purchase_fired', 'true');
     }
   </script>
 
@@ -41,8 +38,8 @@
     fbq('init', '26479131108445246');
     fbq('track', 'PageView');
 
-    // Only fire Purchase for real buyers
-    if (new URLSearchParams(window.location.search).get('purchased') === 'true') {
+    // Only fire Purchase for real buyers (dedup with localStorage)
+    if (new URLSearchParams(window.location.search).get('purchased') === 'true' && !localStorage.getItem('ls_purchase_fired')) {
       fbq('track', 'Purchase', {value: 37.00, currency: 'USD'});
     }
   </script>
