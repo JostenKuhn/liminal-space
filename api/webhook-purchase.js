@@ -1,15 +1,15 @@
 /**
  * POST /api/webhook-purchase
  *
- * Called by Stan Store (or any payment provider) after a successful purchase.
+ * Called by Stan Store after a successful purchase.
  * Expects JSON body with at least { email: "buyer@example.com" }
  *
  * What it does:
- * 1. Finds the subscriber in Beehiiv by email
- * 2. Adds the "purchased" tag so sales emails are skipped
+ * 1. Finds or creates the subscriber in Beehiiv
+ * 2. Adds the "purchased" tag
  * 3. Removes them from the welcome/nurture automation
  *
- * Security: validates a shared secret via ?key= query param
+ * Security: validates a shared secret via ?key= query param or x-webhook-secret header
  */
 
 const API_KEY = process.env.BEEHIIV_API_KEY;
@@ -18,7 +18,6 @@ const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
 const AUTOMATION_ID = '76426619-2bc5-49fb-99c8-73c47bc59e16';
 
 export default async function handler(req, res) {
-  // Allow POST only
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -29,7 +28,6 @@ export default async function handler(req, res) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
 
-  // Stan Store sends different payload shapes — handle both
   const email = extractEmail(req.body);
   if (!email) {
     return res.status(400).json({ error: 'No email found in payload' });
@@ -41,18 +39,21 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Step 1: Find the subscriber by email
-    const subscriber = await findSubscriber(email);
+    // Step 1: Find or create the subscriber
+    let subscriber = await findSubscriber(email);
 
     if (!subscriber) {
-      console.log(`No subscriber found for ${email} — skipping tag`);
-      return res.status(200).json({ success: true, message: 'No subscriber found, nothing to update' });
+      console.log(`No subscriber found for ${email} — creating one`);
+      subscriber = await createSubscriber(email, req.body);
+      if (!subscriber) {
+        return res.status(500).json({ error: 'Failed to create subscriber' });
+      }
     }
 
     // Step 2: Add "purchased" tag
     const tagResult = await addPurchasedTag(subscriber.id);
 
-    // Step 3: Remove from nurture automation (so they stop getting sales emails)
+    // Step 3: Remove from nurture automation
     const automationResult = await removeFromAutomation(subscriber.id);
 
     return res.status(200).json({
@@ -73,11 +74,8 @@ export default async function handler(req, res) {
  */
 function extractEmail(body) {
   if (!body) return null;
-  // Direct email field
   if (body.email) return body.email;
-  // Nested under customer
   if (body.customer?.email) return body.customer.email;
-  // Nested under data
   if (body.data?.email) return body.data.email;
   if (body.data?.customer?.email) return body.data.customer.email;
   return null;
@@ -104,12 +102,49 @@ async function findSubscriber(email) {
 }
 
 /**
+ * Create a new subscriber in Beehiiv (for buyers who never opted in)
+ */
+async function createSubscriber(email, body) {
+  try {
+    const firstName = body?.customer?.first_name || body?.data?.customer?.first_name || null;
+
+    const response = await fetch(
+      `https://api.beehiiv.com/v2/publications/${PUB_ID}/subscriptions`,
+      {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${API_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          ...(firstName && { custom_fields: [{ name: 'First Name', value: firstName }] }),
+          utm_source: 'stan_store',
+          utm_medium: 'purchase',
+          referring_site: 'stan.store/liminalspace',
+          send_welcome_email: false,
+        }),
+      }
+    );
+
+    if (!response.ok) {
+      console.error('Create subscriber error:', await response.text());
+      return null;
+    }
+
+    const data = await response.json();
+    return data.data || null;
+  } catch (err) {
+    console.error('Create subscriber error:', err);
+    return null;
+  }
+}
+
+/**
  * Add "purchased" tag to subscriber
- * Beehiiv requires tag IDs — we find the tag first, then assign it
  */
 async function addPurchasedTag(subscriberId) {
   try {
-    // First, get all tags to find the "purchased" tag ID
     const tagsResponse = await fetch(
       `https://api.beehiiv.com/v2/publications/${PUB_ID}/tags`,
       {
@@ -126,11 +161,10 @@ async function addPurchasedTag(subscriberId) {
     const purchasedTag = tagsData.data?.find(t => t.name === 'purchased');
 
     if (!purchasedTag) {
-      console.error('No "purchased" tag found in Beehiiv');
+      console.error('No "purchased" tag found in Beehiiv — create it manually');
       return false;
     }
 
-    // Now assign the tag to the subscriber
     const assignResponse = await fetch(
       `https://api.beehiiv.com/v2/publications/${PUB_ID}/subscriptions/${subscriberId}/tags`,
       {
@@ -157,7 +191,6 @@ async function addPurchasedTag(subscriberId) {
 
 /**
  * Remove subscriber from the nurture automation
- * This prevents them from receiving any remaining sales emails
  */
 async function removeFromAutomation(subscriberId) {
   try {
@@ -170,7 +203,6 @@ async function removeFromAutomation(subscriberId) {
     );
 
     if (!response.ok) {
-      // 404 is fine — means they weren't in the automation
       if (response.status === 404) return true;
       console.error('Remove from automation error:', await response.text());
       return false;
