@@ -706,11 +706,11 @@
       text-decoration: none; transition: all .2s;
     }
     .sticky-cta .sticky-free {
-      background: var(--gold); color: var(--bg);
-    }
-    .sticky-cta .sticky-buy {
       background: transparent; color: var(--gold);
       border: 1px solid rgba(212,168,76,0.4);
+    }
+    .sticky-cta .sticky-buy {
+      background: var(--gold); color: var(--bg);
     }
     @media (min-width: 769px) { .sticky-cta { display: none !important; } }
 
@@ -802,6 +802,8 @@
         <strong>Now it's a 20-minute audio session away.</strong>
       </p>
 
+      <p class="rv rv-d2" style="font-family:var(--mono);font-size:.6rem;letter-spacing:.08em;color:var(--text-dim);margin:1rem auto .5rem;max-width:30rem;text-align:center;">Remote viewing technique · Two OBE separation methods · Guided binaural audio</p>
+
       <div class="hero-cta-box rv rv-d3">
         <div class="hero-toggle">
           <button class="toggle-active" onclick="toggleHero('free')">Free Session</button>
@@ -814,7 +816,6 @@
           <p class="cta-desc">20 minutes. Headphones. Experience it tonight.</p>
           <form class="optin-form" aria-label="Email opt-in">
             <div class="form-row">
-              <input type="text" name="first_name" placeholder="First name" required autocomplete="given-name" aria-label="First name">
               <input type="email" name="email" placeholder="Your best email" required autocomplete="email" aria-label="Email">
             </div>
             <button type="submit" class="btn-gold">Get Free Access</button>
@@ -834,11 +835,11 @@
           <p class="hero-buy-price"><span>$97</span> $37</p>
           <p style="font-size:.82rem;color:var(--text-mid);margin-bottom:1rem;">One-time payment. Instant access. Keep forever.</p>
           <ul class="hero-buy-includes">
-            <li>3 guided audio sessions (Door 10, 12, 15)</li>
-            <li>Full consciousness exploration podcast</li>
-            <li>The Liminal Field Manual — complete OBE + remote viewing reference</li>
-            <li>7-day progression plan</li>
-            <li>Session journal prompts</li>
+            <li>3 guided sessions — each teaches a real technique</li>
+            <li>Door 12: CIA remote viewing method (Project Stargate)</li>
+            <li>Door 15: Two OBE separation techniques (Rope + Roll-Out)</li>
+            <li>The Liminal Field Manual — full written reference (PDF)</li>
+            <li>7-day progression plan + session journal</li>
           </ul>
           <a href="https://stan.store/liminalspace/p/first-contact--consciousness-exploration-kit" class="btn-gold" style="display:block;text-align:center;text-decoration:none;font-size:1.05rem;padding:1.05rem;">Get Instant Access</a>
           <p class="hero-buy-guarantee">100% satisfaction guaranteed. If the sessions don't shift something inside you, email us for a full refund.</p>
@@ -959,7 +960,6 @@
         <h2 class="rv">Experience it <em>tonight</em></h2>
         <p class="rv rv-d1">Your free session uses the Door 10 frequency — the same alpha-state induction the CIA studied. 20 minutes. Headphones. A dark room.</p>
         <form class="mid-form rv rv-d2 optin-form" aria-label="Email opt-in">
-          <input type="text" name="first_name" placeholder="First name" required autocomplete="given-name" aria-label="First name">
           <input type="email" name="email" placeholder="Your email" required autocomplete="email" aria-label="Email">
           <button type="submit" class="btn-gold">Get Free Access</button>
         </form>
@@ -1097,7 +1097,6 @@
 
         <div class="final-box rv rv-d2">
           <form class="optin-form" aria-label="Email opt-in">
-            <input type="text" name="first_name" placeholder="First name" required autocomplete="given-name" aria-label="First name">
             <input type="email" name="email" placeholder="Your best email" required autocomplete="email" aria-label="Email">
             <button type="submit" class="btn-gold" style="width:100%">Get the Free Session</button>
           </form>
@@ -1254,7 +1253,7 @@
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               email: d.get('email'),
-              first_name: d.get('first_name'),
+              first_name: d.get('first_name') || undefined,
             }),
           });
           if (!res.ok) throw new Error('Subscribe failed');
@@ -1272,6 +1271,44 @@
         }
       });
     });
+  </script>
+
+  <!-- ═══ SCROLL-TRIGGERED POPUP ═══ -->
+  <div id="scroll-popup" style="display:none;position:fixed;inset:0;z-index:10000;background:rgba(5,5,16,0.85);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;">
+    <div style="background:var(--surface);border:1px solid var(--rule);border-radius:16px;padding:2.5rem 2rem;max-width:420px;width:90%;text-align:center;position:relative;box-shadow:0 24px 80px rgba(0,0,0,0.6);">
+      <button onclick="closePopup()" style="position:absolute;top:12px;right:16px;background:none;border:none;color:var(--text-dim);font-size:1.5rem;cursor:pointer;line-height:1;" aria-label="Close">&times;</button>
+      <p style="font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem;">Free guided session</p>
+      <h3 style="font-family:var(--display);font-size:1.4rem;font-weight:800;line-height:1.15;margin-bottom:.5rem;">The CIA proved your mind can leave your body</h3>
+      <p style="font-size:.88rem;color:var(--text-mid);margin-bottom:1.25rem;">Try the 20-minute audio session tonight. Free.</p>
+      <form class="optin-form" aria-label="Email opt-in popup" style="display:flex;gap:.5rem;">
+        <input type="email" name="email" placeholder="Your email" required autocomplete="email" aria-label="Email" style="flex:1;padding:.75rem 1rem;border-radius:8px;border:1px solid var(--rule);background:var(--bg);color:var(--text);font-family:var(--body);font-size:.9rem;">
+        <button type="submit" class="btn-gold" style="white-space:nowrap;padding:.75rem 1.25rem;font-size:.85rem;">Get Access</button>
+      </form>
+      <p style="font-size:.68rem;color:var(--text-dim);margin-top:.75rem;">No credit card. Instant access.</p>
+    </div>
+  </div>
+  <script>
+    (function(){
+      let popupShown = false;
+      const popup = document.getElementById('scroll-popup');
+      window.addEventListener('scroll', function(){
+        if (popupShown) return;
+        const scrollPct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+        if (scrollPct > 0.5) {
+          popupShown = true;
+          if (sessionStorage.getItem('ls_popup_closed')) return;
+          popup.style.display = 'flex';
+          fbq('trackCustom', 'PopupShown');
+        }
+      });
+      window.closePopup = function(){
+        popup.style.display = 'none';
+        sessionStorage.setItem('ls_popup_closed', 'true');
+      };
+      popup.addEventListener('click', function(e){
+        if (e.target === popup) closePopup();
+      });
+    })();
   </script>
 </body>
 </html>
