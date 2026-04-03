@@ -538,8 +538,7 @@ DOORS = {
                 "the pathway is being built with every session. "
                 "Practice the technique that felt most natural. "
                 "The Rope. The Roll-Out. Make it yours. "
-                "There are more techniques. More doors. More states beyond these. "
-                "But for now, rest. Write down everything. "
+                "Rest now. Write down everything. "
                 "And come back tomorrow.",
                 0
             ),
