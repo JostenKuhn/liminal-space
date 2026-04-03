@@ -234,9 +234,29 @@ DOORS = {
                 "where your body stops feeling like your body. "
                 "Where the weight disappears. "
                 "Where the edges of you become unclear. "
-                "This is Door Ten. You are here. "
-                "In this space, there is nothing to do. "
-                "Only to be.",
+                "This is Door Ten. You are here.",
+                8
+            ),
+            (
+                "Now pay attention to what is happening. "
+                "You may feel a tingling, a vibration, a buzzing sensation "
+                "moving through your body. "
+                "This is the vibrational state. "
+                "The Monroe Institute called it the precursor to separation. "
+                "It means your consciousness is loosening from the physical. "
+                "Do not be alarmed. Do not try to control it. "
+                "Simply notice it. Let it build.",
+                10
+            ),
+            (
+                "If the vibrations intensify, you are doing everything right. "
+                "Some people feel a floating sensation. "
+                "As if the body you are lying in is no longer quite yours. "
+                "As if there is a lighter version of you hovering just above, "
+                "or just beside, the physical form. "
+                "If you feel this, stay calm. Stay curious. "
+                "This is the edge. The threshold. "
+                "In Door Twelve, you will learn to step through it.",
                 0
             ),
         ],
@@ -263,6 +283,10 @@ DOORS = {
             (
                 "Welcome back. "
                 "You have stepped through Door Ten. "
+                "What you felt, the vibrations, the floating, the loosening, "
+                "that was your consciousness preparing to move independently of your body. "
+                "In Door Twelve, you will learn the technique to direct that movement. "
+                "In Door Fifteen, you will learn to leave entirely. "
                 "Remember what you experienced. Write it down. "
                 "The Liminal Space remembers you now.",
                 0
@@ -297,16 +321,52 @@ DOORS = {
                 "But you are not dreaming. You are more awake than you have ever been. "
                 "You may notice that the edges of your body have become blurred. "
                 "That the space around you feels vast. Infinite. "
-                "Do not direct this expansion. Allow it. "
                 "Your awareness is not confined to your skull. "
                 "It never was.",
-                12
+                10
             ),
             (
-                "In this space, distance becomes irrelevant. "
-                "In this space, you can perceive what should be imperceptible. "
-                "This is the Liminal Space opening to you. "
-                "Let it show you what it wants to show you.",
+                "Now I am going to teach you a technique. "
+                "This is the method the government used to train remote viewers "
+                "in Project Stargate. "
+                "It is simple. And it works.",
+                6
+            ),
+            (
+                "Think of a place you know well. "
+                "A room in your house. A street you've walked a thousand times. "
+                "A view from a window you love. "
+                "Hold it in your mind. See it clearly. "
+                "The colours. The textures. The light. "
+                "Build it in front of you as if you are standing there.",
+                8
+            ),
+            (
+                "Now shift your perspective. "
+                "You are no longer imagining this place. "
+                "You are there. "
+                "Feel the space around you. The temperature of the air. "
+                "The sounds. The quality of the light. "
+                "Look around. What do you see that you didn't expect? "
+                "What details are appearing that you did not deliberately place there?",
+                10
+            ),
+            (
+                "This is the difference between imagination and perception. "
+                "Imagination is what you construct. "
+                "Perception is what arrives on its own. "
+                "When details appear that surprise you, "
+                "you are no longer imagining. You are viewing. "
+                "Stay here. Let the location become more vivid. More real.",
+                10
+            ),
+            (
+                "Now try moving through this space. "
+                "Move to another room. Turn a corner. "
+                "Look at something you would not normally notice. "
+                "A detail on a shelf. A crack in a wall. The pattern of light on a floor. "
+                "Your awareness can move freely here. "
+                "There are no walls for consciousness.",
                 0
             ),
         ],
@@ -332,8 +392,11 @@ DOORS = {
             (
                 "Welcome back. "
                 "You have stepped through Door Twelve. "
+                "If you saw details that surprised you, details you did not place there deliberately, "
+                "that was not your imagination. That was expanded perception. "
                 "Write down everything. Even the things that don't make sense yet. "
-                "Especially those.",
+                "Especially those. "
+                "In Door Fifteen, you go further. You learn to leave the body entirely.",
                 0
             ),
         ],
@@ -369,16 +432,78 @@ DOORS = {
                 "You may lose all sense of where your body ends and the universe begins. "
                 "You may lose track of time entirely. "
                 "This is not a malfunction. This is the destination.",
-                12
+                10
             ),
             (
+                "Now I am going to teach you two separation techniques. "
+                "These are the methods used by Robert Monroe, "
+                "by the Monroe Institute's most advanced explorers, "
+                "and by thousands of practitioners around the world. "
+                "One of them will feel natural to you. Use that one.",
+                8
+            ),
+            # Technique 1: The Rope
+            (
+                "The first technique is called the Rope. "
+                "Imagine a thick rope hanging above you in the darkness. "
+                "It is directly above your chest, hanging down from somewhere you cannot see. "
+                "Do not move your physical hands. "
+                "Instead, reach up with your non-physical hands. "
+                "Hands you can feel but cannot see. "
+                "Grab the rope.",
+                8
+            ),
+            (
+                "Now pull. "
+                "Hand over hand. Climbing upward. "
+                "You are not moving your muscles. You are moving your intention. "
+                "With each pull, you may feel a surge of vibrations. "
+                "A rushing sound. A feeling of acceleration. "
+                "This is normal. This means it is working. "
+                "Keep pulling. Do not stop. "
+                "At some point, you will feel a pop, a click, a sudden lightness, "
+                "as if gravity just let go of you. "
+                "That is the moment of separation.",
+                10
+            ),
+            (
+                "If the rope did not feel natural, try this instead.",
+                5
+            ),
+            # Technique 2: The Roll-Out
+            (
+                "The second technique is the Roll-Out. "
+                "Without moving your physical body, "
+                "try to roll sideways. "
+                "As if you are rolling out of bed, "
+                "but your body stays behind. "
+                "Shift your weight to one side with pure intention. "
+                "No muscles. No movement. Just the feeling of rolling.",
+                8
+            ),
+            (
+                "You may feel resistance at first. "
+                "As if you are stuck. Glued to yourself. "
+                "Keep rolling. Gently but persistently. "
+                "The vibrations will intensify. "
+                "And then, suddenly, you will be free. "
+                "You will be beside your body, or above it, "
+                "looking down at the physical form you just left. "
+                "Stay calm. You are safe. You have always been safe. "
+                "You cannot get lost. You will always return.",
+                10
+            ),
+            (
+                "Whichever technique you used, or even if neither worked this time, "
+                "you are now in the deepest state Door Fifteen can offer. "
                 "In this space, you are not your name. "
                 "You are not your job. You are not your body. "
                 "You are pure awareness. "
                 "And pure awareness has no limits. "
-                "This is the Liminal Space. "
-                "Here, you can do anything. "
-                "Here, you are everything.",
+                "If you have separated, explore. Move. Look around. "
+                "If you have not, simply rest here in the void. "
+                "Every session builds the pathway. "
+                "What does not happen tonight will happen soon.",
                 0
             ),
         ],
@@ -406,9 +531,16 @@ DOORS = {
             ),
             (
                 "Welcome back. "
-                "You have stepped through Door Fifteen. "
+                "You have been through all three Doors. "
                 "You have been to the Liminal Space. "
-                "And now you know. It is real. And it is yours.",
+                "And now you know. It is real. And it is yours. "
+                "Whether you separated fully tonight or not, "
+                "the pathway is being built with every session. "
+                "Practice the technique that felt most natural. "
+                "The Rope. The Roll-Out. Make it yours. "
+                "There are more techniques. More doors. More states beyond these. "
+                "But for now, rest. Write down everything. "
+                "And come back tomorrow.",
                 0
             ),
         ],
