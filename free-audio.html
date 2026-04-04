@@ -524,8 +524,8 @@
       <!-- Post-listen CTA -->
       <div class="cta-box rv" style="margin-top:1rem;">
         <p style="font-family:var(--serif);font-style:italic;font-size:1.1rem;color:var(--text-mid);margin-bottom:.75rem;">That tingling? That was only Door 10.</p>
-        <p style="font-size:.88rem;color:var(--text-dim);margin-bottom:1.25rem;max-width:40ch;margin-left:auto;margin-right:auto;">Door 12 teaches you the remote viewing technique from Project Stargate. Door 15 guides you through two full out-of-body separation methods.</p>
-        <a href="https://stan.store/liminalspace/p/first-contact--consciousness-exploration-kit" class="btn-gold" target="_blank">Unlock All 3 Doors — $37</a>
+        <p style="font-size:.88rem;color:var(--text-dim);margin-bottom:1.25rem;max-width:42ch;margin-left:auto;margin-right:auto;">Door 12 teaches you the CIA's remote viewing technique — you'll learn to perceive real locations with your mind. Door 15 teaches you two ways to leave your body: the Rope and the Roll-Out.</p>
+        <a href="https://stan.store/liminalspace/p/first-contact--consciousness-exploration-kit" class="btn-gold" target="_blank">Learn the Techniques — $37</a>
         <p class="cta-guarantee">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           One-time payment · Instant access · 100% money-back guarantee
@@ -791,11 +791,14 @@
       });
     });
 
-    // Track Stan Store CTA clicks (InitiateCheckout)
+    // Track Stan Store CTA clicks (once per session)
     document.querySelectorAll('a[href*="stan.store"]').forEach(link => {
       link.addEventListener('click', () => {
-        gtag('event', 'begin_checkout', {value: 37.00, currency: 'USD', page: 'free_audio'});
-        fbq('track', 'InitiateCheckout', {value: 37.00, currency: 'USD', content_name: 'First Contact'});
+        if (!sessionStorage.getItem('ic_fired')) {
+          sessionStorage.setItem('ic_fired', '1');
+          gtag('event', 'begin_checkout', {value: 37.00, currency: 'USD', page: 'free_audio'});
+          fbq('track', 'InitiateCheckout', {value: 37.00, currency: 'USD', content_name: 'First Contact'});
+        }
       });
     });
 
