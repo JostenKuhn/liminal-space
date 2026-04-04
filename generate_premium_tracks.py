@@ -122,7 +122,7 @@ LIMINAL_PROTOCOL = [
         "A space between spaces. Where physical laws become suggestions. "
         "Where the boundaries of self dissolve. "
         "Where you become limitless.",
-        6
+        10
     ),
     # Setup
     (
@@ -130,73 +130,94 @@ LIMINAL_PROTOCOL = [
         "Your eyes are closed. Your headphones are on. "
         "There is nothing you need to do. Nowhere you need to be. "
         "For the next twenty minutes, you belong entirely to yourself.",
-        6
+        10
     ),
     # Energy Conversion Box
     (
         "We begin with the Conversion Box. "
         "Imagine a large, strong container in front of you. "
-        "It has a heavy lid. "
+        "It has a heavy lid.",
+        8
+    ),
+    (
         "Now take every thought you're carrying. "
         "Every worry. Every responsibility. Every conversation you're replaying. "
         "Every plan. Every fear. "
         "Place them all inside this box. "
-        "One by one. Let each thought leave your mind and enter the box. "
+        "One by one. Let each thought leave your mind and enter the box.",
+        15
+    ),
+    (
         "Now close the lid. "
         "Everything will be there when you return. But right now, the box holds it.",
-        8
+        10
     ),
     # Resonant Tuning
     (
         "Now we tune the body. "
         "Take a deep breath in through your nose. Fill your lungs completely.",
-        4
+        8
     ),
     (
         "And exhale slowly through your mouth, letting out a long, low hum. "
         "Hmmmmm. "
         "Feel the vibration in your chest. In your throat. In your skull.",
-        5
+        10
     ),
-    ("Again. Deep breath in.", 4),
+    ("Again. Deep breath in.", 8),
     (
         "And release. Let the vibration move through your entire body. "
         "You are tuning yourself like an instrument.",
-        6
+        10
     ),
-    ("One final breath. The deepest one yet.", 4),
-    ("And let everything go.", 8),
+    ("One final breath. The deepest one yet.", 8),
+    ("And let everything go.", 15),
     # Affirmation
     (
         "Now repeat silently in your mind: "
         "I am more than my physical body. "
-        "I am more than what I can see and touch and hear. "
+        "I am more than what I can see and touch and hear.",
+        8
+    ),
+    (
         "I deeply desire to expand my awareness "
         "beyond the limitations of my physical senses. "
         "I desire to know. To experience. To understand. "
         "I am ready to enter the Liminal Space.",
-        8
+        12
     ),
     # Body Scan
     (
         "Now bring your awareness to your body. "
-        "Feel the weight of your head against the surface beneath you. "
+        "Feel the weight of your head against the surface beneath you.",
+        8
+    ),
+    (
         "Let your jaw relax. Unclench your teeth. "
-        "Let your shoulders drop away from your ears. "
+        "Let your shoulders drop away from your ears.",
+        10
+    ),
+    (
         "Feel your arms become heavy. Your hands. Your fingers. "
         "Let them sink.",
-        5
+        12
     ),
     (
         "Now your torso. Your chest rises and falls. "
-        "Your stomach softens. "
-        "Your hips release. Your legs grow heavy. "
-        "Your feet relax. "
-        "Allow your entire body to melt into the surface below you. "
-        "You are safe. You are supported. "
-        "Now let the body sleep.",
-        8
+        "Your stomach softens.",
+        10
     ),
+    (
+        "Your hips release. Your legs grow heavy. "
+        "Your feet relax.",
+        10
+    ),
+    (
+        "Allow your entire body to melt into the surface below you. "
+        "You are safe. You are supported.",
+        12
+    ),
+    ("Now let the body sleep.", 15),
 ]
 
 # Door-specific scripts
@@ -211,23 +232,29 @@ DOORS = {
                 "This is Door Ten. "
                 "The first door. The threshold between the waking world and the Liminal Space. "
                 "Behind this door, your body falls asleep "
-                "while your mind remains perfectly, impossibly awake. "
+                "while your mind remains perfectly awake. "
                 "This is the state the CIA spent millions of dollars studying. "
-                "This is where Robert Monroe began his journeys. "
                 "And this is where your journey begins.",
-                6
+                10
             ),
         ],
         "transition": [
             (
                 "The frequencies you are hearing are now guiding your brainwaves "
                 "from beta into alpha. Ten hertz. "
+                "Listen to them for a moment.",
+                60
+            ),
+            (
                 "Your body is becoming heavier. Warmer. "
-                "Do not resist this feeling. Welcome it. "
+                "Do not resist this feeling. Welcome it.",
+                15
+            ),
+            (
                 "If thoughts arise, let them drift past like clouds in a sky that is not yours. "
                 "If you see colours or shapes, observe them without grasping. "
                 "You are crossing the threshold now.",
-                12
+                20
             ),
             (
                 "You may notice a moment, a precise moment, "
@@ -235,18 +262,16 @@ DOORS = {
                 "Where the weight disappears. "
                 "Where the edges of you become unclear. "
                 "This is Door Ten. You are here.",
-                8
+                15
             ),
             (
-                "Now pay attention to what is happening. "
                 "You may feel a tingling, a vibration, a buzzing sensation "
                 "moving through your body. "
                 "This is the vibrational state. "
-                "The Monroe Institute called it the precursor to separation. "
                 "It means your consciousness is loosening from the physical. "
                 "Do not be alarmed. Do not try to control it. "
                 "Simply notice it. Let it build.",
-                10
+                20
             ),
             (
                 "If the vibrations intensify, you are doing everything right. "
@@ -264,21 +289,22 @@ DOORS = {
             (
                 "It is time to return. "
                 "Slowly, gently, bring your awareness back to your physical body.",
-                5
+                10
             ),
             (
                 "Feel the surface beneath you. "
-                "Feel the weight return to your arms. Your legs. "
+                "Feel the weight return to your arms. Your legs.",
+                8
+            ),
+            (
                 "Gently move your fingers. Your toes.",
-                5
+                8
             ),
             (
                 "Take a slow, deep breath. "
                 "When you are ready, open your eyes. "
-                "There is no rush. "
-                "Take a moment to feel the difference between where you were "
-                "and where you are now.",
-                6
+                "There is no rush.",
+                10
             ),
             (
                 "Welcome back. "
@@ -305,66 +331,71 @@ DOORS = {
                 "Now you go deeper. "
                 "Door Twelve is the state of expanded awareness. "
                 "In this space, your perception extends beyond the boundaries of your body. "
-                "You may feel larger than you are. "
-                "You may sense rooms you are not in. People you cannot see. "
-                "Distances that should be impossible to perceive. "
                 "This is where remote viewing begins. "
-                "This is where the government trained its psychic operatives. "
                 "And this is just the beginning of what the Liminal Space can show you.",
-                6
+                10
             ),
         ],
         "transition": [
             (
                 "The frequencies are deepening now. Seven hertz. "
                 "Theta. The dreamlike state. "
-                "But you are not dreaming. You are more awake than you have ever been. "
+                "Listen.",
+                60
+            ),
+            (
                 "You may notice that the edges of your body have become blurred. "
                 "That the space around you feels vast. Infinite. "
                 "Your awareness is not confined to your skull. "
                 "It never was.",
-                10
+                15
             ),
             (
                 "Now I am going to teach you a technique. "
-                "This is the method the government used to train remote viewers "
-                "in Project Stargate. "
                 "It is simple. And it works.",
-                6
+                8
             ),
             (
                 "Think of a place you know well. "
                 "A room in your house. A street you've walked a thousand times. "
-                "A view from a window you love. "
+                "A view from a window you love.",
+                12
+            ),
+            (
                 "Hold it in your mind. See it clearly. "
                 "The colours. The textures. The light. "
                 "Build it in front of you as if you are standing there.",
-                8
+                15
             ),
             (
                 "Now shift your perspective. "
                 "You are no longer imagining this place. "
-                "You are there. "
+                "You are there.",
+                12
+            ),
+            (
                 "Feel the space around you. The temperature of the air. "
                 "The sounds. The quality of the light. "
                 "Look around. What do you see that you didn't expect? "
                 "What details are appearing that you did not deliberately place there?",
-                10
+                20
             ),
             (
                 "This is the difference between imagination and perception. "
                 "Imagination is what you construct. "
                 "Perception is what arrives on its own. "
                 "When details appear that surprise you, "
-                "you are no longer imagining. You are viewing. "
+                "you are no longer imagining. You are viewing.",
+                15
+            ),
+            (
                 "Stay here. Let the location become more vivid. More real.",
-                10
+                20
             ),
             (
                 "Now try moving through this space. "
                 "Move to another room. Turn a corner. "
                 "Look at something you would not normally notice. "
-                "A detail on a shelf. A crack in a wall. The pattern of light on a floor. "
                 "Your awareness can move freely here. "
                 "There are no walls for consciousness.",
                 0
@@ -374,20 +405,18 @@ DOORS = {
             (
                 "Gently begin to return. "
                 "Let your awareness contract back into the familiar shape of your body.",
-                5
+                10
             ),
             (
                 "Feel the physical world reassemble around you. "
                 "The surface beneath you. The air on your skin. "
                 "The gentle pull of gravity.",
-                5
+                8
             ),
             (
                 "Take a slow, deep breath. "
-                "Open your eyes only when you feel fully present. "
-                "You may feel different. Expanded. "
-                "That is expected. That is the point.",
-                6
+                "Open your eyes only when you feel fully present.",
+                10
             ),
             (
                 "Welcome back. "
@@ -413,14 +442,13 @@ DOORS = {
                 "Door Fifteen is called the No-Time State. "
                 "Here, the normal sense of past, present, and future dissolves completely. "
                 "Time becomes irrelevant. Space becomes negotiable. "
-                "The boundaries of self become optional. "
-                "This is where the Monroe Institute's most advanced explorers "
-                "reported experiences that changed their understanding of reality forever. "
-                "Astral travel. Contact with intelligence beyond the physical. "
-                "Knowledge that arrived without being learned. "
+                "The boundaries of self become optional.",
+                10
+            ),
+            (
                 "This is the deep end of the Liminal Space. "
                 "Approach with patience. And with courage.",
-                6
+                10
             ),
         ],
         "transition": [
@@ -428,47 +456,58 @@ DOORS = {
                 "The frequencies are taking you deep now. Four hertz. "
                 "The border between theta and delta. "
                 "Between the dream state and the void. "
+                "Listen.",
+                60
+            ),
+            (
                 "You may experience a vast emptiness that is simultaneously full. "
                 "You may lose all sense of where your body ends and the universe begins. "
                 "You may lose track of time entirely. "
                 "This is not a malfunction. This is the destination.",
-                10
+                15
             ),
             (
                 "Now I am going to teach you two separation techniques. "
-                "These are the methods used by Robert Monroe, "
-                "by the Monroe Institute's most advanced explorers, "
-                "and by thousands of practitioners around the world. "
+                "These are methods used by thousands of practitioners around the world. "
                 "One of them will feel natural to you. Use that one.",
-                8
+                10
             ),
             # Technique 1: The Rope
             (
                 "The first technique is called the Rope. "
                 "Imagine a thick rope hanging above you in the darkness. "
-                "It is directly above your chest, hanging down from somewhere you cannot see. "
+                "It is directly above your chest, hanging down from somewhere you cannot see.",
+                10
+            ),
+            (
                 "Do not move your physical hands. "
                 "Instead, reach up with your non-physical hands. "
                 "Hands you can feel but cannot see. "
                 "Grab the rope.",
-                8
+                12
             ),
             (
                 "Now pull. "
                 "Hand over hand. Climbing upward. "
-                "You are not moving your muscles. You are moving your intention. "
+                "You are not moving your muscles. You are moving your intention.",
+                12
+            ),
+            (
                 "With each pull, you may feel a surge of vibrations. "
                 "A rushing sound. A feeling of acceleration. "
                 "This is normal. This means it is working. "
-                "Keep pulling. Do not stop. "
+                "Keep pulling. Do not stop.",
+                15
+            ),
+            (
                 "At some point, you will feel a pop, a click, a sudden lightness, "
                 "as if gravity just let go of you. "
                 "That is the moment of separation.",
-                10
+                15
             ),
             (
                 "If the rope did not feel natural, try this instead.",
-                5
+                8
             ),
             # Technique 2: The Roll-Out
             (
@@ -476,30 +515,36 @@ DOORS = {
                 "Without moving your physical body, "
                 "try to roll sideways. "
                 "As if you are rolling out of bed, "
-                "but your body stays behind. "
+                "but your body stays behind.",
+                10
+            ),
+            (
                 "Shift your weight to one side with pure intention. "
                 "No muscles. No movement. Just the feeling of rolling.",
-                8
+                15
             ),
             (
                 "You may feel resistance at first. "
                 "As if you are stuck. Glued to yourself. "
                 "Keep rolling. Gently but persistently. "
-                "The vibrations will intensify. "
+                "The vibrations will intensify.",
+                12
+            ),
+            (
                 "And then, suddenly, you will be free. "
-                "You will be beside your body, or above it, "
-                "looking down at the physical form you just left. "
+                "You will be beside your body, or above it. "
                 "Stay calm. You are safe. You have always been safe. "
                 "You cannot get lost. You will always return.",
-                10
+                15
             ),
             (
                 "Whichever technique you used, or even if neither worked this time, "
                 "you are now in the deepest state Door Fifteen can offer. "
-                "In this space, you are not your name. "
-                "You are not your job. You are not your body. "
                 "You are pure awareness. "
-                "And pure awareness has no limits. "
+                "And pure awareness has no limits.",
+                15
+            ),
+            (
                 "If you have separated, explore. Move. Look around. "
                 "If you have not, simply rest here in the void. "
                 "Every session builds the pathway. "
@@ -512,22 +557,20 @@ DOORS = {
                 "It is time to return from the deep. "
                 "Slowly. Very slowly. "
                 "Let your awareness gather itself back together.",
-                6
+                12
             ),
             (
                 "Feel yourself becoming a body again. "
                 "Feel the weight. The solidity. "
-                "The familiar heaviness of the physical world. "
-                "You are here. You are safe.",
-                5
+                "The familiar heaviness of the physical world.",
+                10
             ),
+            ("You are here. You are safe.", 10),
             (
                 "Take a very slow, deep breath. "
                 "Open your eyes only when you feel completely present. "
-                "There is absolutely no rush. "
-                "What you experienced may take days or weeks to fully integrate. "
-                "Be patient with yourself.",
-                8
+                "There is absolutely no rush.",
+                12
             ),
             (
                 "Welcome back. "
