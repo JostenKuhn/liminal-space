@@ -38,10 +38,12 @@
     fbq('init', '26479131108445246');
     fbq('track', 'PageView');
 
-    // Only fire Purchase for real buyers (dedup with localStorage)
+    // Only fire Purchase for real buyers (dedup with localStorage + event_id for CAPI dedup)
     if (new URLSearchParams(window.location.search).get('purchased') === 'true' && !localStorage.getItem('ls_meta_purchase_fired')) {
-      fbq('track', 'Purchase', {value: 37.00, currency: 'USD'});
+      const eventId = 'purchase_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+      fbq('track', 'Purchase', {value: 37.00, currency: 'USD'}, {eventID: eventId});
       localStorage.setItem('ls_meta_purchase_fired', 'true');
+      localStorage.setItem('ls_purchase_event_id', eventId);
     }
   </script>
   <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=26479131108445246&ev=PageView&noscript=1"/></noscript>
