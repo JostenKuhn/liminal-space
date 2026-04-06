@@ -737,9 +737,9 @@
     }
     .sticky-cta.visible { display: flex; }
     .sticky-cta a {
-      flex: 1; text-align: center; padding: 0.75rem; border-radius: 8px;
-      font-family: var(--display); font-weight: 700; font-size: 0.82rem;
-      text-decoration: none; transition: all .2s;
+      flex: 1; text-align: center; padding: 0.7rem 0.25rem; border-radius: 8px;
+      font-family: var(--display); font-weight: 700; font-size: 0.7rem;
+      text-decoration: none; transition: all .2s; white-space: nowrap;
     }
     .sticky-cta .sticky-free {
       background: transparent; color: var(--gold);
@@ -1181,7 +1181,8 @@
   <!-- STICKY MOBILE CTA -->
   <div class="sticky-cta" id="sticky-cta">
     <a href="#final" class="sticky-free">Free Audio</a>
-    <a href="https://stan.store/liminalspace/p/first-contact--consciousness-exploration-kit" target="_blank" rel="noopener" class="sticky-buy">Get Protocol · $37</a>
+    <a href="https://stan.store/liminalspace/p/first-contact--consciousness-exploration-kit" target="_blank" rel="noopener" class="sticky-buy">First Contact · $37</a>
+    <a href="https://www.monroeinstitute.org/products/gateway-voyage-online?ref=skrszyzu" target="_blank" rel="noopener" class="sticky-buy" style="background:transparent;color:var(--gold);border:1px solid rgba(212,168,76,0.4);">Gateway · $595</a>
   </div>
 
   <!-- ════════════════════════════════════ -->
@@ -1280,6 +1281,14 @@
           gtag('event', 'begin_checkout', {value: 37.00, currency: 'USD'});
           fbq('track', 'InitiateCheckout', {value: 37.00, currency: 'USD'});
         }
+      });
+    });
+
+    // Track Gateway Voyage clicks
+    document.querySelectorAll('a[href*="monroeinstitute"]').forEach(link => {
+      link.addEventListener('click', () => {
+        gtag('event', 'gateway_voyage_click', {value: 595.00, currency: 'USD', link_location: link.closest('section, nav, .sticky-cta')?.className?.split(' ')[0] || 'unknown'});
+        fbq('trackCustom', 'GatewayVoyageClick', {value: 595.00, currency: 'USD'});
       });
     });
 

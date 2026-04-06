@@ -823,6 +823,14 @@
       });
     });
 
+    // Track Gateway Voyage clicks
+    document.querySelectorAll('a[href*="monroeinstitute"]').forEach(link => {
+      link.addEventListener('click', () => {
+        gtag('event', 'gateway_voyage_click', {value: 595.00, currency: 'USD', page: 'free_audio'});
+        fbq('trackCustom', 'GatewayVoyageClick', {value: 595.00, currency: 'USD'});
+      });
+    });
+
     // Track time on page (30s, 60s, 2min, 5min)
     let timeFired = {};
     [30, 60, 120, 300].forEach(sec => {
