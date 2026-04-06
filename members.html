@@ -1012,5 +1012,39 @@
       }, sec * 1000);
     });
   </script>
+
+  <!-- ═══ GATEWAY VOYAGE POPUP ═══ -->
+  <div id="gw-popup" style="display:none;position:fixed;inset:0;z-index:10000;background:rgba(5,5,16,0.85);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;">
+    <div style="background:var(--bg2);border:1px solid var(--rule);border-radius:16px;padding:2.5rem 2rem;max-width:420px;width:90%;text-align:center;position:relative;box-shadow:0 24px 80px rgba(0,0,0,0.6);">
+      <button onclick="closeGwPopup()" style="position:absolute;top:12px;right:16px;background:none;border:none;color:var(--text-dim);font-size:1.5rem;cursor:pointer;line-height:1;" aria-label="Close">&times;</button>
+      <p style="font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem;">Want to go all the way?</p>
+      <h3 style="font-family:var(--display);font-size:1.3rem;font-weight:800;line-height:1.15;margin-bottom:.5rem;">Focus 15 is just the beginning. There are 21 levels.</h3>
+      <p style="font-size:.85rem;color:var(--text-mid);margin-bottom:1.25rem;">The Monroe Institute's Gateway Voyage takes you from where you are now all the way to Focus 21. 23 sessions. Expert trainers. The original program the CIA studied.</p>
+      <a href="https://www.monroeinstitute.org/products/gateway-voyage-online?ref=skrszyzu" target="_blank" rel="noopener" style="display:block;text-align:center;text-decoration:none;padding:.85rem 1.5rem;font-size:.95rem;border-radius:8px;background:var(--gold);color:var(--bg);font-family:var(--display);font-weight:700;" onclick="closeGwPopup()">Explore the Gateway Voyage · $595</a>
+      <p style="font-size:.68rem;color:var(--text-dim);margin-top:.75rem;">Lifetime access. Self-paced. 50,000+ people have been through it.</p>
+    </div>
+  </div>
+  <script>
+    (function(){
+      let gwShown = false;
+      const gwPopup = document.getElementById('gw-popup');
+      // Show after 5 minutes (they're deep into the content by then)
+      setTimeout(function(){
+        if (gwShown) return;
+        if (sessionStorage.getItem('ls_gw_popup_closed')) return;
+        gwShown = true;
+        gwPopup.style.display = 'flex';
+        gtag('event', 'gateway_popup_shown', {page: 'members'});
+        fbq('trackCustom', 'GatewayPopupShown', {page: 'members'});
+      }, 300000);
+      window.closeGwPopup = function(){
+        gwPopup.style.display = 'none';
+        sessionStorage.setItem('ls_gw_popup_closed', 'true');
+      };
+      gwPopup.addEventListener('click', function(e){
+        if (e.target === gwPopup) closeGwPopup();
+      });
+    })();
+  </script>
 </body>
 </html>
