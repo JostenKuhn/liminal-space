@@ -874,5 +874,44 @@
       }, sec * 1000);
     });
   </script>
+
+  <!-- ═══ SCROLL-TRIGGERED POPUP ═══ -->
+  <div id="scroll-popup" style="display:none;position:fixed;inset:0;z-index:10000;background:rgba(5,5,16,0.85);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;">
+    <div style="background:var(--bg2);border:1px solid var(--rule);border-radius:16px;padding:2.5rem 2rem;max-width:420px;width:90%;text-align:center;position:relative;box-shadow:0 24px 80px rgba(0,0,0,0.6);">
+      <button onclick="closePopup()" style="position:absolute;top:12px;right:16px;background:none;border:none;color:var(--text-dim);font-size:1.5rem;cursor:pointer;line-height:1;" aria-label="Close">&times;</button>
+      <p style="font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem;">Feeling something?</p>
+      <h3 style="font-family:var(--display);font-size:1.3rem;font-weight:800;line-height:1.15;margin-bottom:.5rem;">This is only the first door. There are two more.</h3>
+      <p style="font-size:.85rem;color:var(--text-mid);margin-bottom:1.25rem;">The full protocol takes you through all three levels. Real separation techniques. Complete guide. $37.</p>
+      <a href="https://stan.store/liminalspace/p/first-contact--consciousness-exploration-kit" target="_blank" rel="noopener" class="btn-gold" style="display:block;text-align:center;text-decoration:none;padding:.85rem 1.5rem;font-size:.95rem;" onclick="closePopup()">Get the Protocol · $37</a>
+      <p style="font-size:.68rem;color:var(--text-dim);margin-top:.75rem;">Instant download. Money-back guarantee.</p>
+    </div>
+  </div>
+  <script>
+    (function(){
+      let popupShown = false;
+      const popup = document.getElementById('scroll-popup');
+      // Trigger after 60 seconds OR 50% scroll, whichever comes first
+      function showPopup() {
+        if (popupShown) return;
+        if (sessionStorage.getItem('ls_fa_popup_closed')) return;
+        popupShown = true;
+        popup.style.display = 'flex';
+        gtag('event', 'popup_shown', {page: 'free_audio'});
+        fbq('trackCustom', 'PopupShown', {page: 'free_audio'});
+      }
+      setTimeout(showPopup, 60000);
+      window.addEventListener('scroll', function(){
+        const scrollPct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+        if (scrollPct > 0.5) showPopup();
+      });
+      window.closePopup = function(){
+        popup.style.display = 'none';
+        sessionStorage.setItem('ls_fa_popup_closed', 'true');
+      };
+      popup.addEventListener('click', function(e){
+        if (e.target === popup) closePopup();
+      });
+    })();
+  </script>
 </body>
 </html>
