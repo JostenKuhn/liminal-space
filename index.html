@@ -1294,6 +1294,11 @@
       const buyBox = document.getElementById('hero-buy');
       const btns = document.querySelectorAll('.hero-toggle button');
       if (mode === 'buy') {
+        // If already showing buy, go straight to Stan Store
+        if (buyBox.classList.contains('active')) {
+          window.open('https://stan.store/liminalspace/p/first-contact--consciousness-exploration-kit', '_blank');
+          return;
+        }
         freeBox.classList.remove('active');
         buyBox.classList.add('active');
         btns[0].className = 'toggle-inactive';
