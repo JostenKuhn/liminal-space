@@ -108,9 +108,25 @@
 
     /* ═══ HEADER ═══ */
     .header {
-      text-align: center; padding: 1.5rem 0;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 1.5rem;
       border-bottom: 1px solid var(--rule);
       position: relative; z-index: 10;
+    }
+    .header-links {
+      display: flex; gap: .5rem;
+    }
+    .header-link {
+      font-family: var(--display); font-weight: 700; font-size: .65rem;
+      padding: .45rem .9rem; border-radius: 6px; text-decoration: none;
+      transition: all .2s; white-space: nowrap;
+    }
+    .header-link-primary {
+      background: var(--gold); color: var(--bg);
+    }
+    .header-link-secondary {
+      background: transparent; color: var(--gold);
+      border: 1px solid rgba(212,168,76,0.4);
     }
     .logo {
       font-family: var(--display); font-weight: 700; font-size: 1.05rem;
@@ -452,6 +468,10 @@
   <!-- HEADER -->
   <div class="header">
     <a href="index.html" class="logo">Liminal<i>Space</i></a>
+    <div class="header-links">
+      <a href="https://stan.store/liminalspace/p/first-contact--consciousness-exploration-kit" target="_blank" rel="noopener" class="header-link header-link-primary">First Contact · $37</a>
+      <a href="https://www.monroeinstitute.org/products/gateway-voyage-online?ref=skrszyzu" target="_blank" rel="noopener" class="header-link header-link-secondary">Gateway Voyage · $595</a>
+    </div>
   </div>
 
   <!-- ═══════════════════════════ -->
