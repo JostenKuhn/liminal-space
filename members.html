@@ -1028,7 +1028,7 @@
     (function(){
       let gwShown = false;
       const gwPopup = document.getElementById('gw-popup');
-      // Show after 5 minutes (they're deep into the content by then)
+      // Show after 90 seconds
       setTimeout(function(){
         if (gwShown) return;
         if (sessionStorage.getItem('ls_gw_popup_closed')) return;
@@ -1036,7 +1036,7 @@
         gwPopup.style.display = 'flex';
         gtag('event', 'gateway_popup_shown', {page: 'members'});
         fbq('trackCustom', 'GatewayPopupShown', {page: 'members'});
-      }, 300000);
+      }, 90000);
       window.closeGwPopup = function(){
         gwPopup.style.display = 'none';
         sessionStorage.setItem('ls_gw_popup_closed', 'true');
