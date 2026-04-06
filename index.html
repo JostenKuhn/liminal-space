@@ -283,6 +283,42 @@
     .cred-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--gold); opacity: .3; flex-shrink: 0; }
     @keyframes drift { to { transform: translateX(-50%); } }
 
+    /* ═══ CREDIBILITY NUMBERS ═══ */
+    .cred-numbers {
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+    .cred-numbers-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    @media (max-width: 600px) {
+      .cred-numbers-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem 1rem; }
+    }
+    .cred-stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .cred-stat-num {
+      font-family: var(--display);
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--gold);
+      line-height: 1.1;
+    }
+    .cred-stat-label {
+      font-family: var(--mono);
+      font-size: .55rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-top: .3rem;
+    }
+
     /* ═══ FULL-BLEED IMAGE MOMENT ═══ */
     .moment {
       position: relative;
@@ -865,6 +901,30 @@
       <span>Project Stargate · 23 Years</span><div class="cred-dot"></div>
       <span>Peer-Reviewed Neuroscience</span><div class="cred-dot"></div>
       <span>Hemi-Sync Binaural Technology</span><div class="cred-dot"></div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════ -->
+  <!--     CREDIBILITY NUMBERS             -->
+  <!-- ════════════════════════════════════ -->
+  <div class="cred-numbers rv">
+    <div class="cred-numbers-grid">
+      <div class="cred-stat">
+        <span class="cred-stat-num">50+</span>
+        <span class="cred-stat-label">Years of research</span>
+      </div>
+      <div class="cred-stat">
+        <span class="cred-stat-num">23</span>
+        <span class="cred-stat-label">Years of classified military use</span>
+      </div>
+      <div class="cred-stat">
+        <span class="cred-stat-num">10,000+</span>
+        <span class="cred-stat-label">Sessions started</span>
+      </div>
+      <div class="cred-stat">
+        <span class="cred-stat-num">3</span>
+        <span class="cred-stat-label">Progressive frequency levels</span>
+      </div>
     </div>
   </div>
 
