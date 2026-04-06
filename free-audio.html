@@ -112,13 +112,15 @@
       padding: 1rem 1.5rem;
       border-bottom: 1px solid var(--rule);
       position: relative; z-index: 10;
+      gap: 1rem;
+      flex-wrap: wrap;
     }
     .header-links {
-      display: flex; gap: .5rem;
+      display: flex; gap: .4rem;
     }
     .header-link {
-      font-family: var(--display); font-weight: 700; font-size: .65rem;
-      padding: .45rem .9rem; border-radius: 6px; text-decoration: none;
+      font-family: var(--display); font-weight: 700; font-size: .6rem;
+      padding: .4rem .7rem; border-radius: 6px; text-decoration: none;
       transition: all .2s; white-space: nowrap;
     }
     .header-link-primary {
@@ -127,6 +129,11 @@
     .header-link-secondary {
       background: transparent; color: var(--gold);
       border: 1px solid rgba(212,168,76,0.4);
+    }
+    @media (max-width: 480px) {
+      .header { padding: .75rem 1rem; }
+      .header-link { font-size: .55rem; padding: .35rem .5rem; }
+      .logo { font-size: .9rem; }
     }
     .logo {
       font-family: var(--display); font-weight: 700; font-size: 1.05rem;
