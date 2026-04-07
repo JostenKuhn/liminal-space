@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get First Contact — Liminal Space</title>
+  <meta name="description" content="First Contact — 3 guided audio sessions, field manual, and 7-day protocol. $37.">
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1GJVT4XFG9"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-1GJVT4XFG9');
+  </script>
+
+  <!-- Meta Pixel -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '26479131108445246');
+    fbq('track', 'PageView');
+  </script>
+
+  <!-- Reddit Pixel -->
+  <script>
+    !function(w,d){if(!w.rdt){var p=w.rdt=function(){p.sendEvent?p.sendEvent.apply(p,arguments):p.callQueue.push(arguments)};p.callQueue=[];var t=d.createElement("script");t.src="https://www.redditstatic.com/ads/pixel.js";t.async=!0;var s=d.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}}(window,document);
+    rdt('init','a2_iryyyn1edljt');
+    rdt('track','PageVisit');
+  </script>
+
+  <!-- Stripe.js -->
+  <script src="https://js.stripe.com/v3/" async></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Outfit:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #050510;
+      --surface: #0F0F1A;
+      --rule: rgba(255,255,255,0.06);
+      --gold: #D4A84C;
+      --text: #EAE8F4;
+      --text-mid: #A8A4BE;
+      --text-dim: #6B687E;
+      --display: 'Syne', sans-serif;
+      --body: 'Outfit', sans-serif;
+      --mono: 'IBM Plex Mono', monospace;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .container {
+      width: 100%;
+      max-width: 500px;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 1.25rem;
+    }
+    .logo {
+      font-family: var(--display);
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .logo i {
+      font-style: normal;
+      color: var(--gold);
+    }
+    .product-info {
+      text-align: center;
+      margin-bottom: 1.25rem;
+    }
+    .product-info h1 {
+      font-family: var(--display);
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: .4rem;
+    }
+    .product-info .price {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: .3rem;
+    }
+    .product-info .price span {
+      color: var(--text-dim);
+      text-decoration: line-through;
+      font-size: .85rem;
+      font-weight: 400;
+      margin-right: .4rem;
+    }
+    .product-info .desc {
+      font-size: .78rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+    .includes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+    .includes span {
+      font-size: .65rem;
+      color: var(--text-mid);
+      background: rgba(255,255,255,0.04);
+      padding: .3rem .6rem;
+      border-radius: 6px;
+      border: 1px solid var(--rule);
+    }
+    .checkout-container {
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--surface);
+      margin-bottom: 1rem;
+    }
+    .checkout-loading {
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+    .checkout-loading p {
+      color: var(--text-mid);
+      font-size: .85rem;
+    }
+    .checkout-error {
+      display: none;
+      text-align: center;
+      padding: 2.5rem 1rem;
+    }
+    .checkout-error p {
+      color: #e74c3c;
+      font-size: .85rem;
+      margin-bottom: 1rem;
+    }
+    .checkout-error a {
+      color: var(--gold);
+      text-decoration: underline;
+    }
+    .trust {
+      text-align: center;
+      font-size: .6rem;
+      color: var(--text-dim);
+    }
+    .trust svg {
+      width: 10px;
+      height: 10px;
+      vertical-align: middle;
+      margin-right: .2rem;
+      opacity: .5;
+    }
+    .back-link {
+      text-align: center;
+      margin-top: 1.25rem;
+    }
+    .back-link a {
+      color: var(--text-dim);
+      font-size: .72rem;
+      text-decoration: none;
+    }
+    .back-link a:hover {
+      color: var(--gold);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <a href="index.html" class="logo">Liminal<i>Space</i></a>
+    </div>
+
+    <div class="product-info">
+      <h1>First Contact</h1>
+      <p class="price"><span>$97</span>$37</p>
+      <p class="desc">The complete consciousness exploration kit</p>
+    </div>
+
+    <div class="includes">
+      <span>3 guided sessions</span>
+      <span>Field manual</span>
+      <span>7-day protocol</span>
+      <span>Instant download</span>
+      <span>Lifetime access</span>
+    </div>
+
+    <div class="checkout-container">
+      <div id="checkout-mount"></div>
+      <div id="checkout-loading" class="checkout-loading">
+        <p>Loading secure checkout…</p>
+      </div>
+      <div id="checkout-error" class="checkout-error">
+        <p>Something went wrong. <a href="javascript:location.reload()">Try again</a></p>
+      </div>
+    </div>
+
+    <p class="trust">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Powered by Stripe · 256-bit encryption · 100% money-back guarantee
+    </p>
+
+    <div class="back-link">
+      <a href="index.html">← Learn more about First Contact</a>
+    </div>
+  </div>
+
+  <script>
+    // Track checkout view
+    gtag('event', 'begin_checkout', {value: 37.00, currency: 'USD', source: 'email'});
+    fbq('track', 'InitiateCheckout', {value: 37.00, currency: 'USD'});
+    rdt('track', 'AddToCart', {value: 37.00, currency: 'USD'});
+
+    // Load Stripe checkout immediately
+    (async function() {
+      const mountEl = document.getElementById('checkout-mount');
+      const loadingEl = document.getElementById('checkout-loading');
+      const errorEl = document.getElementById('checkout-error');
+
+      try {
+        // Wait for Stripe.js
+        let stripe;
+        await new Promise(r => {
+          const i = setInterval(() => {
+            if (window.Stripe) { clearInterval(i); r(); }
+          }, 100);
+          setTimeout(() => { clearInterval(i); r(); }, 8000);
+        });
+        stripe = Stripe('pk_live_51TJZUyBMM4lnbKJ2Gflp8haC3Lmo6LBk7Bp29lbfIJyTOTJzK7A5iEq0llVH7IIhdqC14SB80ZoJgir7y3gxEZs600igQ2o21Z');
+
+        const resp = await fetch('/api/create-embedded-checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ source: 'email_direct' }),
+        });
+
+        if (!resp.ok) throw new Error('Failed');
+        const { clientSecret } = await resp.json();
+
+        loadingEl.style.display = 'none';
+        const checkout = await stripe.initEmbeddedCheckout({ clientSecret });
+        checkout.mount('#checkout-mount');
+
+      } catch (err) {
+        console.error('Checkout error:', err);
+        loadingEl.style.display = 'none';
+        errorEl.style.display = 'block';
+      }
+    })();
+  </script>
+</body>
+</html>
