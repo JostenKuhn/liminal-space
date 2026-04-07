@@ -53,8 +53,11 @@ export default async function handler(req, res) {
     // Step 1: Find existing subscriber
     let subscriber = await findSubscriber(API_KEY, PUB_ID, email);
 
-    if (!subscriber) {
-      // Create new subscriber (buyer who skipped email opt-in)
+    if (subscriber) {
+      // Existing subscriber — update utm_source so they enter the Stripe Buyers segment
+      await updateSubscriberUtm(API_KEY, PUB_ID, subscriber.id);
+    } else {
+      // New subscriber (buyer who skipped email opt-in)
       console.log(`No subscriber found for ${email} — creating one`);
       subscriber = await createSubscriber(API_KEY, PUB_ID, email, firstName);
     }
@@ -64,29 +67,48 @@ export default async function handler(req, res) {
       return res.status(200).json({ received: true, warning: 'subscriber creation failed' });
     }
 
-    // Step 2: Apply "purchased" tag
-    const tagResult = await addPurchasedTag(API_KEY, PUB_ID, subscriber.id);
-
-    // Step 3: Remove from nurture automation (they bought — stop selling)
+    // Step 2: Remove from nurture automation (they bought — stop selling)
     const automationResult = await removeFromAutomation(API_KEY, PUB_ID, subscriber.id);
 
-    // Step 4: Add to purchase welcome automation (sends members page link)
-    const PURCHASE_AUTOMATION_ID = 'aut_e2df2f26-4ff3-4cce-9c7a-4ef7fbf7f74c';
-    const welcomeResult = await addToAutomation(API_KEY, PUB_ID, PURCHASE_AUTOMATION_ID, subscriber.id);
-
-    console.log(`Webhook complete: email=${email}, tagged=${tagResult}, removed_from_nurture=${automationResult}, added_to_welcome=${welcomeResult}`);
+    console.log(`Webhook complete: email=${email}, removed_from_nurture=${automationResult}`);
 
     return res.status(200).json({
       received: true,
       email,
       subscriber_id: subscriber.id,
-      tag_added: tagResult,
       removed_from_automation: automationResult,
-      added_to_welcome: welcomeResult,
     });
   } catch (err) {
     console.error('Webhook error:', err);
     return res.status(200).json({ received: true, warning: err.message });
+  }
+}
+
+async function updateSubscriberUtm(apiKey, pubId, subscriberId) {
+  try {
+    const response = await fetch(
+      `https://api.beehiiv.com/v2/publications/${pubId}/subscriptions/${subscriberId}`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Authorization': `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          utm_source: 'stripe',
+          utm_medium: 'purchase',
+        }),
+      }
+    );
+
+    if (!response.ok) {
+      console.error('Update utm error:', await response.text());
+      return false;
+    }
+    return true;
+  } catch (err) {
+    console.error('Update utm error:', err);
+    return false;
   }
 }
 
@@ -132,77 +154,6 @@ async function createSubscriber(apiKey, pubId, email, firstName) {
 
   const data = await response.json();
   return data.data || null;
-}
-
-async function addPurchasedTag(apiKey, pubId, subscriberId) {
-  try {
-    // Get all tags to find "purchased"
-    const tagsResponse = await fetch(
-      `https://api.beehiiv.com/v2/publications/${pubId}/tags`,
-      { headers: { 'Authorization': `Bearer ${apiKey}` } }
-    );
-
-    if (!tagsResponse.ok) {
-      console.error('Get tags error:', await tagsResponse.text());
-      return false;
-    }
-
-    const tagsData = await tagsResponse.json();
-    const purchasedTag = tagsData.data?.find(t => t.name === 'purchased');
-
-    if (!purchasedTag) {
-      console.error('No "purchased" tag found in Beehiiv — create it manually');
-      return false;
-    }
-
-    const assignResponse = await fetch(
-      `https://api.beehiiv.com/v2/publications/${pubId}/subscriptions/${subscriberId}/tags`,
-      {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${apiKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ tag_ids: [purchasedTag.id] }),
-      }
-    );
-
-    if (!assignResponse.ok) {
-      console.error('Assign tag error:', await assignResponse.text());
-      return false;
-    }
-
-    return true;
-  } catch (err) {
-    console.error('Tag error:', err);
-    return false;
-  }
-}
-
-async function addToAutomation(apiKey, pubId, automationId, subscriberId) {
-  try {
-    const response = await fetch(
-      `https://api.beehiiv.com/v2/publications/${pubId}/automations/${automationId}/subscriptions`,
-      {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${apiKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ subscriber_id: subscriberId }),
-      }
-    );
-
-    if (!response.ok) {
-      console.error('Add to automation error:', await response.text());
-      return false;
-    }
-
-    return true;
-  } catch (err) {
-    console.error('Add to automation error:', err);
-    return false;
-  }
 }
 
 async function removeFromAutomation(apiKey, pubId, subscriberId) {

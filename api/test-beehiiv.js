@@ -1,5 +1,5 @@
-// Diagnostic v3 — test creating subscriber WITH automation_ids
-// GET /api/test-beehiiv?email=test@example.com
+// Diagnostic v4 — test PATCH utm_source on existing subscriber
+// GET /api/test-beehiiv?email=josten.kuhn@gmail.com
 // DELETE after debugging
 
 export default async function handler(req, res) {
@@ -8,35 +8,34 @@ export default async function handler(req, res) {
 
   const API_KEY = (process.env.BEEHIIV_API_KEY || '').trim();
   const PUB_ID = (process.env.BEEHIIV_PUBLICATION_ID || '').trim();
-  const PURCHASE_AUTO = 'aut_e2df2f26-4ff3-4cce-9c7a-4ef7fbf7f74c';
 
-  const results = {};
+  // Step 1: Find subscriber
+  const findResp = await fetch(
+    `https://api.beehiiv.com/v2/publications/${PUB_ID}/subscriptions?email=${encodeURIComponent(email)}`,
+    { headers: { 'Authorization': `Bearer ${API_KEY}` } }
+  );
+  const findData = await findResp.json();
+  const subId = findData.data?.[0]?.id;
 
-  // Test: Create/update subscriber with automation_ids in the body
-  try {
-    const r = await fetch(
-      `https://api.beehiiv.com/v2/publications/${PUB_ID}/subscriptions`,
-      {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${API_KEY}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email,
-          utm_source: 'stripe',
-          utm_medium: 'purchase',
-          referring_site: 'enterliminalspace.com',
-          send_welcome_email: false,
-          automation_ids: [PURCHASE_AUTO],
-        }),
-      }
-    );
-    const raw = await r.text();
-    results.create_with_automation = { status: r.status, body: raw.substring(0, 800) };
-  } catch (err) {
-    results.create_with_automation = { error: err.message };
-  }
+  if (!subId) return res.status(200).json({ error: 'subscriber not found' });
 
-  return res.status(200).json(results);
+  // Step 2: PATCH utm_source to 'stripe'
+  const patchResp = await fetch(
+    `https://api.beehiiv.com/v2/publications/${PUB_ID}/subscriptions/${subId}`,
+    {
+      method: 'PATCH',
+      headers: {
+        'Authorization': `Bearer ${API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ utm_source: 'stripe', utm_medium: 'purchase' }),
+    }
+  );
+  const patchBody = await patchResp.text();
+
+  return res.status(200).json({
+    subscriber_id: subId,
+    patch_status: patchResp.status,
+    patch_response: patchBody.substring(0, 500),
+  });
 }
