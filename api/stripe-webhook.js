@@ -1,9 +1,6 @@
-// Stripe webhook — handles successful payments from embedded checkout
-// Set up in Stripe Dashboard → Developers → Webhooks → Add endpoint
-// URL: https://enterliminalspace.com/api/stripe-webhook
-// Events: checkout.session.completed
-
-const AUTOMATION_ID = '76426619-2bc5-49fb-99c8-73c47bc59e16';
+// Stripe webhook — handles successful payments
+// Sends purchase event + profile to Klaviyo
+// Stripe Dashboard → Developers → Webhooks → checkout.session.completed
 
 export const config = {
   api: { bodyParser: false },
@@ -25,7 +22,6 @@ export default async function handler(req, res) {
   const buf = await buffer(req);
   const payload = JSON.parse(buf.toString());
 
-  // Only handle checkout.session.completed
   if (payload.type !== 'checkout.session.completed') {
     return res.status(200).json({ received: true });
   }
@@ -38,45 +34,33 @@ export default async function handler(req, res) {
     return res.status(200).json({ received: true, warning: 'no email' });
   }
 
-  const firstName = session?.customer_details?.name?.split(' ')[0] || '';
-  console.log(`Purchase completed: ${email} (${firstName}), amount: ${session.amount_total}`);
+  const fullName = session?.customer_details?.name || '';
+  const firstName = fullName.split(' ')[0] || '';
+  const lastName = fullName.split(' ').slice(1).join(' ') || '';
+  const amount = (session.amount_total || 3700) / 100;
 
-  const API_KEY = (process.env.BEEHIIV_API_KEY || '').trim();
-  const PUB_ID = (process.env.BEEHIIV_PUBLICATION_ID || '').trim();
+  console.log(`Purchase completed: ${email} (${fullName}), $${amount}`);
 
-  if (!API_KEY || !PUB_ID) {
-    console.error('Missing BEEHIIV_API_KEY or BEEHIIV_PUBLICATION_ID');
-    return res.status(200).json({ received: true, warning: 'beehiiv not configured' });
+  const KLAVIYO_KEY = (process.env.KLAVIYO_PRIVATE_KEY || '').trim();
+  if (!KLAVIYO_KEY) {
+    console.error('Missing KLAVIYO_PRIVATE_KEY');
+    return res.status(200).json({ received: true, warning: 'klaviyo not configured' });
   }
 
   try {
-    // Step 1: Find existing subscriber
-    let subscriber = await findSubscriber(API_KEY, PUB_ID, email);
+    // Step 1: Create/update profile in Klaviyo
+    const profileResult = await upsertProfile(KLAVIYO_KEY, email, firstName, lastName);
 
-    if (subscriber) {
-      // Existing subscriber — update utm_source so they enter the Stripe Buyers segment
-      await updateSubscriberUtm(API_KEY, PUB_ID, subscriber.id);
-    } else {
-      // New subscriber (buyer who skipped email opt-in)
-      console.log(`No subscriber found for ${email} — creating one`);
-      subscriber = await createSubscriber(API_KEY, PUB_ID, email, firstName);
-    }
+    // Step 2: Track purchase event in Klaviyo (triggers automations)
+    const eventResult = await trackPurchaseEvent(KLAVIYO_KEY, email, amount, session.id);
 
-    if (!subscriber) {
-      console.error('Failed to find or create subscriber');
-      return res.status(200).json({ received: true, warning: 'subscriber creation failed' });
-    }
-
-    // Step 2: Remove from nurture automation (they bought — stop selling)
-    const automationResult = await removeFromAutomation(API_KEY, PUB_ID, subscriber.id);
-
-    console.log(`Webhook complete: email=${email}, removed_from_nurture=${automationResult}`);
+    console.log(`Klaviyo: profile=${profileResult}, event=${eventResult}`);
 
     return res.status(200).json({
       received: true,
       email,
-      subscriber_id: subscriber.id,
-      removed_from_automation: automationResult,
+      klaviyo_profile: profileResult,
+      klaviyo_event: eventResult,
     });
   } catch (err) {
     console.error('Webhook error:', err);
@@ -84,97 +68,89 @@ export default async function handler(req, res) {
   }
 }
 
-async function updateSubscriberUtm(apiKey, pubId, subscriberId) {
+async function upsertProfile(apiKey, email, firstName, lastName) {
   try {
-    const response = await fetch(
-      `https://api.beehiiv.com/v2/publications/${pubId}/subscriptions/${subscriberId}`,
-      {
-        method: 'PATCH',
-        headers: {
-          'Authorization': `Bearer ${apiKey}`,
-          'Content-Type': 'application/json',
+    const resp = await fetch('https://a.klaviyo.com/api/profile-import/', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Klaviyo-API-Key ${apiKey}`,
+        'Content-Type': 'application/json',
+        'revision': '2024-10-15',
+      },
+      body: JSON.stringify({
+        data: {
+          type: 'profile',
+          attributes: {
+            email,
+            first_name: firstName || undefined,
+            last_name: lastName || undefined,
+            properties: {
+              purchased: true,
+              product: 'First Contact',
+              source: 'stripe_checkout',
+            },
+          },
         },
-        body: JSON.stringify({
-          utm_source: 'stripe',
-          utm_medium: 'purchase',
-        }),
-      }
-    );
+      }),
+    });
 
-    if (!response.ok) {
-      console.error('Update utm error:', await response.text());
+    if (!resp.ok) {
+      console.error('Klaviyo profile error:', await resp.text());
       return false;
     }
     return true;
   } catch (err) {
-    console.error('Update utm error:', err);
+    console.error('Klaviyo profile error:', err);
     return false;
   }
 }
 
-async function findSubscriber(apiKey, pubId, email) {
-  const response = await fetch(
-    `https://api.beehiiv.com/v2/publications/${pubId}/subscriptions?email=${encodeURIComponent(email)}`,
-    { headers: { 'Authorization': `Bearer ${apiKey}` } }
-  );
-
-  if (!response.ok) {
-    console.error('Find subscriber error:', await response.text());
-    return null;
-  }
-
-  const data = await response.json();
-  return data.data?.[0] || null;
-}
-
-async function createSubscriber(apiKey, pubId, email, firstName) {
-  const response = await fetch(
-    `https://api.beehiiv.com/v2/publications/${pubId}/subscriptions`,
-    {
+async function trackPurchaseEvent(apiKey, email, amount, sessionId) {
+  try {
+    const resp = await fetch('https://a.klaviyo.com/api/events/', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${apiKey}`,
+        'Authorization': `Klaviyo-API-Key ${apiKey}`,
         'Content-Type': 'application/json',
+        'revision': '2024-10-15',
       },
       body: JSON.stringify({
-        email,
-        ...(firstName && { custom_fields: [{ name: 'First Name', value: firstName }] }),
-        utm_source: 'stripe',
-        utm_medium: 'purchase',
-        referring_site: 'enterliminalspace.com',
-        send_welcome_email: true,
+        data: {
+          type: 'event',
+          attributes: {
+            metric: {
+              data: {
+                type: 'metric',
+                attributes: { name: 'Placed Order' },
+              },
+            },
+            profile: {
+              data: {
+                type: 'profile',
+                attributes: { email },
+              },
+            },
+            properties: {
+              product_name: 'First Contact — Consciousness Exploration Kit',
+              value: amount,
+              currency: 'USD',
+              stripe_session_id: sessionId,
+              members_url: 'https://enterliminalspace.com/members.html',
+            },
+            value: amount,
+            unique_id: sessionId || 'stripe_' + Date.now(),
+          },
+        },
       }),
-    }
-  );
+    });
 
-  if (!response.ok) {
-    console.error('Create subscriber error:', await response.text());
-    return null;
-  }
-
-  const data = await response.json();
-  return data.data || null;
-}
-
-async function removeFromAutomation(apiKey, pubId, subscriberId) {
-  try {
-    const response = await fetch(
-      `https://api.beehiiv.com/v2/publications/${pubId}/automations/${AUTOMATION_ID}/subscriptions/${subscriberId}`,
-      {
-        method: 'DELETE',
-        headers: { 'Authorization': `Bearer ${apiKey}` },
-      }
-    );
-
-    if (!response.ok) {
-      if (response.status === 404) return true; // Not in automation — fine
-      console.error('Remove from automation error:', await response.text());
+    if (!resp.ok) {
+      console.error('Klaviyo event error:', await resp.text());
       return false;
     }
-
     return true;
   } catch (err) {
-    console.error('Automation removal error:', err);
+    console.error('Klaviyo event error:', err);
     return false;
   }
 }

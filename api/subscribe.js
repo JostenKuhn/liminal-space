@@ -1,3 +1,6 @@
+// Email opt-in — adds subscriber to Klaviyo list
+// Called from landing page + free-audio page forms
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -9,42 +12,76 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Email is required' });
   }
 
-  const API_KEY = (process.env.BEEHIIV_API_KEY || '').trim();
-  const PUB_ID = (process.env.BEEHIIV_PUBLICATION_ID || '').trim();
-
-  if (!API_KEY || !PUB_ID) {
-    console.error('Missing BEEHIIV_API_KEY or BEEHIIV_PUBLICATION_ID');
+  const KLAVIYO_KEY = (process.env.KLAVIYO_PRIVATE_KEY || '').trim();
+  if (!KLAVIYO_KEY) {
+    console.error('Missing KLAVIYO_PRIVATE_KEY');
     return res.status(500).json({ error: 'Server configuration error' });
   }
 
   try {
-    const response = await fetch(
-      `https://api.beehiiv.com/v2/publications/${PUB_ID}/subscriptions`,
-      {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${API_KEY}`,
-          'Content-Type': 'application/json',
+    // Create/update profile in Klaviyo
+    const profileResp = await fetch('https://a.klaviyo.com/api/profile-import/', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Klaviyo-API-Key ${KLAVIYO_KEY}`,
+        'Content-Type': 'application/json',
+        'revision': '2024-10-15',
+      },
+      body: JSON.stringify({
+        data: {
+          type: 'profile',
+          attributes: {
+            email,
+            first_name: first_name || undefined,
+            properties: {
+              source: 'website_optin',
+              optin_page: 'landing_page',
+            },
+          },
         },
-        body: JSON.stringify({
-          email,
-          ...(first_name && { custom_fields: [{ name: 'First Name', value: first_name }] }),
-          utm_source: 'website',
-          utm_medium: 'landing_page',
-          referring_site: 'enterliminalspace.com',
-          send_welcome_email: true,
-        }),
-      }
-    );
+      }),
+    });
 
-    const data = await response.json();
-
-    if (!response.ok) {
-      console.error('Beehiiv error:', data);
-      return res.status(response.status).json({ error: data.message || 'Subscription failed' });
+    if (!profileResp.ok) {
+      const err = await profileResp.text();
+      console.error('Klaviyo profile error:', err);
+      return res.status(profileResp.status).json({ error: 'Subscription failed' });
     }
 
-    return res.status(200).json({ success: true, id: data.data?.id });
+    // Track opt-in event (triggers welcome/nurture flow)
+    await fetch('https://a.klaviyo.com/api/events/', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Klaviyo-API-Key ${KLAVIYO_KEY}`,
+        'Content-Type': 'application/json',
+        'revision': '2024-10-15',
+      },
+      body: JSON.stringify({
+        data: {
+          type: 'event',
+          attributes: {
+            metric: {
+              data: {
+                type: 'metric',
+                attributes: { name: 'Email Opt-In' },
+              },
+            },
+            profile: {
+              data: {
+                type: 'profile',
+                attributes: { email },
+              },
+            },
+            properties: {
+              source: 'landing_page',
+              free_audio_url: 'https://enterliminalspace.com/free-audio.html',
+            },
+          },
+        },
+      }),
+    });
+
+    return res.status(200).json({ success: true });
   } catch (err) {
     console.error('Subscribe error:', err);
     return res.status(500).json({ error: 'Internal server error' });
