@@ -834,7 +834,7 @@
     <div class="nav-inner">
       <a href="#" class="nav-mark">Liminal<i>Space</i></a>
       <a href="#final" class="nav-cta" style="background:transparent;color:var(--text-mid);border:1px solid var(--rule);">Free Audio</a>
-      <a href="https://stan.store/liminalspace/p/first-contact--consciousness-exploration-kit" target="_blank" rel="noopener" class="nav-cta">First Contact · $37</a>
+      <a href="#final" onclick="scrollToCheckout(); return false;" class="nav-cta">First Contact · $37</a>
       <a href="https://www.monroeinstitute.org/products/gateway-voyage-online?ref=skrszyzu" target="_blank" rel="noopener" class="nav-cta nav-cta-buy">Gateway Voyage · $595</a>
     </div>
   </nav>
@@ -897,7 +897,8 @@
             <li>Real separation techniques used by thousands worldwide</li>
             <li>The full written protocol + 7-day training plan</li>
           </ul>
-          <a href="https://stan.store/liminalspace/p/first-contact--consciousness-exploration-kit" target="_blank" rel="noopener" class="btn-gold" style="display:block;text-align:center;text-decoration:none;font-size:1.05rem;padding:1.05rem;">Get the Protocol · $37</a>
+          <button onclick="openInlineCheckout(this)" class="btn-gold" style="display:block;width:100%;text-align:center;font-size:1.05rem;padding:1.05rem;border:none;cursor:pointer;">Get the Protocol · $37</button>
+          <div class="inline-checkout" style="display:none;margin-top:.75rem;border:1px solid var(--rule);border-radius:12px;overflow:hidden;background:var(--surface);"><div class="inline-checkout-mount"></div><div class="inline-checkout-loading" style="text-align:center;padding:2.5rem 1rem;"><p style="color:var(--text-mid);font-size:.82rem;">Loading secure checkout…</p></div><div class="inline-checkout-error" style="display:none;text-align:center;padding:2rem 1rem;"><p style="color:#e74c3c;font-size:.82rem;margin-bottom:.75rem;">Something went wrong. Please try again.</p><button onclick="this.closest('.inline-checkout').style.display='none'" style="background:var(--gold);color:#050510;border:none;padding:.5rem 1.2rem;border-radius:8px;cursor:pointer;font-size:.8rem;">Close</button></div><p style="text-align:center;font-size:.6rem;color:var(--text-dim);padding:.5rem 1rem .75rem;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:10px;height:10px;vertical-align:middle;margin-right:.2rem;opacity:.5;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Powered by Stripe · 256-bit encryption · Money-back guarantee</p></div>
           <p style="font-size:.7rem;color:var(--text-dim);margin-top:.6rem;margin-bottom:.4rem;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px;vertical-align:middle;margin-right:.3rem;opacity:.5;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Secure checkout · Instant download · 100% money-back guarantee
           </p>
@@ -1063,7 +1064,8 @@
       <div class="mid-inner">
         <h2 class="rv">Experience it <em>tonight</em></h2>
         <p class="rv rv-d1">Headphones on. Eyes closed. The binaural frequencies shift your brainwaves automatically. Most people feel something shift within the first session.</p>
-        <a href="https://stan.store/liminalspace/p/first-contact--consciousness-exploration-kit" target="_blank" rel="noopener" class="btn-gold rv rv-d2" style="display:inline-block;text-decoration:none;font-size:1.05rem;padding:1.1rem 2.5rem;margin-top:1rem;">Get the Protocol · $37</a>
+        <button onclick="openInlineCheckout(this)" class="btn-gold rv rv-d2" style="font-size:1.05rem;padding:1.1rem 2.5rem;margin-top:1rem;border:none;cursor:pointer;">Get the Protocol · $37</button>
+        <div class="inline-checkout rv rv-d2" style="display:none;margin-top:.75rem;border:1px solid var(--rule);border-radius:12px;overflow:hidden;background:var(--surface);max-width:480px;margin-left:auto;margin-right:auto;"><div class="inline-checkout-mount"></div><div class="inline-checkout-loading" style="text-align:center;padding:2.5rem 1rem;"><p style="color:var(--text-mid);font-size:.82rem;">Loading secure checkout…</p></div><div class="inline-checkout-error" style="display:none;text-align:center;padding:2rem 1rem;"><p style="color:#e74c3c;font-size:.82rem;margin-bottom:.75rem;">Something went wrong. Please try again.</p><button onclick="this.closest('.inline-checkout').style.display='none'" style="background:var(--gold);color:#050510;border:none;padding:.5rem 1.2rem;border-radius:8px;cursor:pointer;font-size:.8rem;">Close</button></div><p style="text-align:center;font-size:.6rem;color:var(--text-dim);padding:.5rem 1rem .75rem;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:10px;height:10px;vertical-align:middle;margin-right:.2rem;opacity:.5;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Powered by Stripe · 256-bit encryption · Money-back guarantee</p></div>
         <p class="rv rv-d3" style="margin-top:.75rem;font-size:.72rem;color:var(--text-dim);">Instant download. 100% money-back guarantee.</p>
         <div class="rv rv-d3" style="margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--rule);max-width:380px;margin-left:auto;margin-right:auto;">
           <p style="font-size:.82rem;color:var(--text-dim);margin-bottom:.5rem;">Not ready? Try a free session first.</p>
@@ -1123,7 +1125,8 @@
       <p class="rv rv-d2" style="color: var(--text-mid); font-size: 1rem; line-height: 1.8; font-weight: 300; margin-bottom: 1.25rem;">Three sessions. Each one takes you deeper. Real separation techniques used by thousands of practitioners worldwide. Not a guided meditation. A guided protocol with real methodology.</p>
       <p class="rv rv-d2" style="font-family: var(--display); font-size: 1.8rem; font-weight: 800; margin-bottom: 0.25rem;"><span style="color: var(--text-dim); font-size: 1rem; text-decoration: line-through; margin-right: 0.5rem;">$97</span>$37</p>
       <p class="rv rv-d2" style="font-size: .78rem; color: var(--text-dim); margin-bottom: 1.5rem;">Launch price. One-time. Keep forever.</p>
-      <a href="https://stan.store/liminalspace/p/first-contact--consciousness-exploration-kit" target="_blank" rel="noopener" class="btn-gold rv rv-d3" style="display: inline-block; text-decoration: none; font-size: 1.05rem; padding: 1.1rem 2.5rem;">Get the Protocol · $37</a>
+      <button onclick="openInlineCheckout(this)" class="btn-gold rv rv-d3" style="font-size: 1.05rem; padding: 1.1rem 2.5rem;border:none;cursor:pointer;">Get the Protocol · $37</button>
+      <div class="inline-checkout rv rv-d3" style="display:none;margin-top:.75rem;border:1px solid var(--rule);border-radius:12px;overflow:hidden;background:var(--surface);max-width:480px;margin-left:auto;margin-right:auto;"><div class="inline-checkout-mount"></div><div class="inline-checkout-loading" style="text-align:center;padding:2.5rem 1rem;"><p style="color:var(--text-mid);font-size:.82rem;">Loading secure checkout…</p></div><div class="inline-checkout-error" style="display:none;text-align:center;padding:2rem 1rem;"><p style="color:#e74c3c;font-size:.82rem;margin-bottom:.75rem;">Something went wrong. Please try again.</p><button onclick="this.closest('.inline-checkout').style.display='none'" style="background:var(--gold);color:#050510;border:none;padding:.5rem 1.2rem;border-radius:8px;cursor:pointer;font-size:.8rem;">Close</button></div><p style="text-align:center;font-size:.6rem;color:var(--text-dim);padding:.5rem 1rem .75rem;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:10px;height:10px;vertical-align:middle;margin-right:.2rem;opacity:.5;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Powered by Stripe · 256-bit encryption · Money-back guarantee</p></div>
       <p class="rv rv-d4" style="margin-top: 1rem; font-size: .72rem; color: var(--text-dim);">Instant download. 100% money-back guarantee.</p>
     </div>
   </section>
@@ -1213,7 +1216,7 @@
   <!-- STICKY MOBILE CTA -->
   <div class="sticky-cta" id="sticky-cta">
     <a href="#final" class="sticky-free">Free Audio</a>
-    <a href="https://stan.store/liminalspace/p/first-contact--consciousness-exploration-kit" target="_blank" rel="noopener" class="sticky-buy">First Contact · $37</a>
+    <a href="#final" onclick="scrollToCheckout(); return false;" class="sticky-buy">First Contact · $37</a>
     <a href="https://www.monroeinstitute.org/products/gateway-voyage-online?ref=skrszyzu" target="_blank" rel="noopener" class="sticky-buy" style="background:transparent;color:var(--gold);border:1px solid rgba(212,168,76,0.4);">Gateway · $595</a>
   </div>
 
@@ -1305,17 +1308,6 @@
       secObs.observe(el);
     });
 
-    // Track buy CTA clicks (Stan Store — Stripe checkout coming soon)
-    document.querySelectorAll('a[href*="stan.store"]').forEach(link => {
-      link.addEventListener('click', () => {
-        if (!sessionStorage.getItem('ic_fired')) {
-          sessionStorage.setItem('ic_fired', '1');
-          gtag('event', 'begin_checkout', {value: 37.00, currency: 'USD'});
-          fbq('track', 'InitiateCheckout', {value: 37.00, currency: 'USD'});
-        }
-      });
-    });
-
     // Track Gateway Voyage clicks
     document.querySelectorAll('a[href*="monroeinstitute"]').forEach(link => {
       link.addEventListener('click', () => {
@@ -1337,9 +1329,9 @@
       const buyBox = document.getElementById('hero-buy');
       const btns = document.querySelectorAll('.hero-toggle button');
       if (mode === 'buy') {
-        // If already showing buy, go to Stan Store
+        // If already showing buy, open inline checkout
         if (buyBox.classList.contains('active')) {
-          window.open('https://stan.store/liminalspace/p/first-contact--consciousness-exploration-kit', '_blank');
+          openInlineCheckout(buyBox.querySelector('.btn-gold'));
           return;
         }
         freeBox.classList.remove('active');
@@ -1412,6 +1404,14 @@
     // ═══ STRIPE INLINE CHECKOUT ═══
     let stripeInstance = null;
     let activeCheckout = null; // { instance, container }
+
+    function scrollToCheckout() {
+      const finalBtn = document.querySelector('.final-box .btn-gold');
+      if (finalBtn) {
+        finalBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(() => openInlineCheckout(finalBtn), 600);
+      }
+    }
 
     async function openInlineCheckout(btn) {
       const container = btn.parentElement.querySelector('.inline-checkout');
@@ -1488,7 +1488,7 @@
       <p style="font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem;">Still here?</p>
       <h3 style="font-family:var(--display);font-size:1.4rem;font-weight:800;line-height:1.15;margin-bottom:.5rem;">The full protocol is $37</h3>
       <p style="font-size:.88rem;color:var(--text-mid);margin-bottom:1.25rem;">3 guided sessions. Real separation techniques. 7-day plan. Instant download. Money-back guarantee.</p>
-      <a href="https://stan.store/liminalspace/p/first-contact--consciousness-exploration-kit" target="_blank" rel="noopener" class="btn-gold" style="display:block;text-align:center;text-decoration:none;padding:.85rem 1.5rem;font-size:.95rem;" onclick="closePopup()">Get the Protocol · $37</a>
+      <button onclick="closePopup(); scrollToCheckout();" class="btn-gold" style="display:block;width:100%;text-align:center;padding:.85rem 1.5rem;font-size:.95rem;border:none;cursor:pointer;">Get the Protocol · $37</button>
       <p style="font-size:.72rem;color:var(--text-dim);margin-top:.75rem;">Or <a href="#final" onclick="closePopup()" style="color:var(--gold);text-decoration:underline;text-underline-offset:2px;">try the free audio first</a></p>
     </div>
   </div>
