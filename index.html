@@ -856,12 +856,12 @@
 
       <div class="hero-cta-box rv rv-d3">
         <div class="hero-toggle">
-          <button class="toggle-inactive" onclick="toggleHero('free')">Free Session</button>
-          <button class="toggle-active" onclick="toggleHero('buy')">First Contact · $37</button>
+          <button class="toggle-active" onclick="toggleHero('free')">Free Session</button>
+          <button class="toggle-inactive" onclick="toggleHero('buy')">First Contact · $37</button>
         </div>
 
         <!-- FREE OPTION -->
-        <div id="hero-free" class="hero-buy-box">
+        <div id="hero-free" class="hero-buy-box active">
           <p class="cta-headline">Get your free guided session</p>
           <p class="cta-desc">20 minutes. Headphones. Experience it tonight.</p>
           <form class="optin-form" aria-label="Email opt-in">
@@ -882,7 +882,7 @@
         </div>
 
         <!-- BUY OPTION -->
-        <div id="hero-buy" class="hero-buy-box active">
+        <div id="hero-buy" class="hero-buy-box">
           <p class="cta-headline" style="font-size:1.2rem;line-height:1.35;margin-bottom:.6rem;font-weight:700;">In 1983, the CIA proved human consciousness can operate outside the body. They classified the research for 20 years.</p>
           <p style="font-size:.88rem;color:var(--text-mid);margin-bottom:.4rem;">This is the protocol they studied. Rebuilt from the original methodology and decades of independent research. Three guided sessions. Precision-tuned binaural frequencies. Real techniques.</p>
           <p style="font-size:.88rem;color:var(--gold);margin-bottom:1.2rem;font-weight:600;">Tonight, you put on headphones, press play, and find out what happens when your body falls asleep and your mind doesn't.</p>
@@ -942,6 +942,14 @@
         <span class="cred-stat-num">3</span>
         <span class="cred-stat-label">Progressive frequency levels</span>
       </div>
+    </div>
+  </div>
+
+  <!-- ═══ EARLY SOCIAL PROOF ═══ -->
+  <div style="padding:2rem 1.5rem;max-width:520px;margin:0 auto;text-align:center;">
+    <div class="rv" style="background:rgba(15,15,40,0.6);border:1px solid var(--rule);border-radius:12px;padding:1.25rem 1.5rem;">
+      <p style="font-family:var(--serif);font-style:italic;font-size:.92rem;color:var(--text-mid);line-height:1.6;">"I was skeptical. But the research is solid. On my third session I had full-body vibrations and a brief separation experience."</p>
+      <p style="font-size:.72rem;color:var(--text-dim);margin-top:.5rem;">Sarah K. · Neuroscience Researcher, 29</p>
     </div>
   </div>
 
@@ -1054,7 +1062,16 @@
         <p class="rv rv-d1">Headphones on. Eyes closed. The binaural frequencies shift your brainwaves automatically. Most people feel something shift within the first session.</p>
         <a href="https://stan.store/liminalspace/p/first-contact--consciousness-exploration-kit" target="_blank" rel="noopener" class="btn-gold rv rv-d2" style="display:inline-block;text-decoration:none;font-size:1.05rem;padding:1.1rem 2.5rem;margin-top:1rem;">Get the Protocol · $37</a>
         <p class="rv rv-d3" style="margin-top:.75rem;font-size:.72rem;color:var(--text-dim);">Instant download. 100% money-back guarantee.</p>
-        <p class="rv rv-d3" style="margin-top:1rem;font-size:.78rem;color:var(--text-dim);">Want to try a free session first? <a href="#final" style="color:var(--gold);text-decoration:underline;text-underline-offset:3px;">Get free audio</a></p>
+        <div class="rv rv-d3" style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--rule);max-width:380px;margin-left:auto;margin-right:auto;">
+          <p style="font-size:.82rem;color:var(--text-mid);margin-bottom:.6rem;">Not ready to buy? Try the free session first.</p>
+          <form class="optin-form" aria-label="Email opt-in">
+            <div class="form-row">
+              <input type="text" name="first_name" placeholder="First name" autocomplete="given-name" aria-label="First name">
+              <input type="email" name="email" placeholder="Your email" required autocomplete="email" aria-label="Email">
+            </div>
+            <button type="submit" class="btn-gold" style="background:transparent;color:var(--gold);border:1px solid rgba(212,168,76,0.4);">Get Free Audio</button>
+          </form>
+        </div>
       </div>
     </div>
   </section>
@@ -1364,8 +1381,14 @@
           console.error('Opt-in error:', err);
           btn.disabled = false;
           btn.textContent = origText;
-          // Fallback: still redirect so the experience isn't broken
-          window.location.href = 'free-audio.html';
+          // Show error — don't silently redirect (loses the lead)
+          const errMsg = document.createElement('p');
+          errMsg.textContent = 'Something went wrong. Please try again.';
+          errMsg.style.cssText = 'color:#e74c3c;font-size:.82rem;margin-top:.5rem;';
+          if (!form.querySelector('.form-error')) {
+            errMsg.className = 'form-error';
+            form.appendChild(errMsg);
+          }
         }
       });
     });
