@@ -352,6 +352,13 @@
         const checkout = await stripe.initEmbeddedCheckout({ clientSecret });
         checkout.mount('#checkout-mount');
 
+        // On mobile, scroll so the payment form is visible
+        if (window.innerWidth < 700) {
+          setTimeout(() => {
+            document.getElementById('checkout-mount').scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 300);
+        }
+
       } catch (err) {
         console.error('Checkout error:', err);
         loadingEl.style.display = 'none';
