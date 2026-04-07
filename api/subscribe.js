@@ -42,6 +42,9 @@ export default async function handler(req, res) {
                     email,
                     first_name: first_name || undefined,
                     properties: { source: 'website_optin', optin_page: 'landing_page' },
+                    subscriptions: {
+                      email: { marketing: { consent: 'SUBSCRIBED' } },
+                    },
                   },
                 },
               ],
