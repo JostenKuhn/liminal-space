@@ -1402,20 +1402,25 @@
 
   <script>
     // ═══ STRIPE INLINE CHECKOUT ═══
+    // Pre-init Stripe as soon as the script loads
     let stripeInstance = null;
-    let activeCheckout = null; // { instance, container }
+    let activeCheckout = null;
+    let checkoutLoading = false;
+
+    try { stripeInstance = Stripe('pk_live_51TJZUyBMM4lnbKJ2Gflp8haC3Lmo6LBk7Bp29lbfIJyTOTJzK7A5iEq0llVH7IIhdqC14SB80ZoJgir7y3gxEZs600igQ2o21Z'); } catch(e) {}
 
     function scrollToCheckout() {
       const finalBtn = document.querySelector('.final-box .btn-gold');
       if (finalBtn) {
         finalBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        setTimeout(() => openInlineCheckout(finalBtn), 600);
+        setTimeout(() => openInlineCheckout(finalBtn), 500);
       }
     }
 
     async function openInlineCheckout(btn) {
+      if (checkoutLoading) return; // prevent double-clicks
       const container = btn.parentElement.querySelector('.inline-checkout');
-      if (!container) return;
+      if (!container) { scrollToCheckout(); return; } // fallback: scroll to one that has a container
 
       const mountEl = container.querySelector('.inline-checkout-mount');
       const loadingEl = container.querySelector('.inline-checkout-loading');
@@ -1438,13 +1443,18 @@
         activeCheckout = null;
       }
 
-      // Show container
+      // Show container with loading
       mountEl.innerHTML = '';
       loadingEl.style.display = 'block';
       errorEl.style.display = 'none';
       container.style.display = 'block';
+      checkoutLoading = true;
 
-      // Smooth scroll to checkout
+      // Update button text while loading
+      const origText = btn.textContent;
+      btn.textContent = 'Loading checkout…';
+      btn.style.opacity = '0.7';
+
       setTimeout(() => container.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
 
       // Track
@@ -1455,7 +1465,9 @@
       }
 
       try {
+        // Ensure Stripe is loaded (handles slow network)
         if (!stripeInstance) {
+          await new Promise(r => { const i = setInterval(() => { if (window.Stripe) { clearInterval(i); r(); } }, 100); setTimeout(() => { clearInterval(i); r(); }, 5000); });
           stripeInstance = Stripe('pk_live_51TJZUyBMM4lnbKJ2Gflp8haC3Lmo6LBk7Bp29lbfIJyTOTJzK7A5iEq0llVH7IIhdqC14SB80ZoJgir7y3gxEZs600igQ2o21Z');
         }
 
@@ -1465,7 +1477,11 @@
           body: JSON.stringify({ source: 'landing_page' }),
         });
 
-        if (!resp.ok) throw new Error('Failed to create checkout session');
+        if (!resp.ok) {
+          const err = await resp.json().catch(() => ({}));
+          throw new Error(err.error || 'Checkout failed');
+        }
+
         const { clientSecret } = await resp.json();
 
         loadingEl.style.display = 'none';
@@ -1477,6 +1493,10 @@
         console.error('Checkout error:', err);
         loadingEl.style.display = 'none';
         errorEl.style.display = 'block';
+      } finally {
+        checkoutLoading = false;
+        btn.textContent = origText;
+        btn.style.opacity = '1';
       }
     }
   </script>
