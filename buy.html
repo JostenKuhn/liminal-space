@@ -45,13 +45,14 @@
 
   <style>
     :root {
-      --bg: #050510;
-      --surface: #0F0F1A;
-      --rule: rgba(255,255,255,0.06);
-      --gold: #D4A84C;
-      --text: #EAE8F4;
-      --text-mid: #A8A4BE;
-      --text-dim: #6B687E;
+      --bg: #F8F7F4;
+      --surface: #FFFFFF;
+      --rule: rgba(0,0,0,0.08);
+      --gold: #B8922E;
+      --gold-soft: rgba(184,146,46,0.08);
+      --text: #1A1A2E;
+      --text-mid: #4A4A5A;
+      --text-dim: #8A8A9A;
       --display: 'Syne', sans-serif;
       --body: 'Outfit', sans-serif;
       --mono: 'IBM Plex Mono', monospace;
@@ -129,7 +130,10 @@
     }
     .what-you-get {
       margin-bottom: 1.5rem;
-      padding: 0 .25rem;
+      padding: 1.25rem;
+      background: var(--surface);
+      border-radius: 12px;
+      border: 1px solid var(--rule);
     }
     .what-you-get h2 {
       font-family: var(--mono);
@@ -166,8 +170,8 @@
       text-align: center;
       margin-bottom: 1.5rem;
       padding: .75rem 1rem;
-      background: rgba(212,168,76,0.04);
-      border: 1px solid rgba(212,168,76,0.1);
+      background: var(--gold-soft);
+      border: 1px solid rgba(184,146,46,0.15);
       border-radius: 10px;
     }
     .social-proof p {
@@ -188,6 +192,7 @@
       overflow: hidden;
       background: var(--surface);
       margin-bottom: 1rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
     }
     .checkout-loading {
       text-align: center;
@@ -210,6 +215,22 @@
     .checkout-error a {
       color: var(--gold);
       text-decoration: underline;
+    }
+    .guarantee {
+      text-align: center;
+      padding: .8rem 1rem;
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+    .guarantee p {
+      font-size: .75rem;
+      color: var(--text-mid);
+      line-height: 1.5;
+    }
+    .guarantee strong {
+      color: var(--text);
     }
     .trust {
       text-align: center;
@@ -279,9 +300,13 @@
           </div>
         </div>
 
+        <div class="guarantee">
+          <p><strong>100% money-back guarantee.</strong> Complete the protocol and feel nothing? Reply to any email. Full refund, no questions.</p>
+        </div>
+
         <p class="trust">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          Powered by Stripe · 256-bit encryption · 100% money-back guarantee
+          Powered by Stripe · 256-bit encryption · Secure checkout
         </p>
       </div>
     </div>
