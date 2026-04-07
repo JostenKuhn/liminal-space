@@ -1,5 +1,7 @@
-// Email opt-in — creates profile + triggers nurture flow, then subscribes with consent
-// Order matters: event first (creates profile), subscription after (grants consent)
+// Email opt-in — 3-step process:
+// 1. profile-import (synchronous — creates profile immediately)
+// 2. subscription (grants consent on existing profile)
+// 3. event (triggers nurture flow)
 
 const KLAVIYO_LIST_ID = 'RrUgf6'; // "Email List"
 
@@ -21,44 +23,33 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Email service not configured' });
   }
 
+  const headers = {
+    'Authorization': `Klaviyo-API-Key ${KLAVIYO_KEY}`,
+    'Content-Type': 'application/json',
+    'revision': '2024-10-15',
+  };
+
   try {
-    // Step 1: Track opt-in event FIRST (creates profile + triggers nurture flow)
-    const eventResp = await fetch('https://a.klaviyo.com/api/events/', {
+    // Step 1: Create profile (synchronous — profile exists immediately after this)
+    await fetch('https://a.klaviyo.com/api/profile-import/', {
       method: 'POST',
-      headers: {
-        'Authorization': `Klaviyo-API-Key ${KLAVIYO_KEY}`,
-        'Content-Type': 'application/json',
-        'revision': '2024-10-15',
-      },
+      headers,
       body: JSON.stringify({
         data: {
-          type: 'event',
+          type: 'profile',
           attributes: {
-            metric: { data: { type: 'metric', attributes: { name: 'Email Opt-In' } } },
-            profile: {
-              data: {
-                type: 'profile',
-                attributes: {
-                  email,
-                  first_name: first_name || undefined,
-                  properties: { source: 'website_optin', optin_page: 'landing_page' },
-                },
-              },
-            },
-            properties: { source: 'landing_page', free_audio_url: 'https://enterliminalspace.com/free-audio.html' },
+            email,
+            first_name: first_name || undefined,
+            properties: { source: 'website_optin', optin_page: 'landing_page' },
           },
         },
       }),
     });
 
-    // Step 2: Subscribe with consent AFTER (updates the profile created by event)
-    const subResp = await fetch('https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs/', {
+    // Step 2: Subscribe to list with consent (profile already exists — consent sticks)
+    await fetch('https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs/', {
       method: 'POST',
-      headers: {
-        'Authorization': `Klaviyo-API-Key ${KLAVIYO_KEY}`,
-        'Content-Type': 'application/json',
-        'revision': '2024-10-15',
-      },
+      headers,
       body: JSON.stringify({
         data: {
           type: 'profile-subscription-bulk-create-job',
@@ -68,7 +59,6 @@ export default async function handler(req, res) {
                 type: 'profile',
                 attributes: {
                   email,
-                  first_name: first_name || undefined,
                   subscriptions: { email: { marketing: { consent: 'SUBSCRIBED' } } },
                 },
               }],
@@ -81,7 +71,23 @@ export default async function handler(req, res) {
       }),
     });
 
-    console.log(`Klaviyo: event=${eventResp.status}, subscribe=${subResp.status}, email=${email}`);
+    // Step 3: Fire opt-in event (triggers nurture flow)
+    await fetch('https://a.klaviyo.com/api/events/', {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({
+        data: {
+          type: 'event',
+          attributes: {
+            metric: { data: { type: 'metric', attributes: { name: 'Email Opt-In' } } },
+            profile: { data: { type: 'profile', attributes: { email } } },
+            properties: { source: 'landing_page', free_audio_url: 'https://enterliminalspace.com/free-audio.html' },
+          },
+        },
+      }),
+    });
+
+    console.log(`Klaviyo: subscribed + event fired for ${email}`);
     return res.status(200).json({ success: true });
   } catch (err) {
     console.error('Subscribe error:', err);
