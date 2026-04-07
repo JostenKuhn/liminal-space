@@ -70,7 +70,8 @@ export default async function handler(req, res) {
 
 async function upsertProfile(apiKey, email, firstName, lastName) {
   try {
-    const resp = await fetch('https://a.klaviyo.com/api/profile-import/', {
+    // Subscribe with marketing consent (not just profile-import)
+    const resp = await fetch('https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs/', {
       method: 'POST',
       headers: {
         'Authorization': `Klaviyo-API-Key ${apiKey}`,
@@ -79,15 +80,32 @@ async function upsertProfile(apiKey, email, firstName, lastName) {
       },
       body: JSON.stringify({
         data: {
-          type: 'profile',
+          type: 'profile-subscription-bulk-create-job',
           attributes: {
-            email,
-            first_name: firstName || undefined,
-            last_name: lastName || undefined,
-            properties: {
-              purchased: true,
-              product: 'First Contact',
-              source: 'stripe_checkout',
+            profiles: {
+              data: [
+                {
+                  type: 'profile',
+                  attributes: {
+                    email,
+                    first_name: firstName || undefined,
+                    last_name: lastName || undefined,
+                    properties: {
+                      purchased: true,
+                      product: 'First Contact',
+                      source: 'stripe_checkout',
+                    },
+                    subscriptions: {
+                      email: { marketing: { consent: 'SUBSCRIBED' } },
+                    },
+                  },
+                },
+              ],
+            },
+          },
+          relationships: {
+            list: {
+              data: { type: 'list', id: 'RrUgf6' },
             },
           },
         },
