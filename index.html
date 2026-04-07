@@ -1288,13 +1288,40 @@
       secObs.observe(el);
     });
 
-    // Track buy CTA clicks (once per session)
+    // Stripe checkout — intercept all buy links
     document.querySelectorAll('a[href*="stan.store"]').forEach(link => {
-      link.addEventListener('click', () => {
+      link.addEventListener('click', async (e) => {
+        e.preventDefault();
+        // Track checkout initiation
         if (!sessionStorage.getItem('ic_fired')) {
           sessionStorage.setItem('ic_fired', '1');
           gtag('event', 'begin_checkout', {value: 37.00, currency: 'USD'});
           fbq('track', 'InitiateCheckout', {value: 37.00, currency: 'USD'});
+        }
+        // Create Stripe checkout session
+        link.style.opacity = '0.6';
+        link.style.pointerEvents = 'none';
+        const origText = link.textContent;
+        link.textContent = 'Loading checkout...';
+        try {
+          const res = await fetch('/api/create-checkout', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ source: link.closest('section, nav, .sticky-cta')?.className?.split(' ')[0] || 'unknown' }),
+          });
+          const data = await res.json();
+          if (data.url) {
+            window.location.href = data.url;
+          } else {
+            throw new Error(data.error || 'Checkout failed');
+          }
+        } catch (err) {
+          console.error('Checkout error:', err);
+          link.textContent = origText;
+          link.style.opacity = '1';
+          link.style.pointerEvents = 'auto';
+          // Fallback to Stan Store if Stripe fails
+          window.open('https://stan.store/liminalspace/p/first-contact--consciousness-exploration-kit', '_blank');
         }
       });
     });
@@ -1320,9 +1347,10 @@
       const buyBox = document.getElementById('hero-buy');
       const btns = document.querySelectorAll('.hero-toggle button');
       if (mode === 'buy') {
-        // If already showing buy, go straight to Stan Store
+        // If already showing buy, trigger Stripe checkout
         if (buyBox.classList.contains('active')) {
-          window.open('https://stan.store/liminalspace/p/first-contact--consciousness-exploration-kit', '_blank');
+          const buyBtn = buyBox.querySelector('.btn-gold');
+          if (buyBtn) buyBtn.click();
           return;
         }
         freeBox.classList.remove('active');
