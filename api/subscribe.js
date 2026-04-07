@@ -31,7 +31,7 @@ export default async function handler(req, res) {
 
   try {
     // Step 1: Create profile (synchronous — profile exists immediately after this)
-    await fetch('https://a.klaviyo.com/api/profile-import/', {
+    const step1 = await fetch('https://a.klaviyo.com/api/profile-import/', {
       method: 'POST',
       headers,
       body: JSON.stringify({
@@ -45,9 +45,11 @@ export default async function handler(req, res) {
         },
       }),
     });
+    const step1Body = await step1.text();
+    console.log(`[${email}] Step 1 profile-import: ${step1.status} ${step1Body.slice(0, 200)}`);
 
     // Step 2: Subscribe to list with consent (profile already exists — consent sticks)
-    await fetch('https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs/', {
+    const step2 = await fetch('https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs/', {
       method: 'POST',
       headers,
       body: JSON.stringify({
@@ -70,9 +72,10 @@ export default async function handler(req, res) {
         },
       }),
     });
+    console.log(`[${email}] Step 2 subscribe: ${step2.status}`);
 
     // Step 3: Fire opt-in event (triggers nurture flow)
-    await fetch('https://a.klaviyo.com/api/events/', {
+    const step3 = await fetch('https://a.klaviyo.com/api/events/', {
       method: 'POST',
       headers,
       body: JSON.stringify({
@@ -86,8 +89,7 @@ export default async function handler(req, res) {
         },
       }),
     });
-
-    console.log(`Klaviyo: subscribed + event fired for ${email}`);
+    console.log(`[${email}] Step 3 event: ${step3.status}`);
     return res.status(200).json({ success: true });
   } catch (err) {
     console.error('Subscribe error:', err);
