@@ -70,7 +70,19 @@
     }
     .container {
       width: 100%;
-      max-width: 500px;
+      max-width: 960px;
+    }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+    @media (min-width: 700px) {
+      .two-col {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+      }
     }
     .header {
       text-align: center;
@@ -237,36 +249,42 @@
       <p class="desc">The CIA spent $20 million proving your mind can leave your body. This is the protocol.</p>
     </div>
 
-    <div class="what-you-get">
-      <h2>What's inside</h2>
-      <ul>
-        <li><span class="icon">&#9670;</span><span><strong>Door 10 — Mind Awake, Body Asleep.</strong> The foundation state. Binaural frequencies shift your brainwaves into alpha within minutes. Most people feel something on the first session.</span></li>
-        <li><span class="icon">&#9670;</span><span><strong>Door 12 — Expanded Awareness.</strong> Your perception stretches beyond your body. This is where people report sensing things without using their eyes.</span></li>
-        <li><span class="icon">&#9670;</span><span><strong>Door 15 — The No-Time State.</strong> The state the CIA's remote viewers trained to reach. This is where the boundary between you and your body starts to dissolve.</span></li>
-        <li><span class="icon">&#9670;</span><span><strong>First Contact Field Manual.</strong> The science, the methodology, what to expect at each level, and exactly how to set up for maximum results.</span></li>
-        <li><span class="icon">&#9670;</span><span><strong>7-Day Protocol Plan.</strong> Exactly what to do each day. No guessing. Progressive training from Focus 10 through Focus 15.</span></li>
-      </ul>
-    </div>
+    <div class="two-col">
+      <div class="left-col">
+        <div class="what-you-get">
+          <h2>What's inside</h2>
+          <ul>
+            <li><span class="icon">&#9670;</span><span><strong>Door 10 — Mind Awake, Body Asleep.</strong> The foundation state. Binaural frequencies shift your brainwaves into alpha within minutes.</span></li>
+            <li><span class="icon">&#9670;</span><span><strong>Door 12 — Expanded Awareness.</strong> Your perception stretches beyond your body. Sensing things without using your eyes.</span></li>
+            <li><span class="icon">&#9670;</span><span><strong>Door 15 — The No-Time State.</strong> The state the CIA's remote viewers trained to reach.</span></li>
+            <li><span class="icon">&#9670;</span><span><strong>First Contact Field Manual.</strong> The science, methodology, and what to expect at each level.</span></li>
+            <li><span class="icon">&#9670;</span><span><strong>7-Day Protocol Plan.</strong> Exactly what to do each day. Progressive training through all three levels.</span></li>
+          </ul>
+        </div>
 
-    <div class="social-proof">
-      <p>"I felt my entire body vibrating. Then I felt myself lift. I was fully conscious and completely outside my physical body."</p>
-      <p class="attr">— First Contact user, session two</p>
-    </div>
-
-    <div class="checkout-container">
-      <div id="checkout-mount"></div>
-      <div id="checkout-loading" class="checkout-loading">
-        <p>Loading secure checkout…</p>
+        <div class="social-proof">
+          <p>"I felt my entire body vibrating. Then I felt myself lift. I was fully conscious and completely outside my physical body."</p>
+          <p class="attr">— First Contact user, session two</p>
+        </div>
       </div>
-      <div id="checkout-error" class="checkout-error">
-        <p>Something went wrong. <a href="javascript:location.reload()">Try again</a></p>
+
+      <div class="right-col">
+        <div class="checkout-container">
+          <div id="checkout-mount"></div>
+          <div id="checkout-loading" class="checkout-loading">
+            <p>Loading secure checkout…</p>
+          </div>
+          <div id="checkout-error" class="checkout-error">
+            <p>Something went wrong. <a href="javascript:location.reload()">Try again</a></p>
+          </div>
+        </div>
+
+        <p class="trust">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Powered by Stripe · 256-bit encryption · 100% money-back guarantee
+        </p>
       </div>
     </div>
-
-    <p class="trust">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      Powered by Stripe · 256-bit encryption · 100% money-back guarantee
-    </p>
 
     <div class="back-link">
       <a href="index.html">← Learn more about First Contact</a>
