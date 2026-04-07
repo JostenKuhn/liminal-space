@@ -1395,15 +1395,15 @@
   </script>
 
   <!-- ═══ STRIPE EMBEDDED CHECKOUT OVERLAY ═══ -->
-  <div id="checkout-overlay" style="display:none;position:fixed;inset:0;z-index:20000;background:rgba(5,5,16,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);align-items:center;justify-content:center;overflow-y:auto;">
-    <div style="background:var(--surface);border:1px solid var(--rule);border-radius:16px;padding:2rem 1.5rem;max-width:500px;width:94%;margin:2rem auto;position:relative;box-shadow:0 24px 80px rgba(0,0,0,0.6);">
+  <div id="checkout-overlay" style="display:none;position:fixed;inset:0;z-index:20000;background:rgba(5,5,16,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);align-items:center;justify-content:center;overflow-y:auto;padding:1rem;">
+    <div style="background:var(--surface);border:1px solid var(--rule);border-radius:16px;padding:1.5rem 1.25rem;max-width:480px;width:100%;margin:auto;position:relative;box-shadow:0 24px 80px rgba(0,0,0,0.6);max-height:90vh;overflow-y:auto;">
       <button onclick="closeCheckout()" style="position:absolute;top:12px;right:16px;background:none;border:none;color:var(--text-dim);font-size:1.5rem;cursor:pointer;line-height:1;z-index:1;" aria-label="Close">&times;</button>
-      <div style="text-align:center;margin-bottom:1.25rem;">
-        <p style="font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;">Secure Checkout</p>
-        <h3 style="font-family:var(--display);font-size:1.2rem;font-weight:800;line-height:1.2;margin-bottom:.3rem;">First Contact — $37</h3>
-        <p style="font-size:.75rem;color:var(--text-dim);">3 guided sessions + field manual + 7-day protocol</p>
+      <div style="text-align:center;margin-bottom:1rem;">
+        <p style="font-family:var(--mono);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem;">Secure Checkout</p>
+        <h3 style="font-family:var(--display);font-size:1.1rem;font-weight:800;line-height:1.2;margin-bottom:.2rem;">First Contact — $37</h3>
+        <p style="font-size:.7rem;color:var(--text-dim);">3 guided sessions + field manual + 7-day protocol</p>
       </div>
-      <div id="checkout-mount" style="min-height:300px;"></div>
+      <div id="checkout-mount"></div>
       <div id="checkout-loading" style="text-align:center;padding:3rem 0;">
         <p style="color:var(--text-mid);font-size:.85rem;">Loading secure checkout…</p>
       </div>
