@@ -1,5 +1,5 @@
 // Email opt-in — subscribes to Klaviyo with email consent + triggers nurture flow
-// Klaviyo handles all emails via flows
+// Uses Client API for synchronous subscription, then Server API for event
 
 const KLAVIYO_LIST_ID = 'RrUgf6'; // "Email List"
 
@@ -15,6 +15,7 @@ export default async function handler(req, res) {
   }
 
   const KLAVIYO_KEY = (process.env.KLAVIYO_PRIVATE_KEY || '').trim();
+  const KLAVIYO_PUBLIC = (process.env.KLAVIYO_PUBLIC_KEY || '').trim();
 
   if (!KLAVIYO_KEY) {
     console.error('Missing KLAVIYO_PRIVATE_KEY');
@@ -22,7 +23,40 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Subscribe profile to Email List with marketing consent
+    // Step 1: Subscribe via Client API (synchronous - consent applies immediately)
+    if (KLAVIYO_PUBLIC) {
+      await fetch('https://a.klaviyo.com/client/subscriptions/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'revision': '2024-10-15',
+        },
+        body: JSON.stringify({
+          data: {
+            type: 'subscription',
+            attributes: {
+              profile: {
+                data: {
+                  type: 'profile',
+                  attributes: {
+                    email,
+                    first_name: first_name || undefined,
+                    properties: { source: 'website_optin', optin_page: 'landing_page' },
+                  },
+                },
+              },
+              custom_source: 'Landing Page',
+            },
+            relationships: {
+              list: { data: { type: 'list', id: KLAVIYO_LIST_ID } },
+            },
+          },
+          company_id: KLAVIYO_PUBLIC,
+        }),
+      });
+    }
+
+    // Step 1b: Also subscribe via Server API (backup - in case Client API isn't configured)
     const subResp = await fetch('https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs/', {
       method: 'POST',
       headers: {
@@ -35,35 +69,28 @@ export default async function handler(req, res) {
           type: 'profile-subscription-bulk-create-job',
           attributes: {
             profiles: {
-              data: [
-                {
-                  type: 'profile',
-                  attributes: {
-                    email,
-                    first_name: first_name || undefined,
-                    properties: { source: 'website_optin', optin_page: 'landing_page' },
-                    subscriptions: {
-                      email: { marketing: { consent: 'SUBSCRIBED' } },
-                    },
-                  },
+              data: [{
+                type: 'profile',
+                attributes: {
+                  email,
+                  first_name: first_name || undefined,
+                  properties: { source: 'website_optin', optin_page: 'landing_page' },
+                  subscriptions: { email: { marketing: { consent: 'SUBSCRIBED' } } },
                 },
-              ],
+              }],
             },
-            historical_import: false,
           },
           relationships: {
-            list: {
-              data: {
-                type: 'list',
-                id: KLAVIYO_LIST_ID,
-              },
-            },
+            list: { data: { type: 'list', id: KLAVIYO_LIST_ID } },
           },
         },
       }),
     });
 
-    // Track opt-in event (triggers Klaviyo nurture flow)
+    // Step 2: Wait a moment for subscription to process before creating event
+    await new Promise(r => setTimeout(r, 2000));
+
+    // Step 3: Track opt-in event (triggers Klaviyo nurture flow)
     const eventResp = await fetch('https://a.klaviyo.com/api/events/', {
       method: 'POST',
       headers: {
