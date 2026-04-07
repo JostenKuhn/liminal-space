@@ -1,5 +1,7 @@
-// Email opt-in — adds subscriber to Klaviyo (primary ESP)
-// Klaviyo handles all nurture emails via flows
+// Email opt-in — subscribes to Klaviyo with email consent + triggers nurture flow
+// Klaviyo handles all emails via flows
+
+const KLAVIYO_LIST_ID = 'RrUgf6'; // "Email List"
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -20,8 +22,8 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Create/update profile in Klaviyo
-    const profileResp = await fetch('https://a.klaviyo.com/api/profile-import/', {
+    // Subscribe profile to Email List with marketing consent
+    const subResp = await fetch('https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs/', {
       method: 'POST',
       headers: {
         'Authorization': `Klaviyo-API-Key ${KLAVIYO_KEY}`,
@@ -30,11 +32,29 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         data: {
-          type: 'profile',
+          type: 'profile-subscription-bulk-create-job',
           attributes: {
-            email,
-            first_name: first_name || undefined,
-            properties: { source: 'website_optin', optin_page: 'landing_page' },
+            profiles: {
+              data: [
+                {
+                  type: 'profile',
+                  attributes: {
+                    email,
+                    first_name: first_name || undefined,
+                    properties: { source: 'website_optin', optin_page: 'landing_page' },
+                  },
+                },
+              ],
+            },
+            historical_import: false,
+          },
+          relationships: {
+            list: {
+              data: {
+                type: 'list',
+                id: KLAVIYO_LIST_ID,
+              },
+            },
           },
         },
       }),
@@ -60,7 +80,7 @@ export default async function handler(req, res) {
       }),
     });
 
-    console.log(`Klaviyo: profile=${profileResp.status}, event=${eventResp.status}, email=${email}`);
+    console.log(`Klaviyo: subscribe=${subResp.status}, event=${eventResp.status}, email=${email}`);
     return res.status(200).json({ success: true });
   } catch (err) {
     console.error('Subscribe error:', err);
