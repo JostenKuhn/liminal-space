@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Newsreader:ital,wght@0,300;0,400;1,300;1,400&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#050510; }
+.slide {
+  width:1080px; height:1350px;
+  background:#050510;
+  display:flex; flex-direction:column;
+  justify-content:center; align-items:center;
+  padding:100px 90px;
+  position:relative;
+  overflow:hidden;
+  margin-bottom:4px;
+  page-break-after:always;
+}
+/* Grain overlay */
+.slide::before {
+  content:''; position:absolute; inset:0; z-index:10; pointer-events:none;
+  opacity:0.035;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size:128px;
+}
+/* Subtle border */
+.slide::after {
+  content:''; position:absolute; inset:24px; z-index:5; pointer-events:none;
+  border:1px solid rgba(234,232,244,0.04);
+  border-radius:2px;
+}
+.slide-inner { position:relative; z-index:2; width:100%; text-align:center; }
+.slide-bg { position:absolute; inset:0; z-index:1; }
+.headline {
+  font-family:'Syne',sans-serif; font-weight:800;
+  color:#EAE8F4; font-size:62px; line-height:1.15;
+  letter-spacing:-0.02em;
+}
+.headline-sm { font-size:52px; }
+.subline {
+  font-family:'Newsreader',serif; font-style:italic; font-weight:300;
+  color:#D4A84C; font-size:30px; line-height:1.5;
+  margin-top:32px;
+}
+.body {
+  font-family:'Newsreader',serif; font-weight:300;
+  color:rgba(234,232,244,0.7); font-size:26px; line-height:1.7;
+  margin-top:40px;
+}
+.prose-body {
+  font-family:'Newsreader',serif; font-style:italic; font-weight:300;
+  color:rgba(234,232,244,0.8); font-size:32px; line-height:1.7;
+  text-align:center;
+}
+.state-label {
+  font-family:'IBM Plex Mono',monospace; font-weight:300;
+  font-size:14px; letter-spacing:0.2em; text-transform:uppercase;
+  margin-bottom:16px;
+}
+.list-item {
+  font-family:'Newsreader',serif; font-weight:300;
+  color:rgba(234,232,244,0.7); font-size:28px; line-height:1.6;
+  text-align:left; margin:20px 0; padding-left:30px; position:relative;
+}
+.list-item::before {
+  content:'✦'; color:#D4A84C; position:absolute; left:0; font-size:16px; top:8px;
+}
+.list-item strong {
+  color:#D4A84C; font-weight:400;
+}
+.brand {
+  font-family:'Syne',sans-serif; font-weight:700;
+  color:rgba(234,232,244,0.3); font-size:16px; letter-spacing:0.15em;
+  text-transform:uppercase; position:absolute; bottom:50px; left:50%;
+  transform:translateX(-50%); z-index:3;
+}
+.gold-line {
+  width:60px; height:1px; background:#D4A84C; margin:24px auto 0;
+}
+.divider {
+  width:40px; height:1px; background:rgba(212,168,76,0.4); margin:30px auto;
+}
+</style>
+</head>
+<body>
+<div id="carousel-1">
+<!-- C1 Slide 1: Hook -->
+<div class="slide" id="c1s1">
+  <div class="slide-bg" style="background:radial-gradient(ellipse at 50% 60%, rgba(107,92,231,0.15) 0%, transparent 60%)"></div>
+  <div class="slide-inner">
+    <div class="headline">In 1983, the US Army<br>wrote a classified report<br>on leaving the body.</div>
+    <div class="subline">They concluded it was real.</div>
+  </div>
+  <div class="brand">LIMINAL SPACE</div>
+</div>
+
+<!-- C1 Slide 2 -->
+<div class="slide" id="c1s2">
+  <div class="slide-inner">
+    <div class="headline">It was called<br>the Gateway Process.</div>
+    <div class="body">Commissioned by US Army Intelligence.<br>Researched at the Monroe Institute, Virginia.<br>Declassified in 2003 — buried in the National Archives<br>until Reddit found it in 2021.</div>
+  </div>
+  <div class="brand">LIMINAL SPACE</div>
+</div>
+
+<!-- C1 Slide 3 -->
+<div class="slide" id="c1s3">
+  <div class="slide-bg" style="background:linear-gradient(135deg, rgba(107,92,231,0.08) 0%, transparent 50%)"></div>
+  <div class="slide-inner">
+    <div class="headline headline-sm">The report wasn't<br>about mysticism.</div>
+    <div class="body">It was written in the language of physics.<br>Holographic reality. Resonance theory.<br>Brainwave entrainment.<br><br>The author described consciousness as a<br>'hologram' embedded in a universal field.</div>
+  </div>
+  <div class="brand">LIMINAL SPACE</div>
+</div>
+
+<!-- C1 Slide 4 -->
+<div class="slide" id="c1s4">
+  <div class="slide-inner">
+    <div class="headline">They had a method.</div>
+    <div class="body">Two slightly different tones — one in each ear —<br>forces the brain's hemispheres into coherence.<br><br>The result: a measurable shift in consciousness.<br>Documented. Repeatable.</div>
+  </div>
+  <div class="brand">LIMINAL SPACE</div>
+</div>
+
+<!-- C1 Slide 5 -->
+<div class="slide" id="c1s5">
+  <div class="slide-inner">
+    <div class="headline">They mapped<br>the territory.</div>
+    <div style="margin-top:48px; text-align:left; max-width:700px; margin-left:auto; margin-right:auto;">
+      <div class="list-item"><strong>Focus 10 —</strong> Mind awake, body asleep</div>
+      <div class="list-item"><strong>Focus 12 —</strong> Expanded awareness</div>
+      <div class="list-item"><strong>Focus 15 —</strong> The no-time state</div>
+      <div class="list-item"><strong>Focus 21 —</strong> The bridge to other realities</div>
+    </div>
+  </div>
+  <div class="brand">LIMINAL SPACE</div>
+</div>
+
+<!-- C1 Slide 6 -->
+<div class="slide" id="c1s6">
+  <div class="slide-bg" style="background:radial-gradient(ellipse at 50% 50%, rgba(212,168,76,0.1) 0%, transparent 60%)"></div>
+  <div class="slide-inner">
+    <div class="headline headline-sm">Consciousness is not<br>produced by the brain.</div>
+    <div class="divider"></div>
+    <div class="body">It interacts with it.<br><br>The brain is a receiver — not the source.<br>This has implications science hasn't<br>finished processing.</div>
+  </div>
+  <div class="brand">LIMINAL SPACE</div>
+</div>
+
+<!-- C1 Slide 7 -->
+<div class="slide" id="c1s7">
+  <div class="slide-inner">
+    <div class="headline headline-sm">Page 25 was missing<br>for years.</div>
+    <div class="body">The page describing the actual OBE<br>induction technique was omitted from<br>the public release.<br><br>It describes a process for voluntarily<br>separating consciousness from the<br>physical body.</div>
+  </div>
+  <div class="brand">LIMINAL SPACE</div>
+</div>
+
+<!-- C1 Slide 8 -->
+<div class="slide" id="c1s8">
+  <div class="slide-bg" style="background:linear-gradient(to bottom, rgba(107,92,231,0.08) 0%, transparent 40%)"></div>
+  <div class="slide-inner">
+    <div class="headline headline-sm">The technology<br>has evolved.</div>
+    <div class="body">What the Monroe Institute pioneered,<br>modern audio engineering has refined.<br><br>The same principles — binaural entrainment,<br>hemispheric coherence, threshold states —<br>are reproducible at home.</div>
+  </div>
+  <div class="brand">LIMINAL SPACE</div>
+</div>
+
+<!-- C1 Slide 9: CTA -->
+<div class="slide" id="c1s9">
+  <div class="slide-inner">
+    <div class="headline">Begin your own<br>exploration.</div>
+    <div class="gold-line"></div>
+    <div class="subline">Free 20-minute guided track.<br>Link in bio.</div>
+  </div>
+  <div class="brand">LIMINAL SPACE</div>
+</div>
+</div>
+
+<!-- CAROUSEL 2: THE 7 STATES -->
+<div id="carousel-2">
+<div class="slide" id="c2s1">
+  <div class="slide-bg" style="background:radial-gradient(ellipse at 50% 60%, rgba(107,92,231,0.12) 0%, transparent 60%)"></div>
+  <div class="slide-inner">
+    <div class="headline headline-sm">Most people live in<br>2 states of consciousness<br>their entire lives.</div>
+    <div class="subline">There are 7. Here's the map.</div>
+  </div>
+  <div class="brand">LIMINAL SPACE</div>
+</div>
+
+<div class="slide" id="c2s2">
+  <div class="slide-inner">
+    <div class="state-label" style="color:#EAE8F4">STATE 1</div>
+    <div class="headline">Beta — 14–30 Hz</div>
+    <div class="body">Alert. Analytical. Reactive.<br><br>Your dominant state during work, screens,<br>conversation. Useful. But overused.<br>Most people never leave it.</div>
+  </div>
+  <div class="brand">LIMINAL SPACE</div>
+</div>
+
+<div class="slide" id="c2s3">
+  <div class="slide-inner">
+    <div class="state-label" style="color:#A8A4BE">STATE 2</div>
+    <div class="headline">Alpha — 8–14 Hz</div>
+    <div class="body">The first threshold.<br><br>Light relaxation. The hypnagogic edge.<br>Creativity opens here. You pass through it<br>every night — most people have no idea.</div>
+  </div>
+  <div class="brand">LIMINAL SPACE</div>
+</div>
+
+<div class="slide" id="c2s4">
+  <div class="slide-bg" style="background:radial-gradient(ellipse at 50% 50%, rgba(107,92,231,0.12) 0%, transparent 60%)"></div>
+  <div class="slide-inner">
+    <div class="state-label" style="color:#6B5CE7">STATE 3</div>
+    <div class="headline">Theta — 4–8 Hz</div>
+    <div class="body">Where the Gateway Process begins.<br><br>Deep meditation. REM sleep. Vivid imagery.<br>Time distortion. The boundary between<br>self and environment dissolves.</div>
+  </div>
+  <div class="brand">LIMINAL SPACE</div>
+</div>
+
+<div class="slide" id="c2s5">
+  <div class="slide-inner">
+    <div class="state-label" style="color:#6B687E">STATE 4</div>
+    <div class="headline">Delta — 0.5–4 Hz</div>
+    <div class="body">Dreamless sleep. Or deeper.<br><br>The domain of advanced meditators.<br>Most people have never visited it<br>consciously.</div>
+  </div>
+  <div class="brand">LIMINAL SPACE</div>
+</div>
+
+<div class="slide" id="c2s6">
+  <div class="slide-bg" style="background:radial-gradient(ellipse at 50% 50%, rgba(212,168,76,0.1) 0%, transparent 60%)"></div>
+  <div class="slide-inner">
+    <div class="state-label" style="color:#D4A84C">STATE 5</div>
+    <div class="headline">Gamma — 30–100 Hz</div>
+    <div class="body">Hyper-awareness.<br><br>Associated with insight, peak experience.<br>Tibetan monks produce gamma states<br>meditating on compassion.<br>Rare. Teachable.</div>
+  </div>
+  <div class="brand">LIMINAL SPACE</div>
+</div>
+
+<div class="slide" id="c2s7">
+  <div class="slide-inner">
+    <div class="headline headline-sm">The Monroe Institute<br>added two more.</div>
+    <div class="body">Focus 10 — mind awake, body fully asleep.<br>Controllable.<br><br>Focus 21 — the bridge state.<br>Documented OBE experiences begin here.<br><br>These aren't metaphors.<br>They're mapped, measured, repeatable.</div>
+  </div>
+  <div class="brand">LIMINAL SPACE</div>
+</div>
+
+<div class="slide" id="c2s8">
+  <div class="slide-bg" style="background:linear-gradient(to bottom, rgba(107,92,231,0.08) 0%, transparent 40%)"></div>
+  <div class="slide-inner">
+    <div class="headline headline-sm">You can navigate<br>this map deliberately.</div>
+    <div class="body">Binaural audio guides the brain into any<br>of these states on demand.<br><br>This is what the CIA Gateway research<br>validated. This is what Liminal Space<br>is built on.</div>
+  </div>
+  <div class="brand">LIMINAL SPACE</div>
+</div>
+
+<div class="slide" id="c2s9">
+  <div class="slide-inner">
+    <div class="headline">Save this.<br>You'll want it.</div>
+    <div class="gold-line"></div>
+    <div class="subline">Explore them yourself.<br>Free track — link in bio.</div>
+  </div>
+  <div class="brand">LIMINAL SPACE</div>
+</div>
+</div>
+
+<!-- CAROUSEL 3: THE THRESHOLD -->
+<div id="carousel-3">
+<div class="slide" id="c3s1">
+  <div class="slide-bg" style="background:radial-gradient(ellipse at 50% 60%, rgba(212,168,76,0.08) 0%, transparent 60%)"></div>
+  <div class="slide-inner">
+    <div class="headline">There is a moment<br>every night when you<br>almost leave your body.</div>
+    <div class="subline">Most people miss it.</div>
+  </div>
+  <div class="brand">LIMINAL SPACE</div>
+</div>
+
+<div class="slide" id="c3s2">
+  <div class="slide-inner">
+    <div class="prose-body">It happens in the 90 seconds<br>after you close your eyes.<br><br>The body begins to let go.<br>Breathing slows.<br>Muscle tension releases.<br><br>The mind drifts — not into sleep,<br>but into something else.</div>
+  </div>
+  <div class="brand">LIMINAL SPACE</div>
+</div>
+
+<div class="slide" id="c3s3">
+  <div class="slide-inner">
+    <div class="headline" style="color:#D4A84C">It has a name.</div>
+    <div class="body">Hypnagogia.<br>The hypnagogic threshold.<br><br>The boundary state between<br>waking and sleep.<br><br>Ancient cultures considered it sacred.<br>Modern neuroscience considers it<br>poorly understood.<br><br>The Monroe Institute<br>considered it a doorway.</div>
+  </div>
+  <div class="brand">LIMINAL SPACE</div>
+</div>
+
+<div class="slide" id="c3s4">
+  <div class="slide-inner">
+    <div class="headline">You might notice:</div>
+    <div style="margin-top:48px; text-align:left; max-width:700px; margin-left:auto; margin-right:auto;">
+      <div class="list-item">A falling sensation</div>
+      <div class="list-item">The feeling that something is watching</div>
+      <div class="list-item">Voices, sounds, or music from nowhere</div>
+      <div class="list-item">The sense that your body is not quite there</div>
+    </div>
+  </div>
+  <div class="brand">LIMINAL SPACE</div>
+</div>
+
+<div class="slide" id="c3s5">
+  <div class="slide-inner">
+    <div class="headline headline-sm">Most people<br>startle awake.</div>
+    <div class="body">Or fall straight through into sleep.<br><br>Both are understandable.<br>Neither is useful.<br><br>The threshold is uncomfortable<br>precisely because it's unfamiliar territory.</div>
+  </div>
+  <div class="brand">LIMINAL SPACE</div>
+</div>
+
+<div class="slide" id="c3s6">
+  <div class="slide-bg" style="background:radial-gradient(ellipse at 50% 50%, rgba(212,168,76,0.08) 0%, transparent 60%)"></div>
+  <div class="slide-inner">
+    <div class="headline">What if you learned<br>to stay?</div>
+    <div class="body">The Gateway Process teaches one skill<br>above all others:<br><br>How to remain conscious<br>while the body sleeps.<br><br>Mind awake. Body asleep.<br>This is Focus 10.<br>This is where exploration begins.</div>
+  </div>
+  <div class="brand">LIMINAL SPACE</div>
+</div>
+
+<div class="slide" id="c3s7">
+  <div class="slide-inner">
+    <div class="headline headline-sm">What becomes possible<br>from there is the subject<br>of a 1983 US Army report.</div>
+    <div class="divider"></div>
+    <div class="subline" style="font-size:26px">Declassified. Real.<br>Still largely unread.</div>
+  </div>
+  <div class="brand">LIMINAL SPACE</div>
+</div>
+
+<div class="slide" id="c3s8">
+  <div class="slide-inner">
+    <div class="prose-body">You have visited the threshold<br>thousands of times without<br>knowing what it was.<br><br>The only question is whether<br>you want to stop sleepwalking<br>through it.</div>
+  </div>
+  <div class="brand">LIMINAL SPACE</div>
+</div>
+
+<div class="slide" id="c3s9">
+  <div class="slide-inner">
+    <div class="headline">Your first guided<br>crossing.</div>
+    <div class="gold-line"></div>
+    <div class="subline">20 minutes. Free.<br>Link in bio.</div>
+  </div>
+  <div class="brand">LIMINAL SPACE</div>
+</div>
+</div>
+
+<script>
+// Auto-screenshot each slide using html2canvas or similar
+// For now, just display them for manual screenshot
+</script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1080px; height: 1080px; overflow: hidden; }
+  .ad {
+    width: 1080px; height: 1080px;
+    background: #050510;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  /* Hero image top half */
+  .image-section {
+    flex: 0 0 520px;
+    background: url('../web-images/v8-hero.jpg') center center / cover;
+    position: relative;
+  }
+  .image-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 200px;
+    background: linear-gradient(transparent, #050510);
+  }
+  /* Content bottom half */
+  .content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 80px 40px;
+    position: relative;
+  }
+  .content::before {
+    content: '';
+    position: absolute;
+    top: -40px; left: 50%;
+    transform: translateX(-50%);
+    width: 60px; height: 2px;
+    background: #D4A84C;
+  }
+  .headline {
+    font-family: 'Syne', sans-serif;
+    font-size: 72px;
+    font-weight: 800;
+    color: #F0EEF8;
+    line-height: 1.1;
+    margin-bottom: 24px;
+  }
+  .headline em {
+    font-style: normal;
+    display: block;
+    color: #D4A84C;
+  }
+  .subtext {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 22px;
+    font-weight: 300;
+    font-style: italic;
+    color: #B8B4CE;
+    line-height: 1.5;
+    margin-bottom: 40px;
+    max-width: 550px;
+  }
+  .cta {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    padding: 20px 56px;
+    background: #D4A84C;
+    color: #050510;
+    border-radius: 8px;
+    box-shadow: 0 4px 30px rgba(212,168,76,0.3);
+  }
+  .note {
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    color: #7E7A94;
+    margin-top: 16px;
+  }
+</style>
+</head>
+<body>
+<div class="ad">
+  <div class="image-section"></div>
+  <div class="content">
+    <h1 class="headline">Leave Your Body <em>Tonight</em></h1>
+    <p class="subtext">Free guided audio using CIA-researched binaural beat technology. Just headphones + a dark room.</p>
+    <div class="cta">Download Free Session</div>
+    <p class="note">20 minutes · No credit card · Instant access</p>
+  </div>
+</div>
+</body>
+</html>

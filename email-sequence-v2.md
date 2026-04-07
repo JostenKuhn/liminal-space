@@ -13,9 +13,9 @@ Changes from v1:
 
 ---
 
-## Email 1: "Your session is ready — do this tonight" (Day 0 — Immediate)
+## Email 1 (Day 0 — Immediate)
 
-**Subject:** Your Door 10 session is ready
+**Subject:** Your session is inside. Do this tonight.
 
 Hey {{first_name}},
 
@@ -47,9 +47,9 @@ Everything I'm going to send you over the next week only makes sense if you've a
 
 ---
 
-## Email 2: "What happened inside your brain last night" (Day 1)
+## Email 2 (Day 1)
 
-**Subject:** What's actually happening in your brain
+**Subject:** What happened inside your brain last night
 
 Hey {{first_name}},
 
@@ -79,9 +79,9 @@ Liminal Space
 
 ---
 
-## Email 3: "The one technique that changes everything" (Day 2)
+## Email 3 (Day 2)
 
-**Subject:** The one technique that changes everything
+**Subject:** This one technique separates relaxation from breakthrough
 
 Hey {{first_name}},
 
@@ -115,9 +115,9 @@ Liminal Space
 
 ---
 
-## Email 4: "Three people who went further" (Day 3)
+## Email 4 (Day 3)
 
-**Subject:** Three stories that changed everything
+**Subject:** A NASA engineer, a mother of three, and a CIA operative
 
 Hey {{first_name}},
 
@@ -143,9 +143,9 @@ Liminal Space
 
 ---
 
-## Email 5 (NEW): "Be honest with yourself" (Day 4)
+## Email 5 — NEW (Day 4)
 
-**Subject:** Be honest — you haven't tried it yet, have you?
+**Subject:** Be honest — you haven't tried it yet
 
 Hey {{first_name}},
 
@@ -177,7 +177,7 @@ Liminal Space
 
 ---
 
-## Email 6: "What comes after Focus 10" (Day 5)
+## Email 6 (Day 5)
 
 **Subject:** What happens when you go past Focus 10
 
@@ -213,9 +213,9 @@ Liminal Space
 
 ---
 
-## Email 7: "He left his body on session 2" (Day 6)
+## Email 7 (Day 6)
 
-**Subject:** He left his body on the second session
+**Subject:** He left his body on session two
 
 Hey {{first_name}},
 
@@ -243,9 +243,9 @@ Liminal Space
 
 ---
 
-## Email 8 (NEW): "Something strange happens around minute 12" (Day 7)
+## Email 8 — NEW (Day 7)
 
-**Subject:** Something strange happens around minute 12...
+**Subject:** Something strange happens around minute 12
 
 Hey {{first_name}},
 
@@ -280,9 +280,9 @@ Liminal Space
 
 ---
 
-## Email 9: "This is it" (Day 8)
+## Email 9 (Day 8)
 
-**Subject:** Last call — then I'll stop asking
+**Subject:** Last email — then I'll stop asking
 
 Hey {{first_name}},
 

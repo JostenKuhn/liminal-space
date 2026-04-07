@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liminal Space — Train Your Mind to Leave Your Body</title>
+  <meta name="description" content="The CIA spent $20 million proving your mind can leave your body. Now it's a 20-minute audio session. Try the free guided session tonight.">
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1GJVT4XFG9"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-1GJVT4XFG9');
+  </script>
+
+  <!-- Meta Pixel -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '26479131108445246');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=26479131108445246&ev=PageView&noscript=1"/></noscript>
+
+  <!-- Reddit Pixel -->
+  <script>
+    !function(w,d){if(!w.rdt){var p=w.rdt=function(){p.sendEvent?p.sendEvent.apply(p,arguments):p.callQueue.push(arguments)};p.callQueue=[];var t=d.createElement("script");t.src="https://www.redditstatic.com/ads/pixel.js";t.async=!0;var s=d.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}}(window,document);
+    rdt('init','a2_iryyyn1edljt');
+    rdt('track','PageVisit');
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=Outfit:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #050510;
+      --bg2: #0A0A1E;
+      --surface: #0F0F28;
+      --primary: #6B5CE7;
+      --gold: #D4A84C;
+      --gold-hover: #E0B65A;
+      --gold-glow: rgba(212,168,76,0.35);
+      --text: #F0EEF8;
+      --text-mid: #B8B4CE;
+      --text-dim: #7E7A94;
+      --rule: rgba(255,255,255,0.06);
+      --display: 'Syne', sans-serif;
+      --serif: 'Newsreader', Georgia, serif;
+      --body: 'Outfit', sans-serif;
+      --mono: 'IBM Plex Mono', monospace;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --col: min(68rem, 100% - 2.5rem);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body {
+      font-family: var(--body); background: var(--bg); color: var(--text);
+      line-height: 1.7; overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+    /* Subtle grain — lightweight SVG, no GPU cost */
+    body::after {
+      content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none;
+      opacity: 0.02;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+      background-size: 128px;
+    }
+
+    /* ═══ REVEALS ═══ */
+    .rv { opacity: 0; transform: translateY(20px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+    .rv.show { opacity: 1; transform: none; }
+    .rv-d1 { transition-delay: .1s } .rv-d2 { transition-delay: .2s }
+    .rv-d3 { transition-delay: .3s } .rv-d4 { transition-delay: .4s }
+
+    .wide { width: var(--col); margin-inline: auto; }
+    .z1 { position: relative; z-index: 2; }
+
+    /* ═══ GLOBAL CTA STYLE ═══ */
+    .btn-gold {
+      font-family: var(--display); font-weight: 700; font-size: 1rem;
+      padding: 1rem 2.25rem; border-radius: 8px;
+      background: var(--gold); color: var(--bg);
+      box-shadow: 0 2px 20px rgba(212,168,76,0.25), 0 0 0 1px rgba(212,168,76,0.1);
+      transition: all .3s var(--ease);
+      cursor: pointer; border: none; letter-spacing: -0.01em;
+    }
+    .btn-gold:hover {
+      background: var(--gold-hover); transform: translateY(-2px);
+      box-shadow: 0 8px 40px rgba(212,168,76,0.35), 0 0 0 1px rgba(212,168,76,0.2);
+    }
+
+    /* ═══ NAV ═══ */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+      padding: 1.2rem 0; transition: all .4s;
+    }
+    .nav.scrolled {
+      background: rgba(5,5,16,0.92); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      padding: 0.7rem 0; border-bottom: 1px solid var(--rule);
+    }
+    .nav-inner {
+      width: var(--col); margin-inline: auto;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-mark {
+      font-family: var(--display); font-weight: 700; font-size: 1.1rem;
+      letter-spacing: -0.03em;
+    }
+    .nav-mark i {
+      font-family: var(--serif); font-weight: 300; font-style: italic;
+      color: var(--gold); margin-left: .12em;
+    }
+    .nav-cta {
+      font-family: var(--display); font-weight: 600; font-size: 0.78rem;
+      color: var(--bg); background: var(--gold);
+      padding: 0.55rem 1.5rem; border-radius: 100px;
+      transition: all .3s;
+      box-shadow: 0 2px 16px rgba(212,168,76,0.2);
+    }
+    .nav-cta:hover { background: var(--gold-hover); transform: translateY(-1px); }
+    .nav-cta-buy {
+      margin-left: .5rem; background: transparent; color: var(--gold);
+      border: 1px solid rgba(212,168,76,0.3); box-shadow: none;
+    }
+    .nav-cta-buy:hover { background: rgba(212,168,76,0.1); color: var(--gold); }
+    @media (max-width: 640px) {
+      .nav-cta, .nav-cta-buy { font-size: .62rem; padding: .45rem .9rem; }
+      .nav-cta-buy { margin-left: .35rem; }
+      .nav-mark { font-size: .9rem; }
+    }
+
+    /* ═══════════════════════════ */
+    /*         H E R O            */
+    /* ═══════════════════════════ */
+    .hero {
+      position: relative;
+      min-height: 100vh; min-height: 100dvh;
+      display: flex; align-items: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+    }
+    .hero-bg img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    /* Strong overlay so text is always readable */
+    .hero-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 70% at 50% 40%, rgba(5,5,16,0.4) 0%, rgba(5,5,16,0.88) 55%, var(--bg) 85%),
+        linear-gradient(to bottom, rgba(5,5,16,0.3) 0%, transparent 30%, transparent 70%, var(--bg) 100%);
+    }
+
+    .hero-content {
+      position: relative; z-index: 2;
+      width: var(--col); margin-inline: auto;
+      text-align: center;
+      padding: 9rem 0 7rem;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--mono); font-size: 0.65rem; font-weight: 500;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-family: var(--display);
+      font-size: clamp(2.6rem, 7.5vw, 5.5rem);
+      font-weight: 800; line-height: 0.95;
+      letter-spacing: -0.04em;
+      margin-bottom: 2rem;
+      max-width: 14ch; margin-inline: auto;
+    }
+    .hero h1 em {
+      font-family: var(--serif); font-weight: 300; font-style: italic;
+      color: var(--gold);
+      text-shadow: 0 0 60px var(--gold-glow);
+    }
+
+    .hero-sub {
+      font-family: var(--body);
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      color: var(--text-mid); line-height: 1.8;
+      max-width: 44ch; margin: 0 auto 3rem;
+      font-weight: 300;
+    }
+    .hero-sub strong { color: var(--text); font-weight: 500; }
+
+    /* ═══ HERO CTA — the most important element ═══ */
+    .hero-cta-box {
+      max-width: 480px; margin: 0 auto;
+      background: rgba(10,10,30,0.75);
+      border: 1px solid rgba(212,168,76,0.15);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 8px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.03);
+    }
+    .hero-cta-box .cta-headline {
+      font-family: var(--display); font-size: 0.95rem; font-weight: 700;
+      margin-bottom: 0.3rem; color: var(--text);
+    }
+    .hero-cta-box .cta-desc {
+      font-size: 0.82rem; color: var(--text-mid); margin-bottom: 1.25rem;
+    }
+    .optin-form { display: flex; flex-direction: column; gap: 0.6rem; }
+    .optin-form .form-row { display: flex; gap: 0.5rem; }
+    .optin-form input {
+      flex: 1; font-family: var(--body); font-size: 0.95rem;
+      padding: 0.9rem 1.15rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      background: rgba(5,5,16,0.8);
+      color: var(--text); outline: none;
+      transition: border-color .3s, box-shadow .3s;
+    }
+    .optin-form input::placeholder { color: var(--text-dim); }
+    .optin-form input:focus { border-color: var(--gold); box-shadow: 0 0 20px rgba(212,168,76,0.08); }
+    .optin-form .btn-gold { width: 100%; font-size: 1.05rem; padding: 1.05rem; }
+
+    .hero-note {
+      margin-top: 0.85rem;
+      font-size: 0.72rem; color: var(--text-dim);
+      display: flex; align-items: center; justify-content: center; gap: .35rem;
+    }
+    .hero-note svg { width: 11px; height: 11px; opacity: .5; }
+
+    .form-success { display: none; padding: 1.25rem 0; }
+    .form-success h3 {
+      font-family: var(--display); font-size: 1.2rem; font-weight: 700;
+      color: var(--gold); margin-bottom: .3rem;
+    }
+    .form-success p { color: var(--text-mid); font-size: .95rem; }
+
+    @media (max-width: 540px) {
+      .optin-form .form-row { flex-direction: column; }
+      .hero-cta-box { padding: 1.5rem; }
+    }
+
+    /* ═══ MOBILE HERO FIX — headline + form above fold ═══ */
+    @media (max-width: 768px) {
+      .hero { min-height: auto; }
+      .hero-content { padding: 5rem 0 3rem; }
+      .hero-eyebrow { margin-bottom: 1rem; }
+      .hero h1 { font-size: clamp(2rem, 8vw, 3rem); margin-bottom: 1rem; }
+      .hero-sub { margin-bottom: 1.5rem; font-size: 0.95rem; }
+      /* Kill reveal delay on hero — show instantly */
+      .hero .rv { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ═══ CREDIBILITY STRIP ═══ */
+    .cred {
+      padding: 1.5rem 0;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      overflow: hidden;
+    }
+    .cred-track {
+      display: flex; gap: 2.5rem; align-items: center;
+      animation: drift 50s linear infinite;
+      width: max-content;
+    }
+    .cred-track span {
+      font-family: var(--mono); font-size: .6rem; font-weight: 500;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--text-dim); white-space: nowrap;
+    }
+    .cred-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--gold); opacity: .3; flex-shrink: 0; }
+    @keyframes drift { to { transform: translateX(-50%); } }
+
+    /* ═══ FULL-BLEED IMAGE MOMENT ═══ */
+    .moment {
+      position: relative;
+      height: clamp(45vh, 50vw, 65vh);
+      overflow: hidden;
+    }
+    .moment img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .moment::before {
+      content: ''; position: absolute; inset: 0; z-index: 1;
+      background:
+        linear-gradient(to bottom, var(--bg) 0%, transparent 20%, transparent 75%, var(--bg) 100%),
+        linear-gradient(to right, rgba(5,5,16,0.3), transparent, rgba(5,5,16,0.3));
+    }
+    .moment-text {
+      position: absolute; z-index: 2;
+      bottom: 14%; left: 50%; transform: translateX(-50%);
+      text-align: center; width: 88%; max-width: 38rem;
+    }
+    .moment-text p {
+      font-family: var(--serif); font-style: italic;
+      font-size: clamp(1.15rem, 2.5vw, 1.75rem);
+      line-height: 1.55; color: var(--text);
+      text-shadow: 0 2px 40px rgba(0,0,0,0.8), 0 0 80px rgba(0,0,0,0.5);
+    }
+    .moment-text cite {
+      display: block; font-style: normal;
+      font-family: var(--mono); font-size: .58rem; font-weight: 500;
+      letter-spacing: .15em; text-transform: uppercase;
+      color: var(--gold); margin-top: 1.2rem; opacity: .8;
+    }
+
+    /* ═══ SECTION LABEL ═══ */
+    .sec-label {
+      font-family: var(--mono); font-size: .6rem; font-weight: 600;
+      letter-spacing: .22em; text-transform: uppercase;
+      color: var(--text-dim); margin-bottom: 2.5rem;
+      display: flex; align-items: center; gap: 1.2rem;
+    }
+    .sec-label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+
+    /* ═══ THE RESEARCH ═══ */
+    .research {
+      padding: clamp(6rem, 14vw, 10rem) 0;
+      position: relative;
+    }
+
+    .research h2 {
+      font-family: var(--display);
+      font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+      font-weight: 800; line-height: 1.05;
+      letter-spacing: -0.035em; margin-bottom: 3rem;
+      max-width: 22ch;
+    }
+    .research h2 em { font-family: var(--serif); font-weight: 300; font-style: italic; color: var(--gold); }
+
+    .research-grid {
+      display: grid; grid-template-columns: 5fr 4fr;
+      gap: clamp(3rem, 6vw, 6rem); align-items: start;
+    }
+    .research-prose p {
+      font-family: var(--body);
+      font-size: clamp(1rem, 1.5vw, 1.12rem);
+      color: var(--text-mid); line-height: 1.9;
+      font-weight: 300;
+    }
+    .research-prose p + p { margin-top: 1.75rem; }
+    .research-prose p strong { color: var(--text); font-weight: 500; }
+
+    .research-visual { position: relative; }
+    .research-visual img {
+      width: 100%; border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .research-visual figcaption {
+      font-family: var(--mono); font-size: .58rem;
+      letter-spacing: .08em; text-transform: uppercase;
+      color: var(--text-dim); margin-top: .85rem;
+    }
+
+    .redacted {
+      background: #C0392B; color: #C0392B;
+      padding: .05em .4em; user-select: none; font-size: .85em;
+    }
+
+    @media (max-width: 768px) {
+      .research-grid { grid-template-columns: 1fr; }
+      .research-visual { order: -1; }
+    }
+
+    /* ═══ PULL QUOTE ═══ */
+    .pullquote {
+      position: relative; overflow: hidden;
+      padding: clamp(5rem, 12vw, 9rem) 0;
+      background: var(--bg2);
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+    .pullquote-inner { text-align: center; }
+    .pullquote blockquote {
+      font-family: var(--serif);
+      font-size: clamp(1.3rem, 3.2vw, 2.4rem);
+      font-weight: 300; font-style: italic;
+      line-height: 1.5; max-width: 26ch;
+      margin: 0 auto;
+      color: var(--text);
+    }
+    .pullquote .gold { color: var(--gold); }
+    .pullquote cite {
+      display: block; font-style: normal;
+      font-family: var(--mono); font-size: .62rem; font-weight: 500;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--text-dim); margin-top: 1.75rem;
+    }
+
+    /* ═══ THE DOORS ═══ */
+    .doors {
+      padding: clamp(6rem, 14vw, 10rem) 0;
+      position: relative;
+    }
+
+    .doors-intro { margin-bottom: clamp(3.5rem, 7vw, 5.5rem); }
+    .doors-intro h2 {
+      font-family: var(--display);
+      font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+      font-weight: 800; line-height: 1.05;
+      letter-spacing: -0.035em; margin-bottom: 1.5rem;
+    }
+    .doors-intro h2 em { font-family: var(--serif); font-weight: 300; font-style: italic; color: var(--gold); }
+    .doors-intro > p {
+      font-family: var(--body);
+      font-size: clamp(1rem, 1.4vw, 1.1rem);
+      color: var(--text-mid); max-width: 52ch; line-height: 1.85;
+      font-weight: 300;
+    }
+
+    .door {
+      display: grid; grid-template-columns: auto 1fr;
+      gap: 0 clamp(1.75rem, 3vw, 3rem);
+      padding-bottom: clamp(3rem, 6vw, 4.5rem);
+    }
+    .door:last-child { padding-bottom: 0; }
+
+    .door-line {
+      display: flex; flex-direction: column; align-items: center;
+      padding-top: .3rem;
+    }
+    .door-dot {
+      width: 14px; height: 14px; border-radius: 50%;
+      border: 2px solid; background: var(--bg);
+      flex-shrink: 0;
+    }
+    .door-stem { width: 1px; flex: 1; opacity: .2; }
+
+    .door--10 .door-dot { border-color: #7B8FE8; box-shadow: 0 0 16px rgba(123,143,232,0.3); background: #7B8FE8; }
+    .door--10 .door-stem { background: linear-gradient(to bottom, #7B8FE8, transparent); }
+    .door--10 .door-freq { color: #7B8FE8; }
+
+    .door--12 .door-dot { border-color: #A87DE8; box-shadow: 0 0 16px rgba(168,125,232,0.3); }
+    .door--12 .door-stem { background: linear-gradient(to bottom, #A87DE8, transparent); }
+    .door--12 .door-freq { color: #A87DE8; }
+
+    .door--15 .door-dot { border-color: var(--gold); box-shadow: 0 0 20px var(--gold-glow); }
+    .door--15 .door-freq { color: var(--gold); }
+
+    .door-freq {
+      font-family: var(--mono); font-size: .62rem; font-weight: 600;
+      letter-spacing: .15em; text-transform: uppercase; margin-bottom: .6rem;
+    }
+    .door-content h3 {
+      font-family: var(--display);
+      font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+      font-weight: 700; letter-spacing: -0.02em; margin-bottom: .75rem;
+    }
+    .door-content p {
+      font-family: var(--body);
+      font-size: clamp(.95rem, 1.3vw, 1.05rem);
+      color: var(--text-mid); line-height: 1.9; max-width: 55ch;
+      font-weight: 300;
+    }
+
+    /* ═══ MID CTA — BIG AND BOLD ═══ */
+    .mid-cta {
+      padding: clamp(5rem, 12vw, 8rem) 0;
+      position: relative; overflow: hidden;
+      text-align: center;
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 40%, var(--bg2) 60%, var(--bg) 100%);
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+    .mid-cta::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(212,168,76,0.03) 0%, transparent 70%);
+    }
+
+    .mid-inner { position: relative; z-index: 2; max-width: 520px; margin: 0 auto; }
+    .mid-inner h2 {
+      font-family: var(--display);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800; line-height: 1.05;
+      letter-spacing: -0.03em; margin-bottom: 1rem;
+    }
+    .mid-inner h2 em { font-family: var(--serif); font-weight: 300; font-style: italic; color: var(--gold); }
+    .mid-inner > p { color: var(--text-mid); font-size: 1rem; margin-bottom: 2.5rem; line-height: 1.8; font-weight: 300; }
+
+    .mid-form { display: flex; gap: .5rem; flex-wrap: wrap; justify-content: center; }
+    .mid-form input {
+      flex: 1; min-width: 130px;
+      font-family: var(--body); font-size: .95rem;
+      padding: .9rem 1.1rem; border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(5,5,16,0.8); color: var(--text); outline: none;
+      transition: border-color .3s, box-shadow .3s;
+    }
+    .mid-form input::placeholder { color: var(--text-dim); }
+    .mid-form input:focus { border-color: var(--gold); box-shadow: 0 0 20px rgba(212,168,76,0.08); }
+
+    @media (max-width: 540px) {
+      .mid-form { flex-direction: column; }
+      .mid-form input, .mid-form .btn-gold { width: 100%; }
+    }
+
+    /* ═══ WHAT'S INSIDE ═══ */
+    .inside { padding: clamp(6rem, 14vw, 10rem) 0; position: relative; }
+    .inside-header { margin-bottom: clamp(3rem, 6vw, 4.5rem); }
+    .inside-header h2 {
+      font-family: var(--display);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800; line-height: 1.05;
+      letter-spacing: -0.035em; margin-bottom: 1rem;
+    }
+    .inside-header h2 em { font-family: var(--serif); font-weight: 300; font-style: italic; color: var(--gold); }
+    .inside-header p { font-size: 1rem; color: var(--text-mid); max-width: 46ch; font-weight: 300; }
+
+    .inside-list { list-style: none; }
+    .inside-item {
+      display: grid; grid-template-columns: auto 1fr;
+      gap: 0 1.75rem; padding: 2rem 0;
+      border-top: 1px solid var(--rule); align-items: baseline;
+    }
+    .inside-item:last-child { border-bottom: 1px solid var(--rule); }
+    .inside-num {
+      font-family: var(--mono); font-size: .62rem; font-weight: 600;
+      color: var(--gold); letter-spacing: .1em; padding-top: .15rem;
+    }
+    .inside-item h4 {
+      font-family: var(--display); font-size: 1.1rem; font-weight: 700;
+      margin-bottom: .4rem; letter-spacing: -0.01em;
+    }
+    .inside-item p { font-size: .98rem; color: var(--text-mid); line-height: 1.8; max-width: 52ch; font-weight: 300; }
+
+    /* ═══ SOCIAL PROOF ═══ */
+    .proof {
+      padding: clamp(5rem, 10vw, 8rem) 0;
+      border-top: 1px solid var(--rule);
+    }
+
+    .proof-header { margin-bottom: clamp(2.5rem, 5vw, 3.5rem); }
+    .proof-header h2 {
+      font-family: var(--display);
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 800; letter-spacing: -0.03em;
+    }
+    .proof-header h2 em { font-family: var(--serif); font-weight: 300; font-style: italic; color: var(--gold); }
+
+    .proof-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .proof-card {
+      padding: clamp(1.75rem, 3vw, 2.5rem);
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      background: rgba(15,15,40,0.5);
+      transition: border-color .4s;
+    }
+    .proof-card:hover { border-color: rgba(212,168,76,0.15); }
+    .proof-card:nth-child(3) { grid-column: 1 / -1; max-width: 60%; }
+    .proof-card blockquote {
+      font-family: var(--serif); font-size: clamp(.95rem, 1.3vw, 1.08rem);
+      font-style: italic; color: var(--text-mid);
+      line-height: 1.8; margin-bottom: 1.25rem;
+    }
+    .proof-who {
+      font-family: var(--mono); font-size: .62rem; font-weight: 500;
+      letter-spacing: .08em; text-transform: uppercase; color: var(--text-dim);
+    }
+    @media (max-width: 768px) {
+      .proof-grid { grid-template-columns: 1fr; }
+      .proof-card:nth-child(3) { max-width: 100%; }
+    }
+
+    /* ═══ FAQ ═══ */
+    .faq { padding: clamp(6rem, 12vw, 9rem) 0; border-top: 1px solid var(--rule); }
+    .faq-header { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+    .faq-header h2 {
+      font-family: var(--display); font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 800; letter-spacing: -0.03em;
+    }
+    .faq-list { max-width: 44rem; }
+    .faq-item { border-bottom: 1px solid var(--rule); }
+    .faq-q {
+      width: 100%; text-align: left;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.5rem 0;
+      font-family: var(--display); font-size: .98rem; font-weight: 600;
+      color: var(--text); gap: 1.5rem; transition: color .3s;
+    }
+    .faq-q:hover { color: var(--gold); }
+    .faq-q .ic { width: 18px; height: 18px; flex-shrink: 0; position: relative; }
+    .faq-q .ic::before, .faq-q .ic::after {
+      content: ''; position: absolute; background: var(--text-dim);
+      transition: transform .35s var(--ease), background .3s;
+    }
+    .faq-q .ic::before { width: 12px; height: 1px; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+    .faq-q .ic::after { width: 1px; height: 12px; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+    .faq-item.open .faq-q .ic::after { transform: translate(-50%,-50%) rotate(90deg); }
+    .faq-item.open .faq-q .ic::before,
+    .faq-item.open .faq-q .ic::after { background: var(--gold); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height .45s var(--ease); }
+    .faq-item.open .faq-a { max-height: 320px; }
+    .faq-a p {
+      font-family: var(--body); font-size: 1rem;
+      color: var(--text-mid); line-height: 1.9;
+      padding-bottom: 1.75rem; max-width: 55ch;
+      font-weight: 300;
+    }
+
+    /* ═══ FINAL CTA — MASSIVE ═══ */
+    .final {
+      position: relative; overflow: hidden;
+      padding: clamp(7rem, 16vw, 12rem) 0;
+      text-align: center;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 60%, rgba(212,168,76,0.04) 0%, transparent 50%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg2) 30%, var(--bg2) 70%, var(--bg) 100%);
+    }
+    .final::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212,168,76,0.2), transparent);
+    }
+
+    .final-content { position: relative; z-index: 2; max-width: 580px; margin: 0 auto; }
+    .final-content h2 {
+      font-family: var(--display);
+      font-size: clamp(2.2rem, 5.5vw, 4rem);
+      font-weight: 800; line-height: 1;
+      letter-spacing: -0.04em; margin-bottom: 1.25rem;
+    }
+    .final-content h2 em {
+      font-family: var(--serif); font-weight: 300; font-style: italic;
+      color: var(--gold); display: block; margin-top: .15em;
+      text-shadow: 0 0 60px var(--gold-glow);
+    }
+    .final-content > p {
+      font-family: var(--body); font-size: 1.1rem;
+      color: var(--text-mid); margin-bottom: 3rem; line-height: 1.8;
+      font-weight: 300;
+    }
+
+    .final-box {
+      background: rgba(10,10,30,0.8);
+      border: 1px solid rgba(212,168,76,0.15);
+      border-radius: 16px; padding: 2.5rem;
+      max-width: 460px; margin: 0 auto;
+      box-shadow: 0 12px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.03);
+    }
+    .final-box .optin-form input {
+      font-family: var(--body); font-size: .95rem;
+      padding: .9rem 1.15rem; border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(5,5,16,0.8);
+      color: var(--text); outline: none;
+      transition: border-color .3s, box-shadow .3s;
+      width: 100%;
+    }
+    .final-box .optin-form input::placeholder { color: var(--text-dim); }
+    .final-box .optin-form input:focus { border-color: var(--gold); box-shadow: 0 0 20px rgba(212,168,76,0.08); }
+    .final-note {
+      font-size: .72rem; color: var(--text-dim); margin-top: .85rem;
+    }
+
+    @media (max-width: 540px) {
+      .final-box { padding: 1.75rem; }
+    }
+
+    /* ═══ FOOTER ═══ */
+    .footer { padding: 3rem 0; border-top: 1px solid var(--rule); }
+    .footer-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-mark { font-family: var(--display); font-size: .92rem; font-weight: 700; }
+    .footer-mark i { font-family: var(--serif); font-style: italic; color: var(--gold); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a {
+      font-family: var(--mono); font-size: .62rem;
+      letter-spacing: .06em; text-transform: uppercase;
+      color: var(--text-dim); transition: color .2s;
+    }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy {
+      width: 100%; text-align: center; font-size: .62rem;
+      color: var(--text-dim); margin-top: .75rem; opacity: .5;
+    }
+
+    /* ═══ STICKY MOBILE CTA ═══ */
+    .sticky-cta {
+      display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 600;
+      padding: 0.75rem 1rem; background: rgba(5,5,16,0.95);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(212,168,76,0.2);
+      gap: 0.5rem;
+    }
+    .sticky-cta.visible { display: flex; }
+    .sticky-cta a {
+      flex: 1; text-align: center; padding: 0.75rem; border-radius: 8px;
+      font-family: var(--display); font-weight: 700; font-size: 0.82rem;
+      text-decoration: none; transition: all .2s;
+    }
+    .sticky-cta .sticky-free {
+      background: var(--gold); color: var(--bg);
+    }
+    .sticky-cta .sticky-buy {
+      background: transparent; color: var(--gold);
+      border: 1px solid rgba(212,168,76,0.4);
+    }
+    @media (min-width: 769px) { .sticky-cta { display: none !important; } }
+
+    /* ═══ HERO BUY TOGGLE ═══ */
+    .hero-toggle {
+      display: flex; justify-content: center; gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .hero-toggle button {
+      font-family: var(--mono); font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0.5rem 1.25rem; border-radius: 100px;
+      transition: all .3s; cursor: pointer; border: none;
+    }
+    .hero-toggle .toggle-active {
+      background: var(--gold); color: var(--bg);
+    }
+    .hero-toggle .toggle-inactive {
+      background: transparent; color: var(--text-dim);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .hero-buy-box {
+      display: none; text-align: center;
+    }
+    .hero-buy-box.active { display: block; }
+    .hero-buy-price {
+      font-family: var(--display); font-size: 2.5rem; font-weight: 800;
+      color: var(--text); margin-bottom: 0.25rem;
+    }
+    .hero-buy-price span {
+      font-size: 1rem; color: var(--text-dim); font-weight: 400;
+      text-decoration: line-through; margin-right: 0.5rem;
+    }
+    .hero-buy-includes {
+      list-style: none; text-align: left; margin: 1.25rem 0;
+      font-size: 0.88rem; color: var(--text-mid);
+    }
+    .hero-buy-includes li {
+      padding: 0.4rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .hero-buy-includes li::before {
+      content: '✓'; color: var(--gold); font-weight: 700; margin-right: 0.6rem;
+    }
+    .hero-buy-guarantee {
+      font-size: 0.72rem; color: var(--text-dim); margin-top: 0.75rem;
+    }
+
+    /* ═══ LIVE COUNTER ═══ */
+    .live-counter {
+      font-family: var(--mono); font-size: 0.62rem; font-weight: 500;
+      letter-spacing: 0.06em; color: var(--text-dim);
+      margin-top: 1rem; text-align: center;
+    }
+    .live-counter .counter-dot {
+      display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+      background: #4ade80; margin-right: 0.4rem; vertical-align: middle;
+      animation: pulse-dot 2s ease infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; } 50% { opacity: 0.4; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" role="navigation" aria-label="Main">
+    <div class="nav-inner">
+      <a href="#" class="nav-mark">Liminal<i>Space</i></a>
+      <a href="#final" class="nav-cta">Get Free Audio</a>
+      <a href="https://stan.store/liminalspace/p/first-contact--consciousness-exploration-kit" class="nav-cta nav-cta-buy">Get Full System — $37</a>
+    </div>
+  </nav>
+
+  <!-- ════════════════════════════════════ -->
+  <!--              H E R O                -->
+  <!-- ════════════════════════════════════ -->
+  <section class="hero" id="hero">
+    <div class="hero-bg" aria-hidden="true">
+      <img src="web-images/v8-hero.jpg" alt="" loading="eager">
+    </div>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow rv">Consciousness Exploration · Since 1971</p>
+      <h1 class="rv rv-d1">Your mind can <em>leave your body</em></h1>
+      <p class="hero-sub rv rv-d2">
+        The CIA spent 23 years proving it. The Monroe Institute perfected the technique.
+        <strong>Now it's a 20-minute audio session away.</strong>
+      </p>
+
+      <div class="hero-cta-box rv rv-d3">
+        <div class="hero-toggle">
+          <button class="toggle-active" onclick="toggleHero('free')">Free Session</button>
+          <button class="toggle-inactive" onclick="toggleHero('buy')">Full System — $37</button>
+        </div>
+
+        <!-- FREE OPTION -->
+        <div id="hero-free" class="hero-buy-box active">
+          <p class="cta-headline">Get your free guided session</p>
+          <p class="cta-desc">20 minutes. Headphones. Experience it tonight.</p>
+          <form class="optin-form" aria-label="Email opt-in">
+            <div class="form-row">
+              <input type="text" name="first_name" placeholder="First name" required autocomplete="given-name" aria-label="First name">
+              <input type="email" name="email" placeholder="Your best email" required autocomplete="email" aria-label="Email">
+            </div>
+            <button type="submit" class="btn-gold">Get Free Access</button>
+          </form>
+          <p class="hero-note">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Free. No credit card. Instant access.
+          </p>
+          <div class="form-success" id="hero-success">
+            <h3>Check your inbox</h3>
+            <p>Your guided session is on its way. The threshold awaits.</p>
+          </div>
+        </div>
+
+        <!-- BUY OPTION -->
+        <div id="hero-buy" class="hero-buy-box">
+          <p class="hero-buy-price"><span>$97</span> $37</p>
+          <p style="font-size:.82rem;color:var(--text-mid);margin-bottom:1rem;">One-time payment. Instant access. Keep forever.</p>
+          <ul class="hero-buy-includes">
+            <li>3 guided audio sessions (Door 10, 12, 15)</li>
+            <li>Full consciousness exploration podcast</li>
+            <li>The Liminal Field Manual — complete OBE + remote viewing reference</li>
+            <li>7-day progression plan</li>
+            <li>Session journal prompts</li>
+          </ul>
+          <a href="https://stan.store/liminalspace/p/first-contact--consciousness-exploration-kit" class="btn-gold" style="display:block;text-align:center;text-decoration:none;font-size:1.05rem;padding:1.05rem;">Get Instant Access</a>
+          <p class="hero-buy-guarantee">100% satisfaction guaranteed. If the sessions don't shift something inside you, email us for a full refund.</p>
+        </div>
+
+        <p class="live-counter"><span class="counter-dot"></span><span id="counter-num">2,847</span> explorers have entered the liminal space</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREDIBILITY -->
+  <div class="cred" aria-hidden="true">
+    <div class="cred-track">
+      <span>CIA Gateway Analysis · 1983</span><div class="cred-dot"></div>
+      <span>Monroe Institute · Est. 1971</span><div class="cred-dot"></div>
+      <span>Project Stargate · 23 Years</span><div class="cred-dot"></div>
+      <span>Peer-Reviewed Neuroscience</span><div class="cred-dot"></div>
+      <span>Hemi-Sync Binaural Technology</span><div class="cred-dot"></div>
+      <span>CIA Gateway Analysis · 1983</span><div class="cred-dot"></div>
+      <span>Monroe Institute · Est. 1971</span><div class="cred-dot"></div>
+      <span>Project Stargate · 23 Years</span><div class="cred-dot"></div>
+      <span>Peer-Reviewed Neuroscience</span><div class="cred-dot"></div>
+      <span>Hemi-Sync Binaural Technology</span><div class="cred-dot"></div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════ -->
+  <!--     ASTRAL IMAGE MOMENT             -->
+  <!-- ════════════════════════════════════ -->
+  <div class="moment rv">
+    <img src="web-images/v8-astral.jpg" alt="Luminous figure rising from a sleeping body" loading="lazy">
+    <div class="moment-text">
+      <p>"Consciousness is not produced by the brain. It is received by the brain — like a radio signal."</p>
+      <cite>Robert Monroe — Founder, The Monroe Institute</cite>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════ -->
+  <!--          THE RESEARCH               -->
+  <!-- ════════════════════════════════════ -->
+  <section class="research">
+    <div class="wide z1">
+      <div class="sec-label rv">01 — The Science Behind It</div>
+      <h2 class="rv rv-d1">The government spent $20&nbsp;million proving this is <em>real</em></h2>
+
+      <div class="research-grid">
+        <div class="research-prose">
+          <p class="rv rv-d2">In 1983, U.S. Army Lieutenant Colonel Wayne McDonnell submitted a classified report to the CIA. His conclusion: <strong>human consciousness can be trained to perceive beyond the physical body.</strong></p>
+          <p class="rv rv-d3">The Monroe Institute had already been doing it for over a decade. Using precisely calibrated binaural audio frequencies — different tones in each ear creating a resonant pulse in the brain — they could reliably guide participants into altered states. States where the body sleeps but the mind remains awake, aware, and free to move.</p>
+          <p class="rv rv-d4"><strong>Project Stargate ran for 23 years.</strong> The U.S. military trained operatives to remote view targets across the globe — using only their minds. The programme was classified until 2003. The <span class="redacted">REDACTED</span> documents are now publicly available.</p>
+        </div>
+
+        <figure class="research-visual rv rv-d3">
+          <img src="web-images/v8-waves.jpg" alt="Sound waves transforming into sacred geometry" loading="lazy">
+          <figcaption>Binaural frequencies entrain brainwave patterns into targeted consciousness states.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════ -->
+  <!--          PULL QUOTE                 -->
+  <!-- ════════════════════════════════════ -->
+  <section class="pullquote">
+    <div class="wide z1 pullquote-inner rv">
+      <blockquote>"I was skeptical — I'm a scientist. But the research is solid. On my <span class="gold">third session</span> I had full-body vibrations and a brief separation experience."</blockquote>
+      <cite>Sarah K. — Neuroscience Researcher, 29</cite>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════ -->
+  <!--           THE DOORS                 -->
+  <!-- ════════════════════════════════════ -->
+  <section class="doors">
+    <div class="wide z1">
+      <div class="sec-label rv">02 — The Door System</div>
+      <div class="doors-intro">
+        <h2 class="rv rv-d1">Three progressively deeper states of <em>consciousness</em></h2>
+        <p class="rv rv-d2">Each door corresponds to a specific brainwave frequency. Each one takes you deeper. The Monroe Institute mapped these states over decades. We've distilled them into guided audio sessions.</p>
+        <p class="rv rv-d3" style="font-family:var(--serif);font-style:italic;color:var(--gold);font-size:1rem;margin-top:1rem;">There's a moment around minute 12 where your body disappears. We'll get you there tonight.</p>
+      </div>
+
+      <div class="door door--10 rv rv-d2">
+        <div class="door-line"><div class="door-dot"></div><div class="door-stem"></div></div>
+        <div class="door-content">
+          <div class="door-freq">Door 10 · 10 Hz · Alpha</div>
+          <h3>Mind Awake, Body Asleep</h3>
+          <p>Your physical body dissolves into deep relaxation while your mind stays impossibly clear. Tingling. Warmth. The feeling that your edges are blurring. This is where every explorer begins — the foundation state that the Gateway Program called Focus 10.</p>
+        </div>
+      </div>
+
+      <div class="door door--12 rv rv-d3">
+        <div class="door-line"><div class="door-dot"></div><div class="door-stem"></div></div>
+        <div class="door-content">
+          <div class="door-freq">Door 12 · 7 Hz · Theta</div>
+          <h3>Expanded Awareness</h3>
+          <p>This session teaches you the remote viewing technique used in Project Stargate. You'll learn to project your awareness to a specific location, distinguish imagination from genuine perception, and move through spaces your body has never been. The U.S. military trained operatives in this exact method.</p>
+        </div>
+      </div>
+
+      <div class="door door--15 rv rv-d4">
+        <div class="door-line"><div class="door-dot"></div></div>
+        <div class="door-content">
+          <div class="door-freq">Door 15 · 4 Hz · Delta Threshold</div>
+          <h3>The No-Time State</h3>
+          <p>The deepest door. You are guided through two full out-of-body separation techniques — the Rope and the Roll-Out — the same methods used by Robert Monroe and thousands of practitioners worldwide. This is where people report leaving their physical body entirely.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════ -->
+  <!--           MID CTA                   -->
+  <!-- ════════════════════════════════════ -->
+  <section class="mid-cta" id="mid-optin">
+    <div class="wide">
+      <div class="mid-inner">
+        <h2 class="rv">Experience it <em>tonight</em></h2>
+        <p class="rv rv-d1">Your free session uses the Door 10 frequency — the same alpha-state induction the CIA studied. 20 minutes. Headphones. A dark room.</p>
+        <form class="mid-form rv rv-d2 optin-form" aria-label="Email opt-in">
+          <input type="text" name="first_name" placeholder="First name" required autocomplete="given-name" aria-label="First name">
+          <input type="email" name="email" placeholder="Your email" required autocomplete="email" aria-label="Email">
+          <button type="submit" class="btn-gold">Get Free Access</button>
+        </form>
+        <div class="form-success" id="mid-success">
+          <h3>Check your inbox.</h3>
+          <p>Your session is on its way.</p>
+        </div>
+        <p class="rv rv-d3" style="margin-top: 2rem; font-size: .82rem; color: var(--text-dim);">
+          Or skip ahead — <a href="https://stan.store/liminalspace/p/first-contact--consciousness-exploration-kit" style="color: var(--gold); text-decoration: underline; text-underline-offset: 3px;">get all 3 Doors + the complete guide for $37</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════ -->
+  <!--        WHAT'S INSIDE                -->
+  <!-- ════════════════════════════════════ -->
+  <section class="inside">
+    <div class="wide">
+      <div class="sec-label rv">03 — What You Receive</div>
+      <div class="inside-header">
+        <h2 class="rv rv-d1">Inside your free <em>session</em></h2>
+        <p class="rv rv-d2">Everything you need to reach the threshold state tonight.</p>
+      </div>
+
+      <ul class="inside-list">
+        <li class="inside-item rv rv-d1">
+          <span class="inside-num">01</span>
+          <div>
+            <h4>Precision Binaural Audio</h4>
+            <p>20 minutes of frequency-engineered sound that shifts your brainwaves from waking beta into the Door 10 state — mind awake, body asleep. Requires stereo headphones.</p>
+          </div>
+        </li>
+        <li class="inside-item rv rv-d2">
+          <span class="inside-num">02</span>
+          <div>
+            <h4>The Liminal Field Manual (PDF)</h4>
+            <p>The complete written reference — the neuroscience behind binaural beats, step-by-step remote viewing instructions, two OBE separation techniques (the Rope and the Roll-Out), the full Liminal Protocol, session journal prompts, troubleshooting guide, and a 7-day progression plan. Worth $37 on its own.</p>
+          </div>
+        </li>
+        <li class="inside-item rv rv-d3">
+          <span class="inside-num">03</span>
+          <div>
+            <h4>First-Session Results</h4>
+            <p>Deep relaxation. Hypnagogic imagery. Vibrational sensations. Time distortion. Most people feel a noticeable shift on their very first attempt — a sense that something just moved.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════ -->
+  <!--       UPGRADE TEASER                -->
+  <!-- ════════════════════════════════════ -->
+  <section style="padding: clamp(4rem, 10vw, 7rem) 0; border-top: 1px solid var(--rule); background: linear-gradient(180deg, var(--bg) 0%, rgba(107,92,231,0.03) 50%, var(--bg) 100%);">
+    <div class="wide z1" style="text-align: center; max-width: 36rem;">
+      <p class="rv" style="font-family: var(--mono); font-size: .6rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem;">The free session is just the beginning</p>
+      <h2 class="rv rv-d1" style="font-family: var(--display); font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 1.25rem;">Door 10 relaxes you. Door 12 teaches you to <span style="font-family: var(--serif); font-weight: 300; font-style: italic; color: var(--gold);">see</span>. Door 15 teaches you to <span style="font-family: var(--serif); font-weight: 300; font-style: italic; color: var(--gold);">leave</span>.</h2>
+      <p class="rv rv-d2" style="color: var(--text-mid); font-size: 1rem; line-height: 1.8; font-weight: 300; margin-bottom: 1.25rem;">Door 12 guides you through the exact remote viewing technique used in Project Stargate. Door 15 teaches you two full OBE separation methods — the Rope and the Roll-Out. These aren't guided meditations. They're guided techniques with real methodology.</p>
+      <p class="rv rv-d2" style="font-family: var(--display); font-size: 1.8rem; font-weight: 800; margin-bottom: 0.25rem;"><span style="color: var(--text-dim); font-size: 1rem; text-decoration: line-through; margin-right: 0.5rem;">$97</span>$37</p>
+      <p class="rv rv-d2" style="font-size: .78rem; color: var(--text-dim); margin-bottom: 1.5rem;">Launch price. Will increase.</p>
+      <a href="https://stan.store/liminalspace/p/first-contact--consciousness-exploration-kit" class="btn-gold rv rv-d3" style="display: inline-block; text-decoration: none; font-size: 1.05rem; padding: 1.1rem 2.5rem;">Get Instant Access — $37</a>
+      <p class="rv rv-d4" style="margin-top: 1rem; font-size: .72rem; color: var(--text-dim);">One-time payment. Instant access. Keep forever. Satisfaction guaranteed.</p>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════ -->
+  <!--         SOCIAL PROOF                -->
+  <!-- ════════════════════════════════════ -->
+  <section class="proof">
+    <div class="wide z1">
+      <div class="proof-header rv">
+        <h2>What early explorers are <em>experiencing</em></h2>
+      </div>
+      <div class="proof-grid">
+        <div class="proof-card rv rv-d1">
+          <blockquote>"Within 10 minutes I felt my body dissolve. By minute 15 I was somewhere else entirely. I've done meditation retreats — this was different. This was immediate."</blockquote>
+          <div class="proof-who">Marcus R. · Software Engineer, 34</div>
+        </div>
+        <div class="proof-card rv rv-d2">
+          <blockquote>"I didn't believe any of this. My partner made me try it. I saw geometric patterns behind my eyes and then felt like I was rising out of my body. I've done it every night since."</blockquote>
+          <div class="proof-who">Jamie L. · Graphic Designer, 27</div>
+        </div>
+        <div class="proof-card rv rv-d3">
+          <blockquote>"The vibrations hit at about the 12-minute mark. I've been chasing this state for years through meditation. This audio got me there in one session."</blockquote>
+          <div class="proof-who">Daniel T. · Yoga Instructor, 41</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════ -->
+  <!--              FAQ                    -->
+  <!-- ════════════════════════════════════ -->
+  <section class="faq">
+    <div class="wide">
+      <div class="faq-header rv"><h2>Common questions</h2></div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Is this actually real? Can consciousness really leave the body?<span class="ic"></span></button>
+          <div class="faq-a"><p>The CIA's Gateway Analysis report (declassified 2003) concluded that consciousness can be trained to operate beyond the physical body using binaural audio frequencies. The Monroe Institute has trained thousands in these techniques since 1971. Whether you frame it as out-of-body experience, expanded awareness, or altered brain states — the subjective experience is consistent and reproducible.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Is it safe?<span class="ic"></span></button>
+          <div class="faq-a"><p>Completely. Binaural beats are non-invasive audio. You're simply listening through headphones. The states are natural — your brain enters them every night during sleep. The difference is you remain consciously aware. You're always in control and can open your eyes at any time.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">What equipment do I need?<span class="ic"></span></button>
+          <div class="faq-a"><p>Stereo headphones (wired work best — Bluetooth can add latency). A quiet, dark room. A comfortable surface to lie on. That's it.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">How long until I feel something?<span class="ic"></span></button>
+          <div class="faq-a"><p>Most people report noticeable sensations — deep relaxation, tingling, warmth, or visual imagery — within their first session. Deeper states typically develop over 3–7 sessions. Consistency matters more than duration.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">What's the difference between this and regular meditation?<span class="ic"></span></button>
+          <div class="faq-a"><p>Meditation relies on your ability to still the mind — which can take years. Binaural beats directly entrain your brainwaves to specific frequencies, giving your brain a target to lock onto. It's the difference between swimming across a river and being carried by the current.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">What will you do with my email?<span class="ic"></span></button>
+          <div class="faq-a"><p>Send you the free guided session. Then a short email sequence about consciousness exploration. No spam. No selling your data. Unsubscribe anytime.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════ -->
+  <!--           FINAL CTA                 -->
+  <!-- ════════════════════════════════════ -->
+  <section class="final" id="final">
+    <div class="wide">
+      <div class="final-content">
+        <h2 class="rv">The door is open.<em>Walk through it.</em></h2>
+        <p class="rv rv-d1">20 minutes. Headphones. A dark room. That's all it takes to experience what the CIA spent two decades studying.</p>
+
+        <div class="final-box rv rv-d2">
+          <form class="optin-form" aria-label="Email opt-in">
+            <input type="text" name="first_name" placeholder="First name" required autocomplete="given-name" aria-label="First name">
+            <input type="email" name="email" placeholder="Your best email" required autocomplete="email" aria-label="Email">
+            <button type="submit" class="btn-gold" style="width:100%">Get the Free Session</button>
+          </form>
+          <p class="final-note">No credit card. Instant access. Unsubscribe anytime.</p>
+          <div class="form-success" id="final-success">
+            <h3>Check your inbox.</h3>
+            <p>The threshold awaits.</p>
+          </div>
+          <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.06);text-align:center;">
+            <p style="font-size:.78rem;color:var(--text-dim);margin-bottom:.75rem;">Want everything now?</p>
+            <a href="https://stan.store/liminalspace/p/first-contact--consciousness-exploration-kit" class="btn-gold" style="display:block;text-align:center;text-decoration:none;background:transparent;color:var(--gold);border:1px solid rgba(212,168,76,0.4);font-size:.92rem;padding:.85rem;">Get Full System — $37</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STICKY MOBILE CTA -->
+  <div class="sticky-cta" id="sticky-cta">
+    <a href="#final" class="sticky-free">Free Session</a>
+    <a href="https://stan.store/liminalspace/p/first-contact--consciousness-exploration-kit" class="sticky-buy">Full System — $37</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="wide">
+      <div class="footer-inner">
+        <div class="footer-mark">Liminal<i>Space</i></div>
+        <div class="footer-links">
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+          <a href="mailto:hello@enterliminalspace.com">Contact</a>
+        </div>
+        <p class="footer-copy">&copy; 2026 Liminal Space. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ═══ REVEALS (IntersectionObserver — zero GPU cost) ═══
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('show'); obs.unobserve(e.target); }
+      });
+    }, { threshold: .08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+    // ═══ NAV SCROLL ═══
+    const nav = document.querySelector('.nav');
+    let nt = false;
+    addEventListener('scroll', () => {
+      if (!nt) { requestAnimationFrame(() => { nav.classList.toggle('scrolled', scrollY > 60); nt = false; }); nt = true; }
+    });
+
+    // ═══ FAQ ═══
+    document.querySelectorAll('.faq-q').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const was = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+        if (!was) item.classList.add('open');
+        btn.setAttribute('aria-expanded', !was);
+      });
+    });
+
+    // ═══ ENHANCED TRACKING ═══
+    // Track scroll depth milestones
+    let scrollFired = {};
+    addEventListener('scroll', () => {
+      const pct = Math.round((scrollY / (document.body.scrollHeight - innerHeight)) * 100);
+      [25, 50, 75, 100].forEach(m => {
+        if (pct >= m && !scrollFired[m]) {
+          scrollFired[m] = true;
+          gtag('event', 'scroll_depth', {percent: m});
+          fbq('trackCustom', 'ScrollDepth', {percent: m});
+        }
+      });
+    });
+
+    // Track section views
+    ['research', 'doors', 'mid-cta', 'inside', 'proof', 'faq', 'final'].forEach(id => {
+      const el = document.querySelector('.' + id) || document.getElementById(id);
+      if (!el) return;
+      const secObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            gtag('event', 'section_view', {section: id});
+            fbq('trackCustom', 'SectionView', {section: id});
+            secObs.unobserve(el);
+          }
+        });
+      }, {threshold: 0.3});
+      secObs.observe(el);
+    });
+
+    // Track buy CTA clicks
+    document.querySelectorAll('a[href*="stan.store"]').forEach(link => {
+      link.addEventListener('click', () => {
+        gtag('event', 'begin_checkout', {value: 37.00, currency: 'USD'});
+        fbq('track', 'InitiateCheckout', {value: 37.00, currency: 'USD'});
+      });
+    });
+
+    // Track hero toggle clicks
+    function trackToggle(mode) {
+      gtag('event', 'hero_toggle', {mode: mode});
+      fbq('trackCustom', 'HeroToggle', {mode: mode});
+    }
+
+    // ═══ HERO TOGGLE ═══
+    function toggleHero(mode) {
+      trackToggle(mode);
+      const freeBox = document.getElementById('hero-free');
+      const buyBox = document.getElementById('hero-buy');
+      const btns = document.querySelectorAll('.hero-toggle button');
+      if (mode === 'buy') {
+        freeBox.classList.remove('active');
+        buyBox.classList.add('active');
+        btns[0].className = 'toggle-inactive';
+        btns[1].className = 'toggle-active';
+      } else {
+        buyBox.classList.remove('active');
+        freeBox.classList.add('active');
+        btns[0].className = 'toggle-active';
+        btns[1].className = 'toggle-inactive';
+      }
+    }
+
+    // ═══ STICKY MOBILE CTA ═══
+    const stickyCta = document.getElementById('sticky-cta');
+    if (window.innerWidth < 769) {
+      const heroSection = document.querySelector('.hero');
+      const stickyObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          stickyCta.classList.toggle('visible', !e.isIntersecting);
+        });
+      }, { threshold: 0 });
+      stickyObs.observe(heroSection);
+    }
+
+    // ═══ FORMS — Beehiiv subscribe via /api/subscribe ═══
+    document.querySelectorAll('.optin-form').forEach(form => {
+      form.addEventListener('submit', async e => {
+        e.preventDefault();
+        const btn = form.querySelector('button[type="submit"]');
+        const origText = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = 'Sending…';
+
+        const d = new FormData(form);
+        try {
+          const res = await fetch('/api/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              email: d.get('email'),
+              first_name: d.get('first_name'),
+            }),
+          });
+          if (!res.ok) throw new Error('Subscribe failed');
+          // Track successful signup
+          gtag('event', 'generate_lead', {value: 1.00, currency: 'USD'});
+          fbq('track', 'Lead');
+          fbq('track', 'CompleteRegistration');
+          window.location.href = 'free-audio.html';
+        } catch (err) {
+          console.error('Opt-in error:', err);
+          btn.disabled = false;
+          btn.textContent = origText;
+          // Fallback: still redirect so the experience isn't broken
+          window.location.href = 'free-audio.html';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

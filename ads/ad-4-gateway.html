@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Outfit:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1080px; height: 1080px; overflow: hidden; }
+  .ad {
+    width: 1080px; height: 1080px;
+    background: #050510;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 80px;
+    overflow: hidden;
+  }
+  .ad::before {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle at bottom right, rgba(107,92,231,0.1) 0%, transparent 70%);
+  }
+  .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #D4A84C;
+    padding: 8px 16px;
+    border: 1px solid rgba(212,168,76,0.3);
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 56px;
+    position: relative; z-index: 1;
+    align-self: flex-start;
+  }
+  .headline {
+    font-family: 'Syne', sans-serif;
+    font-size: 52px;
+    font-weight: 700;
+    color: #F0EEF8;
+    line-height: 1.2;
+    margin-bottom: 32px;
+    position: relative; z-index: 1;
+    max-width: 750px;
+  }
+  .headline em {
+    font-style: normal;
+    color: #D4A84C;
+  }
+  .stats {
+    display: flex;
+    gap: 48px;
+    margin-bottom: 48px;
+    position: relative; z-index: 1;
+  }
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+  }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 40px;
+    font-weight: 800;
+    color: #D4A84C;
+    line-height: 1;
+  }
+  .stat-label {
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    color: #7E7A94;
+    margin-top: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .subtext {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 22px;
+    font-weight: 300;
+    font-style: italic;
+    color: #B8B4CE;
+    line-height: 1.6;
+    margin-bottom: auto;
+    max-width: 600px;
+    position: relative; z-index: 1;
+  }
+  .bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative; z-index: 1;
+  }
+  .cta {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    padding: 20px 48px;
+    background: #D4A84C;
+    color: #050510;
+    border-radius: 8px;
+    box-shadow: 0 4px 30px rgba(212,168,76,0.3);
+  }
+  .note {
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    color: #7E7A94;
+  }
+</style>
+</head>
+<body>
+<div class="ad">
+  <div class="tag">Gateway Process · 1983</div>
+  <h1 class="headline">The US government's <em>classified program</em> for out-of-body experiences</h1>
+  <div class="stats">
+    <div class="stat-item">
+      <span class="stat-num">23</span>
+      <span class="stat-label">Years of research</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">1971</span>
+      <span class="stat-label">Monroe Institute est.</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">20</span>
+      <span class="stat-label">Min session</span>
+    </div>
+  </div>
+  <p class="subtext">The techniques are declassified. The audio technology is proven. Try it tonight — free.</p>
+  <div class="bottom">
+    <div class="cta">Get Free Access</div>
+    <p class="note">enterliminalspace.com</p>
+  </div>
+</div>
+</body>
+</html>
