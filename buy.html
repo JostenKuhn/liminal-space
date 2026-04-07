@@ -115,20 +115,60 @@
       color: var(--text-dim);
       line-height: 1.5;
     }
-    .includes {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .4rem;
-      justify-content: center;
-      margin-bottom: 1.25rem;
+    .what-you-get {
+      margin-bottom: 1.5rem;
+      padding: 0 .25rem;
     }
-    .includes span {
-      font-size: .65rem;
+    .what-you-get h2 {
+      font-family: var(--mono);
+      font-size: .6rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+      text-align: center;
+    }
+    .what-you-get ul {
+      list-style: none;
+      padding: 0;
+    }
+    .what-you-get li {
+      font-size: .82rem;
       color: var(--text-mid);
-      background: rgba(255,255,255,0.04);
-      padding: .3rem .6rem;
-      border-radius: 6px;
-      border: 1px solid var(--rule);
+      padding: .5rem 0;
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      align-items: flex-start;
+      gap: .5rem;
+      line-height: 1.4;
+    }
+    .what-you-get li:last-child { border: none; }
+    .what-you-get .icon {
+      color: var(--gold);
+      font-size: .7rem;
+      flex-shrink: 0;
+      margin-top: .15rem;
+    }
+    .what-you-get strong { color: var(--text); font-weight: 500; }
+    .social-proof {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      padding: .75rem 1rem;
+      background: rgba(212,168,76,0.04);
+      border: 1px solid rgba(212,168,76,0.1);
+      border-radius: 10px;
+    }
+    .social-proof p {
+      font-size: .75rem;
+      color: var(--text-mid);
+      line-height: 1.5;
+      font-style: italic;
+    }
+    .social-proof .attr {
+      font-size: .65rem;
+      color: var(--text-dim);
+      font-style: normal;
+      margin-top: .3rem;
     }
     .checkout-container {
       border: 1px solid var(--rule);
@@ -194,15 +234,23 @@
     <div class="product-info">
       <h1>First Contact</h1>
       <p class="price"><span>$97</span>$37</p>
-      <p class="desc">The complete consciousness exploration kit</p>
+      <p class="desc">The CIA spent $20 million proving your mind can leave your body. This is the protocol.</p>
     </div>
 
-    <div class="includes">
-      <span>3 guided sessions</span>
-      <span>Field manual</span>
-      <span>7-day protocol</span>
-      <span>Instant download</span>
-      <span>Lifetime access</span>
+    <div class="what-you-get">
+      <h2>What's inside</h2>
+      <ul>
+        <li><span class="icon">&#9670;</span><span><strong>Door 10 — Mind Awake, Body Asleep.</strong> The foundation state. Binaural frequencies shift your brainwaves into alpha within minutes. Most people feel something on the first session.</span></li>
+        <li><span class="icon">&#9670;</span><span><strong>Door 12 — Expanded Awareness.</strong> Your perception stretches beyond your body. This is where people report sensing things without using their eyes.</span></li>
+        <li><span class="icon">&#9670;</span><span><strong>Door 15 — The No-Time State.</strong> The state the CIA's remote viewers trained to reach. This is where the boundary between you and your body starts to dissolve.</span></li>
+        <li><span class="icon">&#9670;</span><span><strong>First Contact Field Manual.</strong> The science, the methodology, what to expect at each level, and exactly how to set up for maximum results.</span></li>
+        <li><span class="icon">&#9670;</span><span><strong>7-Day Protocol Plan.</strong> Exactly what to do each day. No guessing. Progressive training from Focus 10 through Focus 15.</span></li>
+      </ul>
+    </div>
+
+    <div class="social-proof">
+      <p>"I felt my entire body vibrating. Then I felt myself lift. I was fully conscious and completely outside my physical body."</p>
+      <p class="attr">— First Contact user, session two</p>
     </div>
 
     <div class="checkout-container">
