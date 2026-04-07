@@ -29,7 +29,6 @@ export default async function handler(req, res) {
     params.append('line_items[0][price_data][product_data][description]', '3 guided audio sessions + field manual + 7-day protocol. Instant download.');
     params.append('line_items[0][price_data][unit_amount]', '3700');
     params.append('line_items[0][quantity]', '1');
-    params.append('automatic_payment_methods[enabled]', 'true');
     params.append('allow_promotion_codes', 'true');
     params.append('return_url', 'https://enterliminalspace.com/checkout-return.html?session_id={CHECKOUT_SESSION_ID}');
     params.append('metadata[product]', 'first_contact');
