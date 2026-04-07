@@ -41,8 +41,8 @@ export default async function handler(req, res) {
   const firstName = session?.customer_details?.name?.split(' ')[0] || '';
   console.log(`Purchase completed: ${email} (${firstName}), amount: ${session.amount_total}`);
 
-  const API_KEY = process.env.BEEHIIV_API_KEY;
-  const PUB_ID = process.env.BEEHIIV_PUBLICATION_ID;
+  const API_KEY = (process.env.BEEHIIV_API_KEY || '').trim();
+  const PUB_ID = (process.env.BEEHIIV_PUBLICATION_ID || '').trim();
 
   if (!API_KEY || !PUB_ID) {
     console.error('Missing BEEHIIV_API_KEY or BEEHIIV_PUBLICATION_ID');

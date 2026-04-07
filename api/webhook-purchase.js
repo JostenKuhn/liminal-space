@@ -12,8 +12,8 @@
  * Security: validates a shared secret via ?key= query param or x-webhook-secret header
  */
 
-const API_KEY = process.env.BEEHIIV_API_KEY;
-const PUB_ID = process.env.BEEHIIV_PUBLICATION_ID;
+const API_KEY = (process.env.BEEHIIV_API_KEY || '').trim();
+const PUB_ID = (process.env.BEEHIIV_PUBLICATION_ID || '').trim();
 const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
 const AUTOMATION_ID = '76426619-2bc5-49fb-99c8-73c47bc59e16';
 

@@ -9,8 +9,8 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Email is required' });
   }
 
-  const API_KEY = process.env.BEEHIIV_API_KEY;
-  const PUB_ID = process.env.BEEHIIV_PUBLICATION_ID;
+  const API_KEY = (process.env.BEEHIIV_API_KEY || '').trim();
+  const PUB_ID = (process.env.BEEHIIV_PUBLICATION_ID || '').trim();
 
   if (!API_KEY || !PUB_ID) {
     console.error('Missing BEEHIIV_API_KEY or BEEHIIV_PUBLICATION_ID');

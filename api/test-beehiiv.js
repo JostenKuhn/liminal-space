@@ -6,8 +6,8 @@ export default async function handler(req, res) {
   const email = req.query.email;
   if (!email) return res.status(400).json({ error: 'Pass ?email=...' });
 
-  const API_KEY = process.env.BEEHIIV_API_KEY;
-  const PUB_ID = process.env.BEEHIIV_PUBLICATION_ID;
+  const API_KEY = (process.env.BEEHIIV_API_KEY || '').trim();
+  const PUB_ID = (process.env.BEEHIIV_PUBLICATION_ID || '').trim();
 
   const results = {
     env: {
