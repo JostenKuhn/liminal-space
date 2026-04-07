@@ -34,6 +34,11 @@ export default async function handler(req, res) {
     params.append('metadata[product]', 'first_contact');
     params.append('metadata[source]', req.body?.source || 'embedded');
 
+    // Pre-fill email if provided — makes Apple Pay one-tap
+    if (req.body?.email) {
+      params.append('customer_email', req.body.email);
+    }
+
     const resp = await fetch('https://api.stripe.com/v1/checkout/sessions', {
       method: 'POST',
       headers: {

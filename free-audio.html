@@ -885,14 +885,10 @@
       }
     }
 
-    async function openInlineCheckout(btn) {
+    function openInlineCheckout(btn) {
       if (checkoutLoading) return;
       const container = btn.parentElement.querySelector('.inline-checkout');
       if (!container) { scrollToCheckout(); return; }
-
-      const mountEl = container.querySelector('.inline-checkout-mount');
-      const loadingEl = container.querySelector('.inline-checkout-loading');
-      const errorEl = container.querySelector('.inline-checkout-error');
 
       if (container.style.display === 'block') {
         if (activeCheckout && activeCheckout.instance) {
@@ -909,15 +905,28 @@
         activeCheckout = null;
       }
 
+      const mountEl = container.querySelector('.inline-checkout-mount');
+      const loadingEl = container.querySelector('.inline-checkout-loading');
+      const errorEl = container.querySelector('.inline-checkout-error');
+
       mountEl.innerHTML = '';
-      loadingEl.style.display = 'block';
+      loadingEl.style.display = 'none';
       errorEl.style.display = 'none';
       container.style.display = 'block';
-      checkoutLoading = true;
 
-      const origText = btn.textContent;
-      btn.textContent = 'Loading checkout…';
-      btn.style.opacity = '0.7';
+      mountEl.innerHTML = `
+        <div style="padding:1.25rem 1rem;text-align:center;">
+          <p style="font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem;">Step 1 of 2</p>
+          <p style="font-size:.88rem;color:var(--text);margin-bottom:.75rem;font-weight:500;">Enter your email for instant access</p>
+          <form onsubmit="loadStripeCheckout(this); return false;" style="max-width:320px;margin:0 auto;">
+            <input type="email" name="email" required placeholder="your@email.com" autocomplete="email" style="width:100%;padding:.7rem 1rem;border:1px solid var(--rule);border-radius:8px;background:var(--bg);color:var(--text);font-size:.9rem;margin-bottom:.6rem;outline:none;font-family:var(--body);">
+            <button type="submit" class="btn-gold" style="width:100%;padding:.75rem;border:none;cursor:pointer;font-size:.9rem;">Continue to Payment</button>
+          </form>
+          <p style="font-size:.6rem;color:var(--text-dim);margin-top:.6rem;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:10px;height:10px;vertical-align:middle;margin-right:.2rem;opacity:.5;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Apple Pay &amp; Google Pay available on next step
+          </p>
+        </div>`;
 
       setTimeout(() => container.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
 
@@ -926,6 +935,21 @@
         gtag('event', 'begin_checkout', {value: 37.00, currency: 'USD', page: 'free_audio'});
         fbq('track', 'InitiateCheckout', {value: 37.00, currency: 'USD'});
       }
+    }
+
+    async function loadStripeCheckout(form) {
+      if (checkoutLoading) return;
+      const email = form.querySelector('input[name="email"]').value;
+      if (!email) return;
+
+      const container = form.closest('.inline-checkout');
+      const mountEl = container.querySelector('.inline-checkout-mount');
+      const loadingEl = container.querySelector('.inline-checkout-loading');
+      const errorEl = container.querySelector('.inline-checkout-error');
+
+      mountEl.innerHTML = '';
+      loadingEl.style.display = 'block';
+      checkoutLoading = true;
 
       try {
         if (!stripeInstance) {
@@ -936,7 +960,7 @@
         const resp = await fetch('/api/create-embedded-checkout', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ source: 'free_audio_page' }),
+          body: JSON.stringify({ source: 'free_audio_page', email }),
         });
 
         if (!resp.ok) {
@@ -951,14 +975,14 @@
         instance.mount(mountEl);
         activeCheckout = { instance, container };
 
+        setTimeout(() => container.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+
       } catch (err) {
         console.error('Checkout error:', err);
         loadingEl.style.display = 'none';
         errorEl.style.display = 'block';
       } finally {
         checkoutLoading = false;
-        btn.textContent = origText;
-        btn.style.opacity = '1';
       }
     }
   </script>
