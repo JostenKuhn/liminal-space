@@ -26,7 +26,7 @@ export default async function handler(req, res) {
       ],
       payment_method_types: ['card'],
       allow_promotion_codes: true,
-      success_url: 'https://enterliminalspace.com/members.html?purchase=success',
+      success_url: 'https://enterliminalspace.com/members.html?purchased=true',
       cancel_url: 'https://enterliminalspace.com/?checkout=cancelled',
       metadata: {
         product: 'first_contact',
