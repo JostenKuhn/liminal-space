@@ -921,6 +921,7 @@
         sessionStorage.setItem('ic_fired', '1');
         gtag('event', 'begin_checkout', {value: 37.00, currency: 'USD', page: 'free_audio'});
         fbq('track', 'InitiateCheckout', {value: 37.00, currency: 'USD'});
+        rdt('track', 'AddToCart', {value: 37.00, currency: 'USD'});
       }
 
       try {

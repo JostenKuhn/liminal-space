@@ -28,6 +28,13 @@
     fbq('track', 'PageView');
   </script>
 
+  <!-- Reddit Pixel -->
+  <script>
+    !function(w,d){if(!w.rdt){var p=w.rdt=function(){p.sendEvent?p.sendEvent.apply(p,arguments):p.callQueue.push(arguments)};p.callQueue=[];var t=d.createElement("script");t.src="https://www.redditstatic.com/ads/pixel.js";t.async=!0;var s=d.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}}(window,document);
+    rdt('init','a2_iryyyn1edljt');
+    rdt('track','PageVisit');
+  </script>
+
   <!-- Stripe.js -->
   <script src="https://js.stripe.com/v3/" async></script>
 
@@ -127,7 +134,7 @@
     <h1>You're in.</h1>
     <p class="sub">Payment confirmed. Your sessions are ready. Check your email for the welcome message with your download link.</p>
     <p class="redirect-note"><span class="spinner"></span>Redirecting to your sessions in <span id="countdown">5</span>s…</p>
-    <a href="members.html?purchased=true" class="btn-gold">Go to My Sessions Now</a>
+    <a href="members.html" class="btn-gold">Go to My Sessions Now</a>
   </div>
 
   <script>
@@ -138,20 +145,30 @@
     if (!localStorage.getItem(purchaseKey)) {
       localStorage.setItem(purchaseKey, Date.now().toString());
 
+      // Mark purchase as tracked — prevents members.html from double-firing
+      localStorage.setItem('ls_purchase_fired', '1');
+      localStorage.setItem('ls_meta_purchase_fired', '1');
+      localStorage.setItem('ls_reddit_purchase_fired', '1');
+
+      const txnId = sessionId || 'stripe_' + Date.now();
+      const eventID = 'purchase_' + txnId;
+
       // GA4 purchase event
       gtag('event', 'purchase', {
-        transaction_id: sessionId || 'stripe_' + Date.now(),
+        transaction_id: txnId,
         value: 37.00,
         currency: 'USD',
         items: [{ item_name: 'First Contact', price: 37.00, quantity: 1 }]
       });
 
-      // Meta Pixel purchase event (deduped by eventID)
-      const eventID = 'purchase_' + (sessionId || Date.now());
+      // Meta Pixel purchase event
       fbq('track', 'Purchase', { value: 37.00, currency: 'USD' }, { eventID: eventID });
+
+      // Reddit Pixel purchase event
+      rdt('track', 'Purchase', { value: 37.00, currency: 'USD' });
     }
 
-    // Countdown + redirect
+    // Countdown + redirect (no ?purchased=true — tracking already fired here)
     let seconds = 5;
     const countdownEl = document.getElementById('countdown');
     const timer = setInterval(() => {
@@ -159,7 +176,7 @@
       countdownEl.textContent = seconds;
       if (seconds <= 0) {
         clearInterval(timer);
-        window.location.href = 'members.html?purchased=true';
+        window.location.href = 'members.html';
       }
     }, 1000);
   </script>
