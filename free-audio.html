@@ -843,37 +843,13 @@
       });
     });
 
-    // Stripe checkout — intercept all buy links
+    // Track buy CTA clicks (Stan Store — Stripe checkout coming soon)
     document.querySelectorAll('a[href*="stan.store"]').forEach(link => {
-      link.addEventListener('click', async (e) => {
-        e.preventDefault();
+      link.addEventListener('click', () => {
         if (!sessionStorage.getItem('ic_fired')) {
           sessionStorage.setItem('ic_fired', '1');
           gtag('event', 'begin_checkout', {value: 37.00, currency: 'USD', page: 'free_audio'});
           fbq('track', 'InitiateCheckout', {value: 37.00, currency: 'USD', content_name: 'First Contact'});
-        }
-        link.style.opacity = '0.6';
-        link.style.pointerEvents = 'none';
-        const origText = link.textContent;
-        link.textContent = 'Loading checkout...';
-        try {
-          const res = await fetch('/api/create-checkout', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ source: 'free_audio' }),
-          });
-          const data = await res.json();
-          if (data.url) {
-            window.location.href = data.url;
-          } else {
-            throw new Error(data.error || 'Checkout failed');
-          }
-        } catch (err) {
-          console.error('Checkout error:', err);
-          link.textContent = origText;
-          link.style.opacity = '1';
-          link.style.pointerEvents = 'auto';
-          window.open('https://stan.store/liminalspace/p/first-contact--consciousness-exploration-kit', '_blank');
         }
       });
     });
