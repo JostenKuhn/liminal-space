@@ -40,6 +40,9 @@
     rdt('track','SignUp');
   </script>
 
+  <!-- Stripe.js for embedded checkout -->
+  <script src="https://js.stripe.com/v3/" async></script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap">
@@ -872,6 +875,94 @@
           fbq('trackCustom', 'TimeOnPage', {page: 'free_audio', seconds: sec});
         }
       }, sec * 1000);
+    });
+  </script>
+
+  <!-- ═══ STRIPE EMBEDDED CHECKOUT OVERLAY ═══ -->
+  <div id="checkout-overlay" style="display:none;position:fixed;inset:0;z-index:20000;background:rgba(5,5,16,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);align-items:center;justify-content:center;overflow-y:auto;">
+    <div style="background:var(--bg2);border:1px solid var(--rule);border-radius:16px;padding:2rem 1.5rem;max-width:500px;width:94%;margin:2rem auto;position:relative;box-shadow:0 24px 80px rgba(0,0,0,0.6);">
+      <button onclick="closeCheckout()" style="position:absolute;top:12px;right:16px;background:none;border:none;color:var(--text-dim);font-size:1.5rem;cursor:pointer;line-height:1;z-index:1;" aria-label="Close">&times;</button>
+      <div style="text-align:center;margin-bottom:1.25rem;">
+        <p style="font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;">Secure Checkout</p>
+        <h3 style="font-family:var(--display);font-size:1.2rem;font-weight:800;line-height:1.2;margin-bottom:.3rem;">First Contact — $37</h3>
+        <p style="font-size:.75rem;color:var(--text-dim);">3 guided sessions + field manual + 7-day protocol</p>
+      </div>
+      <div id="checkout-mount" style="min-height:300px;"></div>
+      <div id="checkout-loading" style="text-align:center;padding:3rem 0;">
+        <p style="color:var(--text-mid);font-size:.85rem;">Loading secure checkout…</p>
+      </div>
+      <div id="checkout-error" style="display:none;text-align:center;padding:2rem 0;">
+        <p style="color:#e74c3c;font-size:.85rem;margin-bottom:1rem;">Something went wrong. Please try again.</p>
+        <button onclick="closeCheckout()" style="background:var(--gold);color:#050510;border:none;padding:.6rem 1.5rem;border-radius:8px;cursor:pointer;font-size:.85rem;">Close</button>
+      </div>
+      <p style="text-align:center;font-size:.65rem;color:var(--text-dim);margin-top:1rem;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px;vertical-align:middle;margin-right:.2rem;opacity:.5;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Powered by Stripe · 256-bit encryption · 100% money-back guarantee
+      </p>
+    </div>
+  </div>
+
+  <script>
+    // ═══ STRIPE EMBEDDED CHECKOUT ═══
+    let stripeInstance = null;
+    let checkoutInstance = null;
+
+    async function openCheckout() {
+      const overlay = document.getElementById('checkout-overlay');
+      const mountEl = document.getElementById('checkout-mount');
+      const loadingEl = document.getElementById('checkout-loading');
+      const errorEl = document.getElementById('checkout-error');
+
+      mountEl.innerHTML = '';
+      loadingEl.style.display = 'block';
+      errorEl.style.display = 'none';
+      overlay.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+
+      if (!sessionStorage.getItem('ic_fired')) {
+        sessionStorage.setItem('ic_fired', '1');
+        gtag('event', 'begin_checkout', {value: 37.00, currency: 'USD'});
+        fbq('track', 'InitiateCheckout', {value: 37.00, currency: 'USD'});
+      }
+
+      try {
+        if (!stripeInstance) {
+          stripeInstance = Stripe('pk_live_51TJZUyBMM4lnbKJ2Gflp8haC3Lmo6LBk7Bp29lbfIJyTOTJzK7A5iEq0llVH7IIhdqC14SB80ZoJgir7y3gxEZs600igQ2o21Z');
+        }
+
+        const resp = await fetch('/api/create-embedded-checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ source: 'free_audio_page' }),
+        });
+
+        if (!resp.ok) throw new Error('Failed to create checkout session');
+        const { clientSecret } = await resp.json();
+
+        if (checkoutInstance) checkoutInstance.destroy();
+
+        loadingEl.style.display = 'none';
+        checkoutInstance = await stripeInstance.initEmbeddedCheckout({ clientSecret });
+        checkoutInstance.mount('#checkout-mount');
+
+      } catch (err) {
+        console.error('Checkout error:', err);
+        loadingEl.style.display = 'none';
+        errorEl.style.display = 'block';
+      }
+    }
+
+    function closeCheckout() {
+      document.getElementById('checkout-overlay').style.display = 'none';
+      document.body.style.overflow = '';
+      if (checkoutInstance) { checkoutInstance.destroy(); checkoutInstance = null; }
+    }
+
+    document.getElementById('checkout-overlay').addEventListener('click', function(e) {
+      if (e.target === this) closeCheckout();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeCheckout();
     });
   </script>
 

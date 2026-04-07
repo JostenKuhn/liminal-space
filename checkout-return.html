@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Successful — Liminal Space</title>
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1GJVT4XFG9"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-1GJVT4XFG9');
+  </script>
+
+  <!-- Meta Pixel -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '26479131108445246');
+    fbq('track', 'PageView');
+  </script>
+
+  <!-- Stripe.js -->
+  <script src="https://js.stripe.com/v3/" async></script>
+
+  <style>
+    :root {
+      --bg: #050510;
+      --surface: #0F0F1A;
+      --gold: #D4A84C;
+      --text: #EAE8F4;
+      --text-mid: #A8A4BE;
+      --text-dim: #6B687E;
+      --display: 'Syne', sans-serif;
+      --body: 'Outfit', sans-serif;
+      --mono: 'IBM Plex Mono', monospace;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .container {
+      text-align: center;
+      max-width: 480px;
+    }
+    .check {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(212, 168, 76, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+    }
+    .check svg {
+      width: 32px;
+      height: 32px;
+      stroke: var(--gold);
+    }
+    h1 {
+      font-family: var(--display);
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: .5rem;
+    }
+    .sub {
+      color: var(--text-mid);
+      font-size: .9rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+    .redirect-note {
+      color: var(--text-dim);
+      font-size: .78rem;
+      margin-bottom: 1.5rem;
+    }
+    .btn-gold {
+      display: inline-block;
+      background: var(--gold);
+      color: #050510;
+      font-weight: 600;
+      padding: .85rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: .95rem;
+    }
+    .btn-gold:hover {
+      filter: brightness(1.1);
+    }
+    .spinner {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--text-dim);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: .5rem;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <div class="container" id="content">
+    <div class="check">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+    </div>
+    <h1>You're in.</h1>
+    <p class="sub">Payment confirmed. Your sessions are ready. Check your email for the welcome message with your download link.</p>
+    <p class="redirect-note"><span class="spinner"></span>Redirecting to your sessions in <span id="countdown">5</span>s…</p>
+    <a href="members.html?purchased=true" class="btn-gold">Go to My Sessions Now</a>
+  </div>
+
+  <script>
+    // Fire purchase tracking events (deduped)
+    const sessionId = new URLSearchParams(window.location.search).get('session_id');
+    const purchaseKey = 'ls_purchase_' + (sessionId || 'unknown');
+
+    if (!localStorage.getItem(purchaseKey)) {
+      localStorage.setItem(purchaseKey, Date.now().toString());
+
+      // GA4 purchase event
+      gtag('event', 'purchase', {
+        transaction_id: sessionId || 'stripe_' + Date.now(),
+        value: 37.00,
+        currency: 'USD',
+        items: [{ item_name: 'First Contact', price: 37.00, quantity: 1 }]
+      });
+
+      // Meta Pixel purchase event (deduped by eventID)
+      const eventID = 'purchase_' + (sessionId || Date.now());
+      fbq('track', 'Purchase', { value: 37.00, currency: 'USD' }, { eventID: eventID });
+    }
+
+    // Countdown + redirect
+    let seconds = 5;
+    const countdownEl = document.getElementById('countdown');
+    const timer = setInterval(() => {
+      seconds--;
+      countdownEl.textContent = seconds;
+      if (seconds <= 0) {
+        clearInterval(timer);
+        window.location.href = 'members.html?purchased=true';
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
