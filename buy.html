@@ -199,6 +199,45 @@
       font-style: normal;
       margin-top: .3rem;
     }
+    .order-summary {
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    .order-summary h2 {
+      font-family: var(--mono);
+      font-size: .6rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .order-item {
+      font-size: .8rem;
+      color: var(--text-mid);
+      padding: .35rem 0;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .order-check {
+      color: var(--gold);
+      font-size: .7rem;
+      flex-shrink: 0;
+    }
+    .order-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: .75rem;
+      padding-top: .75rem;
+      border-top: 1px solid var(--rule);
+      font-size: .95rem;
+      font-weight: 600;
+      color: var(--text);
+    }
     .checkout-container {
       border: 1px solid var(--rule);
       border-radius: 12px;
@@ -312,8 +351,8 @@
     <div class="product-info">
       <h1>First Contact</h1>
       <p class="price"><span>$97</span>$37</p>
-      <p class="desc">The CIA spent $20 million proving your mind can leave your body. This is the protocol.</p>
-      <p class="delivery-tag">Instant digital download - audio files + PDF guide</p>
+      <p class="desc">3 guided audio sessions + field manual + 7-day protocol.<br>The CIA-researched method to train your mind to leave your body.</p>
+      <p class="delivery-tag">Instant digital download - start tonight</p>
     </div>
 
     <div class="two-col">
@@ -361,6 +400,21 @@
       </div>
 
       <div class="right-col">
+        <div class="order-summary">
+          <h2>Your order</h2>
+          <div class="order-items">
+            <div class="order-item"><span class="order-check">&#10003;</span> 3 guided audio sessions (20 min each)</div>
+            <div class="order-item"><span class="order-check">&#10003;</span> First Contact Field Manual (PDF)</div>
+            <div class="order-item"><span class="order-check">&#10003;</span> 7-Day Protocol Plan</div>
+            <div class="order-item"><span class="order-check">&#10003;</span> Lifetime access - yours forever</div>
+            <div class="order-item"><span class="order-check">&#10003;</span> Full refund guarantee</div>
+          </div>
+          <div class="order-total">
+            <span>Total today</span>
+            <span><s style="color:var(--text-dim);font-size:.8rem;margin-right:.3rem;">$97</s> $37</span>
+          </div>
+        </div>
+
         <div class="checkout-container">
           <div id="checkout-mount"></div>
           <div id="checkout-loading" class="checkout-loading">
