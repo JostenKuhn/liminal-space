@@ -70,7 +70,11 @@ export default async function handler(req, res) {
     // Step 3: Remove from nurture automation (they bought — stop selling)
     const automationResult = await removeFromAutomation(API_KEY, PUB_ID, subscriber.id);
 
-    console.log(`Webhook complete: email=${email}, tagged=${tagResult}, removed_from_automation=${automationResult}`);
+    // Step 4: Add to purchase welcome automation (sends members page link)
+    const PURCHASE_AUTOMATION_ID = 'aut_e2df2f26-4ff3-4cce-9c7a-4ef7fbf7f74c';
+    const welcomeResult = await addToAutomation(API_KEY, PUB_ID, PURCHASE_AUTOMATION_ID, subscriber.id);
+
+    console.log(`Webhook complete: email=${email}, tagged=${tagResult}, removed_from_nurture=${automationResult}, added_to_welcome=${welcomeResult}`);
 
     return res.status(200).json({
       received: true,
@@ -78,6 +82,7 @@ export default async function handler(req, res) {
       subscriber_id: subscriber.id,
       tag_added: tagResult,
       removed_from_automation: automationResult,
+      added_to_welcome: welcomeResult,
     });
   } catch (err) {
     console.error('Webhook error:', err);
@@ -170,6 +175,32 @@ async function addPurchasedTag(apiKey, pubId, subscriberId) {
     return true;
   } catch (err) {
     console.error('Tag error:', err);
+    return false;
+  }
+}
+
+async function addToAutomation(apiKey, pubId, automationId, subscriberId) {
+  try {
+    const response = await fetch(
+      `https://api.beehiiv.com/v2/publications/${pubId}/automations/${automationId}/subscriptions`,
+      {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ subscriber_id: subscriberId }),
+      }
+    );
+
+    if (!response.ok) {
+      console.error('Add to automation error:', await response.text());
+      return false;
+    }
+
+    return true;
+  } catch (err) {
+    console.error('Add to automation error:', err);
     return false;
   }
 }
