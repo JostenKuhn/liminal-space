@@ -1176,7 +1176,21 @@
         <p class="rv rv-d1">20 minutes. Headphones. A dark room. That's all it takes to experience what the CIA spent two decades studying.</p>
 
         <div class="final-box rv rv-d2">
-          <button onclick="openCheckout()" class="btn-gold" style="display:block;width:100%;text-align:center;font-size:1.05rem;padding:1.05rem;margin-bottom:.5rem;border:none;cursor:pointer;">Get the Protocol · $37</button>
+          <button onclick="openInlineCheckout(this)" class="btn-gold" style="display:block;width:100%;text-align:center;font-size:1.05rem;padding:1.05rem;margin-bottom:.5rem;border:none;cursor:pointer;">Get the Protocol · $37</button>
+          <div class="inline-checkout" style="display:none;margin-bottom:1rem;border:1px solid var(--rule);border-radius:12px;overflow:hidden;background:var(--surface);">
+            <div class="inline-checkout-mount"></div>
+            <div class="inline-checkout-loading" style="text-align:center;padding:2.5rem 1rem;">
+              <p style="color:var(--text-mid);font-size:.82rem;">Loading secure checkout…</p>
+            </div>
+            <div class="inline-checkout-error" style="display:none;text-align:center;padding:2rem 1rem;">
+              <p style="color:#e74c3c;font-size:.82rem;margin-bottom:.75rem;">Something went wrong. Please try again.</p>
+              <button onclick="this.closest('.inline-checkout').style.display='none'" style="background:var(--gold);color:#050510;border:none;padding:.5rem 1.2rem;border-radius:8px;cursor:pointer;font-size:.8rem;">Close</button>
+            </div>
+            <p style="text-align:center;font-size:.6rem;color:var(--text-dim);padding:.5rem 1rem .75rem;">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:10px;height:10px;vertical-align:middle;margin-right:.2rem;opacity:.5;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Powered by Stripe · 256-bit encryption · Money-back guarantee
+            </p>
+          </div>
           <p style="font-size:.72rem;color:var(--text-dim);margin-bottom:1.5rem;">Instant download. 100% money-back guarantee.</p>
           <div style="padding-top:1.25rem;border-top:1px solid rgba(255,255,255,0.06);text-align:center;">
             <p style="font-size:.78rem;color:var(--text-dim);margin-bottom:.6rem;">Not ready to buy? Try the free session first.</p>
@@ -1394,49 +1408,46 @@
     });
   </script>
 
-  <!-- ═══ STRIPE EMBEDDED CHECKOUT OVERLAY ═══ -->
-  <div id="checkout-overlay" style="display:none;position:fixed;inset:0;z-index:20000;background:rgba(5,5,16,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);align-items:center;justify-content:center;overflow-y:auto;padding:1rem;">
-    <div style="background:var(--surface);border:1px solid var(--rule);border-radius:16px;padding:1.5rem 1.25rem;max-width:480px;width:100%;margin:auto;position:relative;box-shadow:0 24px 80px rgba(0,0,0,0.6);max-height:90vh;overflow-y:auto;">
-      <button onclick="closeCheckout()" style="position:absolute;top:12px;right:16px;background:none;border:none;color:var(--text-dim);font-size:1.5rem;cursor:pointer;line-height:1;z-index:1;" aria-label="Close">&times;</button>
-      <div style="text-align:center;margin-bottom:1rem;">
-        <p style="font-family:var(--mono);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem;">Secure Checkout</p>
-        <h3 style="font-family:var(--display);font-size:1.1rem;font-weight:800;line-height:1.2;margin-bottom:.2rem;">First Contact — $37</h3>
-        <p style="font-size:.7rem;color:var(--text-dim);">3 guided sessions + field manual + 7-day protocol</p>
-      </div>
-      <div id="checkout-mount"></div>
-      <div id="checkout-loading" style="text-align:center;padding:3rem 0;">
-        <p style="color:var(--text-mid);font-size:.85rem;">Loading secure checkout…</p>
-      </div>
-      <div id="checkout-error" style="display:none;text-align:center;padding:2rem 0;">
-        <p style="color:#e74c3c;font-size:.85rem;margin-bottom:1rem;">Something went wrong. Please try again.</p>
-        <button onclick="closeCheckout()" style="background:var(--gold);color:#050510;border:none;padding:.6rem 1.5rem;border-radius:8px;cursor:pointer;font-size:.85rem;">Close</button>
-      </div>
-      <p style="text-align:center;font-size:.65rem;color:var(--text-dim);margin-top:1rem;">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px;vertical-align:middle;margin-right:.2rem;opacity:.5;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        Powered by Stripe · 256-bit encryption · 100% money-back guarantee
-      </p>
-    </div>
-  </div>
-
   <script>
-    // ═══ STRIPE EMBEDDED CHECKOUT ═══
+    // ═══ STRIPE INLINE CHECKOUT ═══
     let stripeInstance = null;
-    let checkoutInstance = null;
+    let activeCheckout = null; // { instance, container }
 
-    async function openCheckout() {
-      const overlay = document.getElementById('checkout-overlay');
-      const mountEl = document.getElementById('checkout-mount');
-      const loadingEl = document.getElementById('checkout-loading');
-      const errorEl = document.getElementById('checkout-error');
+    async function openInlineCheckout(btn) {
+      const container = btn.parentElement.querySelector('.inline-checkout');
+      if (!container) return;
 
-      // Reset state
+      const mountEl = container.querySelector('.inline-checkout-mount');
+      const loadingEl = container.querySelector('.inline-checkout-loading');
+      const errorEl = container.querySelector('.inline-checkout-error');
+
+      // Toggle — if already open, close it
+      if (container.style.display === 'block') {
+        if (activeCheckout && activeCheckout.instance) {
+          activeCheckout.instance.destroy();
+          activeCheckout = null;
+        }
+        container.style.display = 'none';
+        return;
+      }
+
+      // Close any other open checkout
+      if (activeCheckout && activeCheckout.instance) {
+        activeCheckout.instance.destroy();
+        activeCheckout.container.style.display = 'none';
+        activeCheckout = null;
+      }
+
+      // Show container
       mountEl.innerHTML = '';
       loadingEl.style.display = 'block';
       errorEl.style.display = 'none';
-      overlay.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
+      container.style.display = 'block';
 
-      // Track checkout initiation
+      // Smooth scroll to checkout
+      setTimeout(() => container.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
+
+      // Track
       if (!sessionStorage.getItem('ic_fired')) {
         sessionStorage.setItem('ic_fired', '1');
         gtag('event', 'begin_checkout', {value: 37.00, currency: 'USD'});
@@ -1444,12 +1455,10 @@
       }
 
       try {
-        // Init Stripe if not done
         if (!stripeInstance) {
           stripeInstance = Stripe('pk_live_51TJZUyBMM4lnbKJ2Gflp8haC3Lmo6LBk7Bp29lbfIJyTOTJzK7A5iEq0llVH7IIhdqC14SB80ZoJgir7y3gxEZs600igQ2o21Z');
         }
 
-        // Create checkout session
         const resp = await fetch('/api/create-embedded-checkout', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -1457,18 +1466,12 @@
         });
 
         if (!resp.ok) throw new Error('Failed to create checkout session');
-
         const { clientSecret } = await resp.json();
 
-        // Destroy previous instance if exists
-        if (checkoutInstance) {
-          checkoutInstance.destroy();
-        }
-
-        // Mount embedded checkout
         loadingEl.style.display = 'none';
-        checkoutInstance = await stripeInstance.initEmbeddedCheckout({ clientSecret });
-        checkoutInstance.mount('#checkout-mount');
+        const instance = await stripeInstance.initEmbeddedCheckout({ clientSecret });
+        instance.mount(mountEl);
+        activeCheckout = { instance, container };
 
       } catch (err) {
         console.error('Checkout error:', err);
@@ -1476,26 +1479,6 @@
         errorEl.style.display = 'block';
       }
     }
-
-    function closeCheckout() {
-      const overlay = document.getElementById('checkout-overlay');
-      overlay.style.display = 'none';
-      document.body.style.overflow = '';
-      if (checkoutInstance) {
-        checkoutInstance.destroy();
-        checkoutInstance = null;
-      }
-    }
-
-    // Close on backdrop click
-    document.getElementById('checkout-overlay').addEventListener('click', function(e) {
-      if (e.target === this) closeCheckout();
-    });
-
-    // Close on Escape key
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') closeCheckout();
-    });
   </script>
 
   <!-- ═══ SCROLL-TRIGGERED POPUP ═══ -->
