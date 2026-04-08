@@ -23,7 +23,7 @@ export default async function handler(req, res) {
   try {
     const params = new URLSearchParams();
     params.append('mode', 'payment');
-    params.append('ui_mode', 'embedded_page');
+    params.append('ui_mode', 'embedded');
     params.append('line_items[0][price_data][currency]', 'usd');
     params.append('line_items[0][price_data][product_data][name]', 'First Contact — Consciousness Exploration Kit');
     params.append('line_items[0][price_data][product_data][description]', '3 guided audio sessions + field manual + 7-day protocol. Instant download.');
