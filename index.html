@@ -37,8 +37,6 @@
     rdt('track','PageVisit');
   </script>
 
-  <!-- Stripe.js for embedded checkout -->
-  <script src="https://js.stripe.com/v3/" async></script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -834,7 +832,7 @@
     <div class="nav-inner">
       <a href="#" class="nav-mark">Liminal<i>Space</i></a>
       <a href="#final" class="nav-cta" style="background:transparent;color:var(--text-mid);border:1px solid var(--rule);">Free Audio</a>
-      <a href="#final" onclick="scrollToCheckout(); return false;" class="nav-cta">First Contact · $37</a>
+      <a href="buy.html" class="nav-cta">First Contact · $37</a>
       <a href="https://www.monroeinstitute.org/products/gateway-voyage-online?ref=skrszyzu" target="_blank" rel="noopener" class="nav-cta nav-cta-buy">Gateway Voyage · $595</a>
     </div>
   </nav>
@@ -897,8 +895,7 @@
             <li>Real separation techniques used by thousands worldwide</li>
             <li>The full written protocol + 7-day training plan</li>
           </ul>
-          <button onclick="openInlineCheckout(this)" class="btn-gold" style="display:block;width:100%;text-align:center;font-size:1.05rem;padding:1.05rem;border:none;cursor:pointer;">Get the Protocol · $37</button>
-          <div class="inline-checkout" style="display:none;margin-top:.75rem;border:1px solid var(--rule);border-radius:12px;overflow:hidden;background:var(--surface);"><div class="inline-checkout-mount"></div><div class="inline-checkout-loading" style="text-align:center;padding:2.5rem 1rem;"><p style="color:var(--text-mid);font-size:.82rem;">Loading secure checkout…</p></div><div class="inline-checkout-error" style="display:none;text-align:center;padding:2rem 1rem;"><p style="color:#e74c3c;font-size:.82rem;margin-bottom:.75rem;">Something went wrong. Please try again.</p><button onclick="this.closest('.inline-checkout').style.display='none'" style="background:var(--gold);color:#050510;border:none;padding:.5rem 1.2rem;border-radius:8px;cursor:pointer;font-size:.8rem;">Close</button></div><p style="text-align:center;font-size:.6rem;color:var(--text-dim);padding:.5rem 1rem .75rem;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:10px;height:10px;vertical-align:middle;margin-right:.2rem;opacity:.5;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Powered by Stripe · 256-bit encryption · Money-back guarantee</p></div>
+          <a href="buy.html" class="btn-gold" style="display:block;width:100%;text-align:center;font-size:1.05rem;padding:1.05rem;text-decoration:none;">Get the Protocol · $37</a>
           <p style="font-size:.7rem;color:var(--text-dim);margin-top:.6rem;margin-bottom:.4rem;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px;vertical-align:middle;margin-right:.3rem;opacity:.5;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Secure checkout · Instant download · 100% money-back guarantee
           </p>
@@ -1064,8 +1061,7 @@
       <div class="mid-inner">
         <h2 class="rv">Experience it <em>tonight</em></h2>
         <p class="rv rv-d1">Headphones on. Eyes closed. The binaural frequencies shift your brainwaves automatically. Most people feel something shift within the first session.</p>
-        <button onclick="openInlineCheckout(this)" class="btn-gold rv rv-d2" style="font-size:1.05rem;padding:1.1rem 2.5rem;margin-top:1rem;border:none;cursor:pointer;">Get the Protocol · $37</button>
-        <div class="inline-checkout rv rv-d2" style="display:none;margin-top:.75rem;border:1px solid var(--rule);border-radius:12px;overflow:hidden;background:var(--surface);max-width:480px;margin-left:auto;margin-right:auto;"><div class="inline-checkout-mount"></div><div class="inline-checkout-loading" style="text-align:center;padding:2.5rem 1rem;"><p style="color:var(--text-mid);font-size:.82rem;">Loading secure checkout…</p></div><div class="inline-checkout-error" style="display:none;text-align:center;padding:2rem 1rem;"><p style="color:#e74c3c;font-size:.82rem;margin-bottom:.75rem;">Something went wrong. Please try again.</p><button onclick="this.closest('.inline-checkout').style.display='none'" style="background:var(--gold);color:#050510;border:none;padding:.5rem 1.2rem;border-radius:8px;cursor:pointer;font-size:.8rem;">Close</button></div><p style="text-align:center;font-size:.6rem;color:var(--text-dim);padding:.5rem 1rem .75rem;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:10px;height:10px;vertical-align:middle;margin-right:.2rem;opacity:.5;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Powered by Stripe · 256-bit encryption · Money-back guarantee</p></div>
+        <a href="buy.html" class="btn-gold rv rv-d2" style="font-size:1.05rem;padding:1.1rem 2.5rem;margin-top:1rem;display:inline-block;text-decoration:none;">Get the Protocol · $37</a>
         <p class="rv rv-d3" style="margin-top:.75rem;font-size:.72rem;color:var(--text-dim);">Instant download. 100% money-back guarantee.</p>
         <div class="rv rv-d3" style="margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--rule);max-width:380px;margin-left:auto;margin-right:auto;">
           <p style="font-size:.82rem;color:var(--text-dim);margin-bottom:.5rem;">Not ready? Try a free session first.</p>
@@ -1125,8 +1121,7 @@
       <p class="rv rv-d2" style="color: var(--text-mid); font-size: 1rem; line-height: 1.8; font-weight: 300; margin-bottom: 1.25rem;">Three sessions. Each one takes you deeper. Real separation techniques used by thousands of practitioners worldwide. Not a guided meditation. A guided protocol with real methodology.</p>
       <p class="rv rv-d2" style="font-family: var(--display); font-size: 1.8rem; font-weight: 800; margin-bottom: 0.25rem;"><span style="color: var(--text-dim); font-size: 1rem; text-decoration: line-through; margin-right: 0.5rem;">$97</span>$37</p>
       <p class="rv rv-d2" style="font-size: .78rem; color: var(--text-dim); margin-bottom: 1.5rem;">Launch price. One-time. Keep forever.</p>
-      <button onclick="openInlineCheckout(this)" class="btn-gold rv rv-d3" style="font-size: 1.05rem; padding: 1.1rem 2.5rem;border:none;cursor:pointer;">Get the Protocol · $37</button>
-      <div class="inline-checkout rv rv-d3" style="display:none;margin-top:.75rem;border:1px solid var(--rule);border-radius:12px;overflow:hidden;background:var(--surface);max-width:480px;margin-left:auto;margin-right:auto;"><div class="inline-checkout-mount"></div><div class="inline-checkout-loading" style="text-align:center;padding:2.5rem 1rem;"><p style="color:var(--text-mid);font-size:.82rem;">Loading secure checkout…</p></div><div class="inline-checkout-error" style="display:none;text-align:center;padding:2rem 1rem;"><p style="color:#e74c3c;font-size:.82rem;margin-bottom:.75rem;">Something went wrong. Please try again.</p><button onclick="this.closest('.inline-checkout').style.display='none'" style="background:var(--gold);color:#050510;border:none;padding:.5rem 1.2rem;border-radius:8px;cursor:pointer;font-size:.8rem;">Close</button></div><p style="text-align:center;font-size:.6rem;color:var(--text-dim);padding:.5rem 1rem .75rem;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:10px;height:10px;vertical-align:middle;margin-right:.2rem;opacity:.5;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Powered by Stripe · 256-bit encryption · Money-back guarantee</p></div>
+      <a href="buy.html" class="btn-gold rv rv-d3" style="font-size: 1.05rem; padding: 1.1rem 2.5rem;display:inline-block;text-decoration:none;">Get the Protocol · $37</a>
       <p class="rv rv-d4" style="margin-top: 1rem; font-size: .72rem; color: var(--text-dim);">Instant download. 100% money-back guarantee.</p>
     </div>
   </section>
@@ -1179,21 +1174,7 @@
         <p class="rv rv-d1">20 minutes. Headphones. A dark room. That's all it takes to experience what the CIA spent two decades studying.</p>
 
         <div class="final-box rv rv-d2">
-          <button onclick="openInlineCheckout(this)" class="btn-gold" style="display:block;width:100%;text-align:center;font-size:1.05rem;padding:1.05rem;margin-bottom:.5rem;border:none;cursor:pointer;">Get the Protocol · $37</button>
-          <div class="inline-checkout" style="display:none;margin-bottom:1rem;border:1px solid var(--rule);border-radius:12px;overflow:hidden;background:var(--surface);">
-            <div class="inline-checkout-mount"></div>
-            <div class="inline-checkout-loading" style="text-align:center;padding:2.5rem 1rem;">
-              <p style="color:var(--text-mid);font-size:.82rem;">Loading secure checkout…</p>
-            </div>
-            <div class="inline-checkout-error" style="display:none;text-align:center;padding:2rem 1rem;">
-              <p style="color:#e74c3c;font-size:.82rem;margin-bottom:.75rem;">Something went wrong. Please try again.</p>
-              <button onclick="this.closest('.inline-checkout').style.display='none'" style="background:var(--gold);color:#050510;border:none;padding:.5rem 1.2rem;border-radius:8px;cursor:pointer;font-size:.8rem;">Close</button>
-            </div>
-            <p style="text-align:center;font-size:.6rem;color:var(--text-dim);padding:.5rem 1rem .75rem;">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:10px;height:10px;vertical-align:middle;margin-right:.2rem;opacity:.5;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              Powered by Stripe · 256-bit encryption · Money-back guarantee
-            </p>
-          </div>
+          <a href="buy.html" class="btn-gold" style="display:block;width:100%;text-align:center;font-size:1.05rem;padding:1.05rem;margin-bottom:.5rem;text-decoration:none;">Get the Protocol · $37</a>
           <p style="font-size:.72rem;color:var(--text-dim);margin-bottom:1.5rem;">Instant download. 100% money-back guarantee.</p>
           <div style="padding-top:1.25rem;border-top:1px solid rgba(255,255,255,0.06);text-align:center;">
             <p style="font-size:.78rem;color:var(--text-dim);margin-bottom:.6rem;">Not ready to buy? Try the free session first.</p>
@@ -1216,7 +1197,7 @@
   <!-- STICKY MOBILE CTA -->
   <div class="sticky-cta" id="sticky-cta">
     <a href="#final" class="sticky-free">Free Audio</a>
-    <a href="#final" onclick="scrollToCheckout(); return false;" class="sticky-buy">First Contact · $37</a>
+    <a href="buy.html" class="sticky-buy">First Contact · $37</a>
     <a href="https://www.monroeinstitute.org/products/gateway-voyage-online?ref=skrszyzu" target="_blank" rel="noopener" class="sticky-buy" style="background:transparent;color:var(--gold);border:1px solid rgba(212,168,76,0.4);">Gateway · $595</a>
   </div>
 
@@ -1329,9 +1310,9 @@
       const buyBox = document.getElementById('hero-buy');
       const btns = document.querySelectorAll('.hero-toggle button');
       if (mode === 'buy') {
-        // If already showing buy, open inline checkout
+        // If already showing buy, go to checkout page
         if (buyBox.classList.contains('active')) {
-          openInlineCheckout(buyBox.querySelector('.btn-gold'));
+          window.location.href = 'buy.html';
           return;
         }
         freeBox.classList.remove('active');
@@ -1400,101 +1381,6 @@
     });
   </script>
 
-  <script>
-    // ═══ STRIPE INLINE CHECKOUT ═══
-    // Pre-init Stripe as soon as the script loads
-    let stripeInstance = null;
-    let activeCheckout = null;
-    let checkoutLoading = false;
-
-    try { stripeInstance = Stripe('pk_live_51TJZUyBMM4lnbKJ2Gflp8haC3Lmo6LBk7Bp29lbfIJyTOTJzK7A5iEq0llVH7IIhdqC14SB80ZoJgir7y3gxEZs600igQ2o21Z'); } catch(e) {}
-
-    function scrollToCheckout() {
-      const finalBtn = document.querySelector('.final-box .btn-gold');
-      if (finalBtn) {
-        finalBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        setTimeout(() => openInlineCheckout(finalBtn), 500);
-      }
-    }
-
-    async function openInlineCheckout(btn) {
-      if (checkoutLoading) return;
-      const container = btn.parentElement.querySelector('.inline-checkout');
-      if (!container) { scrollToCheckout(); return; }
-
-      const mountEl = container.querySelector('.inline-checkout-mount');
-      const loadingEl = container.querySelector('.inline-checkout-loading');
-      const errorEl = container.querySelector('.inline-checkout-error');
-
-      // Toggle — if already open, close it
-      if (container.style.display === 'block') {
-        if (activeCheckout && activeCheckout.instance) {
-          activeCheckout.instance.destroy();
-          activeCheckout = null;
-        }
-        container.style.display = 'none';
-        return;
-      }
-
-      // Close any other open checkout
-      if (activeCheckout && activeCheckout.instance) {
-        activeCheckout.instance.destroy();
-        activeCheckout.container.style.display = 'none';
-        activeCheckout = null;
-      }
-
-      // Show loading immediately
-      mountEl.innerHTML = '';
-      loadingEl.style.display = 'block';
-      errorEl.style.display = 'none';
-      container.style.display = 'block';
-      checkoutLoading = true;
-
-      setTimeout(() => container.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
-
-      // Track
-      if (!sessionStorage.getItem('ic_fired')) {
-        sessionStorage.setItem('ic_fired', '1');
-        gtag('event', 'begin_checkout', {value: 37.00, currency: 'USD'});
-        fbq('track', 'InitiateCheckout', {value: 37.00, currency: 'USD'});
-        rdt('track', 'AddToCart', {value: 37.00, currency: 'USD'});
-      }
-
-      try {
-        if (!stripeInstance) {
-          await new Promise(r => { const i = setInterval(() => { if (window.Stripe) { clearInterval(i); r(); } }, 100); setTimeout(() => { clearInterval(i); r(); }, 5000); });
-          stripeInstance = Stripe('pk_live_51TJZUyBMM4lnbKJ2Gflp8haC3Lmo6LBk7Bp29lbfIJyTOTJzK7A5iEq0llVH7IIhdqC14SB80ZoJgir7y3gxEZs600igQ2o21Z');
-        }
-
-        const resp = await fetch('/api/create-embedded-checkout', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ source: 'landing_page' }),
-        });
-
-        if (!resp.ok) {
-          const err = await resp.json().catch(() => ({}));
-          throw new Error(err.error || 'Checkout failed');
-        }
-
-        const { clientSecret } = await resp.json();
-
-        loadingEl.style.display = 'none';
-        const instance = await stripeInstance.initEmbeddedCheckout({ clientSecret });
-        instance.mount(mountEl);
-        activeCheckout = { instance, container };
-
-        setTimeout(() => container.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
-
-      } catch (err) {
-        console.error('Checkout error:', err);
-        loadingEl.style.display = 'none';
-        errorEl.style.display = 'block';
-      } finally {
-        checkoutLoading = false;
-      }
-    }
-  </script>
 
 </body>
 </html>

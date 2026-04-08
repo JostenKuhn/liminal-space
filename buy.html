@@ -85,9 +85,40 @@
         gap: 2rem;
       }
     }
+    .brand-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+      background: #050510;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: .7rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .brand-bar-logo {
+      font-family: var(--display);
+      font-size: .95rem;
+      font-weight: 800;
+      color: #F0EEF8;
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .brand-bar-logo i {
+      font-style: normal;
+      color: #D4A84C;
+    }
+    .brand-bar-secure {
+      font-family: var(--mono);
+      font-size: .55rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: #7E7A94;
+    }
+    .brand-bar-secure svg {
+      width: 10px; height: 10px; vertical-align: middle; margin-right: .3rem; opacity: .5;
+    }
+    body { padding-top: 3.5rem; }
     .header {
       text-align: center;
       margin-bottom: 1.25rem;
+      display: none;
     }
     .logo {
       font-family: var(--display);
@@ -343,6 +374,14 @@
   </style>
 </head>
 <body>
+  <div class="brand-bar">
+    <a href="index.html" class="brand-bar-logo">Liminal<i>Space</i></a>
+    <span class="brand-bar-secure">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Secure Checkout
+    </span>
+  </div>
+
   <div class="container">
     <div class="header">
       <a href="index.html" class="logo">Liminal<i>Space</i></a>
