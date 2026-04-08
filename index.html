@@ -30,11 +30,13 @@
   </script>
   <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=26479131108445246&ev=PageView&noscript=1"/></noscript>
 
-  <!-- Reddit Pixel -->
+  <!-- Reddit Pixel (lazy-loaded after 3s) -->
   <script>
-    !function(w,d){if(!w.rdt){var p=w.rdt=function(){p.sendEvent?p.sendEvent.apply(p,arguments):p.callQueue.push(arguments)};p.callQueue=[];var t=d.createElement("script");t.src="https://www.redditstatic.com/ads/pixel.js";t.async=!0;var s=d.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}}(window,document);
-    rdt('init','a2_iryyyn1edljt');
-    rdt('track','PageVisit');
+    setTimeout(function(){
+      !function(w,d){if(!w.rdt){var p=w.rdt=function(){p.sendEvent?p.sendEvent.apply(p,arguments):p.callQueue.push(arguments)};p.callQueue=[];var t=d.createElement("script");t.src="https://www.redditstatic.com/ads/pixel.js";t.async=!0;var s=d.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}}(window,document);
+      rdt('init','a2_iryyyn1edljt');
+      rdt('track','PageVisit');
+    }, 3000);
   </script>
 
 
@@ -744,23 +746,31 @@
     /* ═══ STICKY MOBILE CTA ═══ */
     .sticky-cta {
       display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 600;
-      padding: 0.75rem 1rem; background: rgba(5,5,16,0.95);
+      padding: 0.65rem 1rem; background: rgba(5,5,16,0.97);
       backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-      border-top: 1px solid rgba(212,168,76,0.2);
-      gap: 0.5rem;
+      border-top: 1px solid rgba(212,168,76,0.25);
+      gap: 0.5rem; align-items: center;
     }
     .sticky-cta.visible { display: flex; }
     .sticky-cta a {
-      flex: 1; text-align: center; padding: 0.65rem 0.2rem; border-radius: 8px;
-      font-family: var(--display); font-weight: 700; font-size: 0.62rem;
+      text-align: center; border-radius: 8px;
+      font-family: var(--display); font-weight: 700;
       text-decoration: none; transition: all .2s; white-space: nowrap;
     }
     .sticky-cta .sticky-free {
-      background: transparent; color: var(--gold);
-      border: 1px solid rgba(212,168,76,0.4);
+      flex: 0 0 auto; padding: 0.6rem 0.8rem; font-size: 0.6rem;
+      background: transparent; color: var(--text-dim);
+      border: 1px solid var(--rule);
     }
     .sticky-cta .sticky-buy {
+      flex: 1; padding: 0.75rem 0.5rem; font-size: 0.82rem;
       background: var(--gold); color: var(--bg);
+      box-shadow: 0 2px 16px rgba(212,168,76,0.3);
+    }
+    .sticky-cta .sticky-gateway {
+      flex: 0 0 auto; padding: 0.6rem 0.6rem; font-size: 0.55rem;
+      background: transparent; color: var(--text-dim);
+      border: 1px solid var(--rule);
     }
     @media (min-width: 769px) { .sticky-cta { display: none !important; } }
 
@@ -1196,9 +1206,9 @@
 
   <!-- STICKY MOBILE CTA -->
   <div class="sticky-cta" id="sticky-cta">
-    <a href="#final" class="sticky-free">Free Audio</a>
-    <a href="buy.html" class="sticky-buy">First Contact · $37</a>
-    <a href="https://www.monroeinstitute.org/products/gateway-voyage-online?ref=skrszyzu" target="_blank" rel="noopener" class="sticky-buy" style="background:transparent;color:var(--gold);border:1px solid rgba(212,168,76,0.4);">Gateway · $595</a>
+    <a href="#final" class="sticky-free">Free</a>
+    <a href="buy.html" class="sticky-buy">Get the Protocol · $37</a>
+    <a href="https://www.monroeinstitute.org/products/gateway-voyage-online?ref=skrszyzu" target="_blank" rel="noopener" class="sticky-gateway">Gateway</a>
   </div>
 
   <!-- ════════════════════════════════════ -->

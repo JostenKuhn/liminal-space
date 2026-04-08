@@ -29,11 +29,13 @@
     fbq('track', 'PageView');
   </script>
 
-  <!-- Reddit Pixel -->
+  <!-- Reddit Pixel (lazy-loaded after 3s) -->
   <script>
-    !function(w,d){if(!w.rdt){var p=w.rdt=function(){p.sendEvent?p.sendEvent.apply(p,arguments):p.callQueue.push(arguments)};p.callQueue=[];var t=d.createElement("script");t.src="https://www.redditstatic.com/ads/pixel.js";t.async=!0;var s=d.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}}(window,document);
-    rdt('init','a2_iryyyn1edljt');
-    rdt('track','PageVisit');
+    setTimeout(function(){
+      !function(w,d){if(!w.rdt){var p=w.rdt=function(){p.sendEvent?p.sendEvent.apply(p,arguments):p.callQueue.push(arguments)};p.callQueue=[];var t=d.createElement("script");t.src="https://www.redditstatic.com/ads/pixel.js";t.async=!0;var s=d.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}}(window,document);
+      rdt('init','a2_iryyyn1edljt');
+      rdt('track','PageVisit');
+    }, 3000);
   </script>
 
   <!-- Stripe.js -->
@@ -79,11 +81,14 @@
       gap: 1.5rem;
       align-items: start;
     }
+    /* Mobile: checkout column first */
+    .right-col { order: -1; }
     @media (min-width: 700px) {
       .two-col {
         grid-template-columns: 1fr 1fr;
         gap: 2rem;
       }
+      .right-col { order: 0; }
     }
     .brand-bar {
       position: fixed; top: 0; left: 0; right: 0; z-index: 500;
@@ -417,25 +422,6 @@
           <p class="attr">- First Contact user, day three</p>
         </div>
 
-        <div class="faq">
-          <h2>Common questions</h2>
-          <div class="faq-item">
-            <p class="faq-q">What do I actually receive?</p>
-            <p class="faq-a">3 guided audio sessions (MP3, ~20 min each), the First Contact Field Manual (PDF), and a 7-day protocol plan. Instant access - download or stream immediately after purchase.</p>
-          </div>
-          <div class="faq-item">
-            <p class="faq-q">Do I need meditation experience?</p>
-            <p class="faq-a">No. The binaural frequencies do the work. You just lie down, put on headphones, and press play. The audio guides you through everything.</p>
-          </div>
-          <div class="faq-item">
-            <p class="faq-q">What if nothing happens?</p>
-            <p class="faq-a">Most people feel something on session one (heaviness, vibrations, unusual clarity). If you complete the full protocol and feel nothing, reply to any email for a full refund. No questions asked.</p>
-          </div>
-          <div class="faq-item">
-            <p class="faq-q">Do I need special headphones?</p>
-            <p class="faq-a">Any stereo headphones work - earbuds, over-ear, wired or wireless. The frequencies need to reach each ear separately, so speakers won't work.</p>
-          </div>
-        </div>
       </div>
 
       <div class="right-col">
@@ -472,6 +458,11 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           Powered by Stripe · 256-bit encryption · Secure checkout
         </p>
+
+        <div style="text-align:center;margin-top:1rem;padding:.6rem .8rem;background:var(--gold-soft);border:1px solid rgba(184,146,46,0.15);border-radius:8px;">
+          <p style="font-size:.72rem;color:var(--text-mid);font-style:italic;line-height:1.4;">"Full-body vibrations on session one. By day three I could reach Focus 10 in under five minutes."</p>
+          <p style="font-size:.6rem;color:var(--text-dim);margin-top:.2rem;">— First Contact user</p>
+        </div>
       </div>
     </div>
 

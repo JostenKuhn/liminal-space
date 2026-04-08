@@ -32,12 +32,14 @@
   </script>
   <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=26479131108445246&ev=PageView&noscript=1"/></noscript>
 
-  <!-- Reddit Pixel -->
+  <!-- Reddit Pixel (lazy-loaded after 3s) -->
   <script>
-    !function(w,d){if(!w.rdt){var p=w.rdt=function(){p.sendEvent?p.sendEvent.apply(p,arguments):p.callQueue.push(arguments)};p.callQueue=[];var t=d.createElement("script");t.src="https://www.redditstatic.com/ads/pixel.js";t.async=!0;var s=d.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}}(window,document);
-    rdt('init','a2_iryyyn1edljt');
-    rdt('track','PageVisit');
-    rdt('track','SignUp');
+    setTimeout(function(){
+      !function(w,d){if(!w.rdt){var p=w.rdt=function(){p.sendEvent?p.sendEvent.apply(p,arguments):p.callQueue.push(arguments)};p.callQueue=[];var t=d.createElement("script");t.src="https://www.redditstatic.com/ads/pixel.js";t.async=!0;var s=d.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}}(window,document);
+      rdt('init','a2_iryyyn1edljt');
+      rdt('track','PageVisit');
+      rdt('track','SignUp');
+    }, 3000);
   </script>
 
 
@@ -536,11 +538,12 @@
 
       <p class="rv" style="margin-top:1.25rem;font-family:var(--serif);font-style:italic;font-size:.88rem;color:var(--text-mid);max-width:38ch;margin-left:auto;margin-right:auto;">Most people feel something shift around minute 12.</p>
 
-      <!-- Post-listen CTA -->
-      <div class="cta-box rv" style="margin-top:1.5rem;">
+      <!-- Post-listen CTA — hidden until 60s of audio played -->
+      <div class="cta-box rv" id="post-listen-cta" style="margin-top:1.5rem;display:none;opacity:0;transition:opacity .8s ease;">
         <p style="font-family:var(--serif);font-style:italic;font-size:1.1rem;color:var(--text-mid);margin-bottom:.75rem;">That tingling? That was only the first door.</p>
         <p style="font-size:.88rem;color:var(--text-dim);margin-bottom:1.25rem;max-width:42ch;margin-left:auto;margin-right:auto;">Door 12 teaches you to perceive real locations with your mind. Door 15 teaches you two techniques to separate your consciousness from your body entirely.</p>
         <a href="buy.html" class="btn-gold" style="display:inline-block;text-decoration:none;">Get the Full Protocol · $37</a>
+        <p style="font-size:.72rem;color:var(--text-mid);font-style:italic;margin-top:.75rem;max-width:36ch;margin-left:auto;margin-right:auto;">"Full-body vibrations on session one. By day three I could reach Focus 10 in under five minutes." — First Contact user</p>
         <p class="cta-guarantee">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           Instant download · 100% money-back guarantee
@@ -805,8 +808,9 @@
       });
     }
 
-    // Track audio play
+    // Track audio play + reveal sell CTA after 60s of listening
     const audio = document.querySelector('audio');
+    let ctaRevealed = false;
     if (audio) {
       audio.addEventListener('play', () => {
         gtag('event', 'audio_start', {audio_title: 'Door 10 Free Session'});
@@ -816,7 +820,7 @@
         gtag('event', 'audio_complete', {audio_title: 'Door 10 Free Session'});
         fbq('trackCustom', 'AudioComplete', {session: 'door_10_free'});
       });
-      // Track audio progress
+      // Track audio progress + reveal CTA at 60s
       let audioFired = {};
       audio.addEventListener('timeupdate', () => {
         if (!audio.duration) return;
@@ -828,6 +832,16 @@
             fbq('trackCustom', 'AudioProgress', {session: 'door_10_free', percent: m});
           }
         });
+        // Reveal sell CTA after 60s of audio played
+        if (audio.currentTime >= 60 && !ctaRevealed) {
+          ctaRevealed = true;
+          const cta = document.getElementById('post-listen-cta');
+          if (cta) {
+            cta.style.display = 'block';
+            requestAnimationFrame(() => { cta.style.opacity = '1'; });
+            gtag('event', 'sell_cta_revealed', {trigger: 'audio_60s'});
+          }
+        }
       });
     }
 
