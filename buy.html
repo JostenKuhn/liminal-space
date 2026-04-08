@@ -475,7 +475,7 @@
     // Track checkout view
     gtag('event', 'begin_checkout', {value: 37.00, currency: 'USD', source: 'email'});
     fbq('track', 'InitiateCheckout', {value: 37.00, currency: 'USD'});
-    rdt('track', 'AddToCart', {value: 37.00, currency: 'USD'});
+    if (typeof rdt !== 'undefined') rdt('track', 'AddToCart', {value: 37.00, currency: 'USD'});
 
     // Load Stripe checkout immediately
     (async function() {
