@@ -481,7 +481,7 @@
   <div class="header">
     <a href="index.html" class="logo">Liminal<i>Space</i></a>
     <div class="header-links">
-      <a href="buy.html" class="header-link header-link-primary">First Contact · $37</a>
+      <a href="buy.html" target="_blank" class="header-link header-link-primary">First Contact · $37</a>
       <a href="https://www.monroeinstitute.org/products/gateway-voyage-online?ref=skrszyzu" target="_blank" rel="noopener" class="header-link header-link-secondary">Gateway Voyage · $595</a>
     </div>
   </div>
@@ -541,7 +541,7 @@
       <div class="cta-box rv" id="post-listen-cta" style="margin-top:1.5rem;display:none;opacity:0;transition:opacity .8s ease;">
         <p style="font-family:var(--serif);font-style:italic;font-size:1.1rem;color:var(--text-mid);margin-bottom:.75rem;">That tingling? That was only the first door.</p>
         <p style="font-size:.88rem;color:var(--text-dim);margin-bottom:1.25rem;max-width:42ch;margin-left:auto;margin-right:auto;">Door 12 teaches you to perceive real locations with your mind. Door 15 teaches you two techniques to separate your consciousness from your body entirely.</p>
-        <a href="buy.html" class="btn-gold" style="display:inline-block;text-decoration:none;">Get the Full Protocol · $37</a>
+        <a href="buy.html" target="_blank" class="btn-gold" style="display:inline-block;text-decoration:none;">Get the Full Protocol · $37</a>
         <p style="font-size:.72rem;color:var(--text-mid);font-style:italic;margin-top:.75rem;max-width:36ch;margin-left:auto;margin-right:auto;">"Full-body vibrations on session one. By day three I could reach Focus 10 in under five minutes." — First Contact user</p>
         <p class="cta-guarantee">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -675,7 +675,7 @@
         <div class="cta-price"><span style="text-decoration:line-through;color:var(--text-dim);font-size:0.6em;font-weight:400;margin-right:.35rem;">$97</span>$37</div>
         <p style="font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.15rem;">Launch price — increases soon</p>
         <p class="cta-price-note">One-time payment · Instant access · Keep forever</p>
-        <a href="buy.html" class="btn-gold" style="font-size: 1.1rem; padding: 1.15rem 2.5rem;display:inline-block;text-decoration:none;">Get the Protocol · $37</a>
+        <a href="buy.html" target="_blank" class="btn-gold" style="font-size: 1.1rem; padding: 1.15rem 2.5rem;display:inline-block;text-decoration:none;">Get the Protocol · $37</a>
         <p class="cta-guarantee">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           Secure checkout · Instant digital delivery · 100% money-back guarantee
@@ -880,7 +880,7 @@
 
   <script>
     // ═══ TRACK BUY BUTTON CLICKS ═══
-    document.querySelectorAll('a[href="buy.html"]').forEach(function(link) {
+    document.querySelectorAll('a[href="buy.html" target="_blank"]').forEach(function(link) {
       link.addEventListener('click', function() {
         var loc = link.closest('section, .cta-box, .header');
         var section = loc ? (loc.className || '').split(' ')[0] : 'unknown';
