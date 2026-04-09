@@ -1400,6 +1400,7 @@
         var section = loc ? (loc.className || '').split(' ')[0] : 'unknown';
         gtag('event', 'select_item', {value: 37.00, currency: 'USD', item_list_name: section, items: [{item_name: 'First Contact', price: 37.00}]});
         fbq('trackCustom', 'ClickToBuy', {value: 37.00, currency: 'USD', location: section});
+        fbq('track', 'InitiateCheckout', {value: 37.00, currency: 'USD'});
         if (typeof rdt !== 'undefined') rdt('track', 'AddToCart', {value: 37.00, currency: 'USD'});
       });
     });
