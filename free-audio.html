@@ -13,7 +13,6 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-1GJVT4XFG9');
-    gtag('event', 'generate_lead', {value: 1.00, currency: 'USD'});
   </script>
 
   <!-- Meta Pixel -->
@@ -887,7 +886,11 @@
         var section = loc ? (loc.className || '').split(' ')[0] : 'unknown';
         gtag('event', 'select_item', {value: 37.00, currency: 'USD', item_list_name: section, items: [{item_name: 'First Contact', price: 37.00}]});
         fbq('trackCustom', 'ClickToBuy', {value: 37.00, currency: 'USD', location: section});
-        fbq('track', 'InitiateCheckout', {value: 37.00, currency: 'USD'});
+        if (!sessionStorage.getItem('ls_ic_fired')) {
+          sessionStorage.setItem('ls_ic_fired', '1');
+          var eid = 'ic_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6);
+          fbq('track', 'InitiateCheckout', {value: 37.00, currency: 'USD'}, {eventID: eid});
+        }
         if (typeof rdt !== 'undefined') rdt('track', 'AddToCart', {value: 37.00, currency: 'USD'});
       });
     });

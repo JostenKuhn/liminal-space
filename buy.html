@@ -495,12 +495,7 @@
   </div>
 
   <script>
-    // Track checkout view
-    gtag('event', 'begin_checkout', {value: 37.00, currency: 'USD', source: 'email'});
-    fbq('track', 'InitiateCheckout', {value: 37.00, currency: 'USD'});
-    if (typeof rdt !== 'undefined') rdt('track', 'AddToCart', {value: 37.00, currency: 'USD'});
-
-    // Load Stripe checkout immediately
+    // Load Stripe checkout — only fire tracking events AFTER checkout successfully renders
     (async function() {
       const mountEl = document.getElementById('checkout-mount');
       const loadingEl = document.getElementById('checkout-loading');
@@ -529,6 +524,15 @@
         loadingEl.style.display = 'none';
         const checkout = await stripe.initEmbeddedCheckout({ clientSecret });
         checkout.mount('#checkout-mount');
+
+        // Checkout loaded successfully — NOW fire tracking events (deduped)
+        if (!sessionStorage.getItem('ls_checkout_tracked')) {
+          sessionStorage.setItem('ls_checkout_tracked', '1');
+          var eid = 'ic_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6);
+          gtag('event', 'begin_checkout', {value: 37.00, currency: 'USD', source: 'checkout_page'});
+          fbq('track', 'InitiateCheckout', {value: 37.00, currency: 'USD'}, {eventID: eid});
+          if (typeof rdt !== 'undefined') rdt('track', 'AddToCart', {value: 37.00, currency: 'USD'});
+        }
 
         // On mobile, scroll so the payment form is visible
         if (window.innerWidth < 700) {
