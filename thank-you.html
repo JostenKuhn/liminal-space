@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Check Your Email | Liminal Space</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1GJVT4XFG9"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-1GJVT4XFG9');
+  </script>
+
+  <!-- Meta Pixel -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '26479131108445246');
+    fbq('track', 'PageView');
+    fbq('track', 'Lead');
+    fbq('track', 'CompleteRegistration');
+  </script>
+
+  <!-- Reddit Pixel (lazy) -->
+  <script>
+    setTimeout(function(){
+      !function(w,d){if(!w.rdt){var p=w.rdt=function(){p.sendEvent?p.sendEvent.apply(p,arguments):p.callQueue.push(arguments)};p.callQueue=[];var t=d.createElement("script");t.src="https://www.redditstatic.com/ads/pixel.js";t.async=!0;var s=d.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}}(window,document);
+      rdt('init','a2_iryyyn1edljt');
+      rdt('track','PageVisit');
+      rdt('track','SignUp');
+    }, 3000);
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Outfit:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #050510;
+      --surface: #0F0F28;
+      --gold: #D4A84C;
+      --gold-glow: rgba(212,168,76,0.35);
+      --text: #F0EEF8;
+      --text-mid: #B8B4CE;
+      --text-dim: #7E7A94;
+      --rule: rgba(255,255,255,0.06);
+      --display: 'Syne', sans-serif;
+      --body: 'Outfit', sans-serif;
+      --mono: 'IBM Plex Mono', monospace;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--bg); color: var(--text); font-family: var(--body);
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      padding: 2rem;
+    }
+    .container {
+      text-align: center; max-width: 520px;
+    }
+    .icon {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: rgba(212,168,76,0.12);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 2rem;
+    }
+    .icon svg {
+      width: 36px; height: 36px; stroke: var(--gold);
+    }
+    h1 {
+      font-family: var(--display); font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 800; line-height: 1.1; margin-bottom: 1rem;
+    }
+    h1 em {
+      font-family: 'Georgia', serif; font-weight: 400; font-style: italic;
+      color: var(--gold);
+    }
+    .sub {
+      color: var(--text-mid); font-size: 1rem; line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+    .steps {
+      text-align: left; max-width: 380px; margin: 0 auto 2rem;
+    }
+    .step {
+      display: flex; gap: .75rem; align-items: flex-start;
+      padding: .75rem 0; border-bottom: 1px solid var(--rule);
+    }
+    .step:last-child { border: none; }
+    .step-num {
+      font-family: var(--mono); font-size: .7rem; font-weight: 500;
+      color: var(--gold); background: rgba(212,168,76,0.1);
+      width: 28px; height: 28px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: .1rem;
+    }
+    .step-text {
+      font-size: .9rem; color: var(--text-mid); line-height: 1.5;
+    }
+    .step-text strong { color: var(--text); }
+    .bonus {
+      background: rgba(212,168,76,0.06); border: 1px solid rgba(212,168,76,0.15);
+      border-radius: 12px; padding: 1.25rem; margin-bottom: 2rem;
+    }
+    .bonus-label {
+      font-family: var(--mono); font-size: .6rem; font-weight: 500;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: .5rem;
+    }
+    .bonus p {
+      font-size: .88rem; color: var(--text-mid); line-height: 1.6;
+    }
+    .bonus strong { color: var(--text); }
+    .note {
+      font-size: .78rem; color: var(--text-dim); line-height: 1.6;
+    }
+    .note a { color: var(--gold); }
+    .providers {
+      display: flex; justify-content: center; gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .providers img {
+      height: 24px; opacity: .3;
+    }
+    .email-icons {
+      display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem;
+    }
+    .email-btn {
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .6rem 1.2rem; border-radius: 8px;
+      background: var(--surface); border: 1px solid var(--rule);
+      color: var(--text-mid); font-size: .78rem; text-decoration: none;
+      transition: all .2s;
+    }
+    .email-btn:hover { border-color: rgba(212,168,76,0.3); color: var(--text); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+        <polyline points="22,6 12,13 2,6"/>
+      </svg>
+    </div>
+
+    <h1>Check your <em>email</em></h1>
+    <p class="sub">Your free guided session is on its way. Open the email to get instant access to Door 10.</p>
+
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">1</span>
+        <p class="step-text"><strong>Open the email</strong> from Liminal Space (check spam/promotions if you don't see it)</p>
+      </div>
+      <div class="step">
+        <span class="step-num">2</span>
+        <p class="step-text"><strong>Click the link</strong> to access your free 20-minute guided session</p>
+      </div>
+      <div class="step">
+        <span class="step-num">3</span>
+        <p class="step-text"><strong>Put on headphones</strong>, lie down in a dark room, press play</p>
+      </div>
+    </div>
+
+    <div class="bonus">
+      <p class="bonus-label">Welcome gift inside</p>
+      <p>Your email includes an <strong>exclusive discount</strong> on the full First Contact protocol. Only available through this link. Opens tonight.</p>
+    </div>
+
+    <p class="note">Didn't get it? Check your spam or promotions folder. The email comes from <a href="mailto:hello@enterliminalspace.com">hello@enterliminalspace.com</a></p>
+
+    <div class="email-icons">
+      <a href="https://mail.google.com" target="_blank" class="email-btn">Open Gmail</a>
+      <a href="https://outlook.live.com" target="_blank" class="email-btn">Open Outlook</a>
+      <a href="https://mail.yahoo.com" target="_blank" class="email-btn">Open Yahoo</a>
+    </div>
+  </div>
+</body>
+</html>
