@@ -798,7 +798,7 @@ def page_focus_1(c):
     y -= 22
     c.setFillColor(TEXT)
     c.setFont("Helvetica-Bold", 16)
-    c.drawString(MARGIN + 5, y, "Focus 10: Mind Awake, Body Asleep")
+    c.drawString(MARGIN + 5, y, "Focus 10 (Door 10): Mind Awake, Body Asleep")
     y -= 22
 
     desc = (
@@ -835,7 +835,7 @@ def page_focus_1(c):
     y -= 22
     c.setFillColor(TEXT)
     c.setFont("Helvetica-Bold", 16)
-    c.drawString(MARGIN + 5, y, "Focus 12: Expanded Awareness")
+    c.drawString(MARGIN + 5, y, "Focus 12 (Door 12): Expanded Awareness")
     y -= 22
 
     desc2 = (
@@ -860,7 +860,7 @@ def page_focus_1(c):
         c.drawString(MARGIN + 5, y, line)
         y -= 15
 
-    draw_page_number(c, 7)
+    draw_page_number(c, 6)
     c.showPage()
 
 
@@ -889,11 +889,11 @@ def page_focus_2(c):
     y -= 22
     c.setFillColor(TEXT)
     c.setFont("Helvetica-Bold", 16)
-    c.drawString(MARGIN + 5, y, "Focus 15: The No-Time State")
+    c.drawString(MARGIN + 5, y, "Focus 15 (Door 15): The No-Time State")
     y -= 22
 
     desc = (
-        "The most advanced state in this guide. Focus 15 is described as existing outside of "
+        "The most advanced state in this guide. Door 15 is described as existing outside of "
         "time. The normal sense of past, present, and future dissolves. Practitioners report "
         "a vast, empty awareness, a void that is simultaneously full of potential. This is the "
         "state from which the most profound experiences emerge: vivid non-physical environments, "
@@ -920,9 +920,9 @@ def page_focus_2(c):
     y -= 6
 
     body = (
-        "These three Focus levels form a natural progression. Master Focus 10 first. It is the "
+        "These three Doors form a natural progression. Master Door 10 first. It is the "
         "foundation upon which everything else is built. Once you can reliably reach the "
-        "mind-awake-body-asleep state, Focus 12 becomes accessible naturally. Focus 15 represents "
+        "mind-awake-body-asleep state, Door 12 becomes accessible naturally. Door 15 represents "
         "the edge of what most practitioners experience in their first months of practice."
     )
     y = draw_body(c, body, y)
@@ -930,7 +930,7 @@ def page_focus_2(c):
 
     body2 = (
         "There is no rush. The Monroe Institute's full program includes Focus levels up to 27 "
-        "and beyond. The three levels in this guide give you a solid launchpad."
+        "and beyond. The three Doors in this guide give you a solid launchpad."
     )
     y = draw_body(c, body2, y, color=TEXT, font="Helvetica-Oblique", size=11)
 
@@ -942,7 +942,7 @@ def page_focus_2(c):
     c.line(MARGIN + 40, arrow_y, PAGE_W - MARGIN - 40, arrow_y)
     # dots
     positions = [MARGIN + 40, PAGE_W / 2, PAGE_W - MARGIN - 40]
-    labels = ["Focus 10", "Focus 12", "Focus 15"]
+    labels = ["Door 10", "Door 12", "Door 15"]
     sublabels = ["Foundation", "Expansion", "Transcendence"]
     for i, (px, label, sub) in enumerate(zip(positions, labels, sublabels)):
         c.setFillColor(PRIMARY)
@@ -1052,7 +1052,7 @@ def page_first_session_2(c):
     y = draw_subtitle(c, "3. During the Session", y, size=13)
     y -= 4
     body = (
-        "Press play on the Focus 10 track. Close your eyes. Allow the audio to guide your "
+        "Press play on Door 10. Close your eyes. Allow the audio to guide your "
         "brainwaves. Your only job is passive observation."
     )
     y = draw_body(c, body, y, size=10)
@@ -1063,7 +1063,7 @@ def page_first_session_2(c):
         "If thoughts arise, notice them and let them pass. Return your attention to the sound",
         "Pay attention to any physical sensations: tingling, heaviness, warmth, vibration",
         "If you see colors, patterns, or images behind your closed eyes, observe them without grasping",
-        "You may feel a shift, a moment where your body seems to drop away. This is Focus 10. Stay calm",
+        "You may feel a shift, a moment where your body seems to drop away. This is Door 10. Stay calm",
     ]
     for item in items:
         y = draw_bullet(c, item, y, size=10, leading=16)
@@ -1204,7 +1204,7 @@ def page_troubleshooting(c):
             "How long until I have a full out-of-body experience?",
             "This varies widely. Some people report experiences within the first few sessions. "
             "For most, it takes consistent practice over two to eight weeks. Focus on mastering "
-            "Focus 10 first. The mind-awake-body-asleep state is the foundation. Everything else "
+            "Door 10 first. The mind-awake-body-asleep state is the foundation. Everything else "
             "follows from there."
         ),
         (
@@ -1252,13 +1252,13 @@ def page_protocol(c):
     y -= 20
 
     days = [
-        ("Day 1", "Focus 10", "Introduction. Follow the full preparation ritual. Observe what happens. Journal after.", "#5B4FE8"),
-        ("Day 2", "Focus 10", "Repeat. You may notice you relax faster. Pay attention to any new sensations.", "#5B4FE8"),
-        ("Day 3", "Focus 10", "Deepening. Try to notice the exact moment your body falls asleep while your mind stays awake.", "#5B4FE8"),
-        ("Day 4", "Focus 10", "Consolidation. By now you should be reaching relaxation faster. Note any imagery.", "#5B4FE8"),
-        ("Day 5", "Focus 12", "Expansion. Move to the Focus 12 track. The deeper frequency may feel unfamiliar. That is expected.", "#6E63F0"),
-        ("Day 6", "Focus 12", "Exploration. Your second session at this level. Allow your awareness to expand. Do not direct it.", "#6E63F0"),
-        ("Day 7", "Focus 15", "The deep end. Use the Focus 15 track. This is theta/delta territory. Let go completely.", "#D4A852"),
+        ("Day 1", "Door 10", "Introduction. Follow the full preparation ritual. Observe what happens. Journal after.", "#5B4FE8"),
+        ("Day 2", "Door 10", "Repeat. You may notice you relax faster. Pay attention to any new sensations.", "#5B4FE8"),
+        ("Day 3", "Door 10", "Deepening. Try to notice the exact moment your body falls asleep while your mind stays awake.", "#5B4FE8"),
+        ("Day 4", "Door 10", "Consolidation. By now you should be reaching relaxation faster. Note any imagery.", "#5B4FE8"),
+        ("Day 5", "Door 12", "Expansion. Move to Door 12. The deeper frequency may feel unfamiliar. That is expected.", "#6E63F0"),
+        ("Day 6", "Door 12", "Exploration. Your second session at this level. Allow your awareness to expand. Do not direct it.", "#6E63F0"),
+        ("Day 7", "Door 15", "The deep end. Use Door 15. This is theta/delta territory. Let go completely.", "#D4A852"),
     ]
 
     for day, track, instruction, color in days:
@@ -1335,7 +1335,7 @@ def page_remote_viewing(c):
     y -= 4
 
     steps = [
-        ("Step 1: Reach Focus 12", "Use the Door 12 audio session to enter the expanded awareness state. Wait until your body feels distant and your mind feels vast."),
+        ("Step 1: Reach Door 12", "Use the Door 12 audio session to enter the expanded awareness state. Wait until your body feels distant and your mind feels vast."),
         ("Step 2: Choose a target", "Pick a real location you know well. A room in your house, a friend's kitchen, a place you visit often. Start familiar."),
         ("Step 3: Build the scene", "Visualize the location in detail. The colours, the textures, the objects. Place yourself inside it mentally. See the walls. The floor. The light."),
         ("Step 4: Shift from imagining to perceiving", "This is the critical step. Stop constructing the scene. Instead, just observe. Let details arrive on their own. Notice things you did not deliberately put there. A shadow. A sound. An object in a new position."),
@@ -1398,7 +1398,7 @@ def page_obe_techniques(c):
     y -= 20
 
     rope_steps = [
-        "Enter the Focus 15 state using the Door 15 audio. Wait for the vibrational state.",
+        "Enter Door 15 using the audio session. Wait for the vibrational state.",
         "Imagine a thick rope hanging above you in the darkness, directly above your chest.",
         "Without moving your physical hands, reach up with your non-physical hands and grab the rope.",
         "Pull yourself upward, hand over hand. You are not moving muscles. You are moving intention.",
@@ -1425,7 +1425,7 @@ def page_obe_techniques(c):
     y -= 20
 
     roll_steps = [
-        "Enter the Focus 15 state. Wait for deep relaxation and the vibrational stage.",
+        "Enter Door 15. Wait for deep relaxation and the vibrational stage.",
         "Without moving your physical body, try to roll sideways, as if rolling out of bed.",
         "Use pure intention. No muscles. No physical movement. Just the feeling of rolling.",
         "You may feel resistance at first, as if stuck. Keep rolling gently but persistently.",
@@ -1516,7 +1516,7 @@ def page_whats_next(c):
     y -= 8
 
     body2 = (
-        "Focus 10 through 15 is the launchpad. The Monroe Institute's full map extends "
+        "Door 10 through 15 is the launchpad. The Monroe Institute's full map extends "
         "through Focus 21, the bridge to other realities, Focus 27, a state described as "
         "a reception center for non-physical consciousness, and beyond. Remote viewing. "
         "Astral navigation. Communication with non-physical intelligence. Perception across "
@@ -1539,11 +1539,10 @@ def page_whats_next(c):
     y -= 6
 
     items = [
-        "Complete binaural beat library: all Focus levels through 21 and beyond",
+        "Complete binaural beat library: all Doors through 21 and beyond",
         "Remote viewing protocols: trained perception at a distance",
         "Advanced OBE techniques: phasing, energy body activation, astral navigation",
-        "A community of explorers mapping consciousness together",
-        "Guided sessions with voice narration for the deepest immersions",
+        "A growing library of consciousness exploration resources",
     ]
     for item in items:
         y = draw_bullet(c, item, y, color=MUTED, size=10.5)
@@ -1568,7 +1567,7 @@ def page_whats_next(c):
     c.setFont("Helvetica-Bold", 11)
     c.drawCentredString(PAGE_W / 2, y - 78, "Step through.")
 
-    draw_page_number(c, 13)
+    draw_page_number(c, 16)
     c.showPage()
 
 
